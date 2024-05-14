@@ -31,7 +31,7 @@
           <span class="font-bold text-md">Olvidé la contraseña</span>
         </div>
         <button
-          class="w-full bg-violet-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
+          class="w-full bg-violet-700 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
         >
           Ingresar
         </button>
