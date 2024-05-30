@@ -10,12 +10,13 @@
           Bienvenido al sistema de reportes de Dooblo creado por Datavoz
         </span>
         <div class="py-4">
-          <span class="mb-2 text-md">Email</span>
+          <span class="mb-2 text-md">Nombre de usuario</span>
           <input
             type="text"
             class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
-            name="email"
-            id="email"
+            name="username"
+            id="username"
+            v-model.trim="user.username"
           />
         </div>
         <div class="py-4">
@@ -25,13 +26,11 @@
             name="pass"
             id="pass"
             class="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500"
+            v-model.trim="user.password"
           />
         </div>
-        <div class="flex justify-between w-full py-4">
-          <span class="font-bold text-md">Olvidé la contraseña</span>
-        </div>
         <button
-          class="w-full bg-violet-700 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-black hover:border hover:border-gray-300"
+          class="w-full bg-violet-700 text-white p-2 rounded-lg mb-6"
         >
           Ingresar
         </button>
@@ -53,8 +52,16 @@
 </template>
 
 <script>
+import { useToast } from "vue-toastification";
 export default {
-    
+    name:"login",
+    data() {
+      return {
+        user: { username:"",password:""},
+        inputType: "password",
+        toast: useToast()
+      }
+    }
 };
 </script>
 
