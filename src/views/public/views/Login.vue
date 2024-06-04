@@ -31,6 +31,7 @@
         </div>
         <button
           class="w-full bg-violet-700 text-white p-2 rounded-lg mb-6"
+          @click="login(this.user)"
         >
           Ingresar
         </button>
@@ -52,6 +53,8 @@
 </template>
 
 <script>
+import "../../../store/index.js";
+import { mapActions } from "vuex";
 import { useToast } from "vue-toastification";
 export default {
     name:"login",
@@ -61,6 +64,36 @@ export default {
         inputType: "password",
         toast: useToast()
       }
+    },
+    methods:{
+      ...mapActions(["loginUser"]),
+      login(user) {
+      this.loginUser(user).then((response) => {
+        if (response.status == 200) {
+          this.resetDataUser();
+          this.$router.push({ name: "home" });
+        } 
+      }).catch(e =>{
+        console.log(e)
+          let errors = e.response.data.errors;
+          let error = e.response.data.error;
+          if(errors){
+              errors.forEach(error_element => {
+                  this.toast.error(error_element.msg)
+              });
+          }
+          else{
+            this.toast.error(error)
+          }
+      })
+    },
+    resetDataUser() {
+            this.user.nombre = "";
+            this.user.password = "";
+    },
+    togglePasswordType() {
+          this.inputType = this.inputType === 'password' ? 'text' : 'password';
+        }
     }
 };
 </script>

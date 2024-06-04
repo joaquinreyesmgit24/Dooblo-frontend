@@ -2,7 +2,7 @@
     <div class="text-gray-800 font-inter">
       <Sidebar />
       <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-        <Navbar />
+        <Navbar @logout="logout()" :username="getUsername" />
         <div class="p-6">
           <router-view></router-view>
         </div>
@@ -15,8 +15,7 @@
   import Sidebar from "../../components/Sidebar.vue";
   import Navbar from "../../components/Navbar.vue";
   import { createPopper } from '@popperjs/core';
-  import { Chart } from 'chart.js';
-  
+  import { mapActions, mapGetters } from "vuex";
   export default {
     components: { Sidebar, Navbar },
     data() {
@@ -28,9 +27,14 @@
       this.initSidebar();
       this.initDropdowns();
       this.initTabs();
-      this.initChart();
     },
     methods: {
+      ...mapActions(["logoutUser"]),
+      logout() {
+          this.logoutUser().then(response => {
+            this.$router.push('/login');
+          })
+      },
       initSidebar() {
         const sidebarToggle = document.querySelector('.sidebar-toggle');
         const sidebarOverlay = document.querySelector('.sidebar-overlay');
@@ -161,53 +165,6 @@
           });
         });
       },
-      initChart() {
-        new Chart(document.getElementById('order-chart'), {
-          type: 'line',
-          data: {
-            labels: this.generateNDays(7),
-            datasets: [
-              {
-                label: 'Active',
-                data: this.generateRandomData(7),
-                borderWidth: 1,
-                fill: true,
-                pointBackgroundColor: 'rgb(59, 130, 246)',
-                borderColor: 'rgb(59, 130, 246)',
-                backgroundColor: 'rgb(59 130 246 / .05)',
-                tension: .2
-              },
-              {
-                label: 'Completed',
-                data: this.generateRandomData(7),
-                borderWidth: 1,
-                fill: true,
-                pointBackgroundColor: 'rgb(16, 185, 129)',
-                borderColor: 'rgb(16, 185, 129)',
-                backgroundColor: 'rgb(16 185 129 / .05)',
-                tension: .2
-              },
-              {
-                label: 'Canceled',
-                data: this.generateRandomData(7),
-                borderWidth: 1,
-                fill: true,
-                pointBackgroundColor: 'rgb(244, 63, 94)',
-                borderColor: 'rgb(244, 63, 94)',
-                backgroundColor: 'rgb(244 63 94 / .05)',
-                tension: .2
-              },
-            ]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
-            }
-          }
-        });
-      },
       generateNDays(n) {
         const data = [];
         for (let i = 0; i < n; i++) {
@@ -227,8 +184,11 @@
         }
         return data;
       }
+    },
+      computed: {
+          ...mapGetters(["getUsername","getRolName"]),
     }
-  };
+  }
   </script>
   
   <style scoped>

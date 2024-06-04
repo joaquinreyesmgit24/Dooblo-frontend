@@ -23,7 +23,7 @@
                             <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Configuración</a>
                         </li>
                         <li>
-                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Cerrar sesión</a>
+                            <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50" @click="$emit('logout')">Cerrar sesión</a>
                         </li>
                     </ul>
                 </li>
@@ -33,7 +33,10 @@
 
 <script>
 export default {
-
+    name:"navbar",
+    props: {
+    userName: { type: String, default: 'invitado' }
+  },
 }
 </script>
 

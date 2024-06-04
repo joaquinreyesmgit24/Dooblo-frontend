@@ -1,10 +1,10 @@
-import Login from './views/Login.vue';
+import login from './views/Login.vue';
 
 
 export const PublicRoutes = [
 {
     path: '/login',
-    component: Login,
+    component: login,
     name:'login'
 },
 ];
