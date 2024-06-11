@@ -14,3 +14,30 @@ body {
     width: 100%;
   }
 }
+thead,
+table {
+    border: initial !important;
+}
+
+td {
+    border: initial !important;
+}
+
+th {
+    font-family: "Inter", sans-serif !important;
+    font-weight: 400;
+    width: 300px !important;
+    border: initial !important;
+    padding: 25px !important;
+    font-weight: 400;
+}
+.footer__navigation__page-btn {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+}
+
+.vgt-global-search {
+    padding: 20px !important;
+    background: rgb(246, 246, 246);
+    border: initial !important;
+}

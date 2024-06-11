@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "chart.js": "^4.4.2",
     "dayjs": "^1.11.11",
+    "flowbite": "^2.3.0",
     "remixicon": "^4.2.0",
     "vue": "^3.4.21",
     "vue-good-table-next": "^0.2.1",
