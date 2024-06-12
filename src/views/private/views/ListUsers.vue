@@ -9,7 +9,7 @@
                         <template v-slot:table-row="props">
                             <span v-if="props.column.field == 'acciones'
                                     ">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-bs-toggle="modal"
                                     data-bs-target="#modalUpdateUser" @click="openModal(props.row)">
                                     Editar
                                 </button>
@@ -31,15 +31,42 @@
                             </div>
                             <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
                                 role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                                <div class="px-6 py-4">
-                                    <!-- Contenido del modal -->
-                                    <h2 class="text-lg font-bold mb-2">Mi Modal</h2>
-                                    <p>Este es el contenido de mi modal.</p>
-                                </div>
-                                <div class="px-6 py-4 bg-gray-100">
-                                    <button @click="closeModal"
-                                        class="px-4 py-2 bg-gray-500 text-white rounded">Cerrar</button>
-                                </div>
+                                <button @click="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                                <form class="p-4 md:p-5">
+                                    <div class="grid gap-4 mb-4 grid-cols-2">
+                                        <div class="col-span-2">
+                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de usuario:</label>
+                                            <input type="text" name="name" id="name"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                                placeholder="Nombre de usuario" required="">
+                                        </div>
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
+                                            <select id="category"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500">
+                                                <option selected="">Seleccione el rol</option>
+                                                <!-- <option value="TV">TV/Monitors</option>
+                                                <option value="PC">PC</option>
+                                                <option value="GA">Gaming/Console</option>
+                                                <option value="PH">Phones</option> -->
+                                            </select>
+                                        </div>
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
+                                            <input type="password" name="price" id="price"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                                placeholder="Contraseña" required="">
+                                        </div>
+                                    </div>
+                                    <button type="submit" @click="closeModal"
+                                        class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                        Actualizar usuario
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -110,7 +137,7 @@
             this.getDataUsers();
         },
         methods: {
-            openModal(){
+            openModal() {
                 this.showModal = true;
             },
             closeModal() {
