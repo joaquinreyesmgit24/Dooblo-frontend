@@ -24,7 +24,7 @@
                 </router-link>
             </li>
             <li class="mb-1">
-                <router-link to="/users" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
+                <router-link to="/projects" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-file-ppt-2-fill mr-3 text-lg"></i>
                     <span class="text-sm">Proyectos</span>
                 </router-link>
