@@ -5,16 +5,28 @@
             <span class="text-lg font-bold text-white ml-3">Dooblo</span>
         </a>
         <ul class="mt-4">
-            <li class="mb-1 group active">
+            <!-- <li class="mb-1 group active">
                 <router-link to="/" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-violet-400 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="ri-home-2-line mr-3 text-lg"></i>
+                    <span class="text-sm">Inicio</span>
+                </router-link>
+            </li> -->
+            <li class="mb-1 group active">
+                <router-link to="/" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-home-2-line mr-3 text-lg"></i>
                     <span class="text-sm">Inicio</span>
                 </router-link>
             </li>
             <li class="mb-1">
-                <router-link to="/users" class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-violet-400 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                <router-link to="/users" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-user-line mr-3 text-lg"></i>
                     <span class="text-sm">Usuarios</span>
+                </router-link>
+            </li>
+            <li class="mb-1">
+                <router-link to="/users" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
+                    <i class="ri-file-ppt-2-fill mr-3 text-lg"></i>
+                    <span class="text-sm">Proyectos</span>
                 </router-link>
             </li>
             <!-- <li class="mb-1 group">

@@ -64,7 +64,7 @@
                                     </div>
                                     <button type="submit" @click="closeModal"
                                         class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                        Actualizar usuario
+                                        Editar usuario
                                     </button>
                                 </form>
                             </div>
