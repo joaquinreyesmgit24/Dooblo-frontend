@@ -7,15 +7,11 @@
                     <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
                         :pagination-options="paginationOptions" max-height="450px" :fixed-header="true">
                         <template v-slot:table-row="props">
-                            <span v-if="props.column.field == 'acciones'
-                                    ">
+                            <span v-if="props.column.field == 'acciones'">
                                 <button type="button" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-bs-toggle="modal"
-                                    data-bs-target="#modalUpdateUser" @click="openModal(props.row)">
+                                    data-bs-target="#modalUpdateUser" @click="openUpdateProjectModal(props.row)">
                                     Editar
                                 </button>
-                            </span>
-                            <span v-if="props.column.field == 'role'">
-                                {{ props.row.role.name }}
                             </span>
                         </template>
                         <template v-slot:emptystate>
@@ -39,27 +35,27 @@
                                 <form class="p-4 md:p-5">
                                     <div class="grid gap-4 mb-4 grid-cols-2">
                                         <div class="col-span-2">
-                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de usuario:</label>
+                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Id de encuesta:</label>
                                             <input type="text" name="name" id="name"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                                placeholder="Nombre de usuario" required="">
+                                                placeholder="Id de encuesta" required=""  v-model="editedProject.surveyID">
                                         </div>
-                                        <div class="col-span-2 sm:col-span-1">
-                                            <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
-                                            <select id="category"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500">
-                                                <option selected="">Seleccione el rol</option>
-                                                <!-- <option value="TV">TV/Monitors</option>
-                                                <option value="PC">PC</option>
-                                                <option value="GA">Gaming/Console</option>
-                                                <option value="PH">Phones</option> -->
-                                            </select>
-                                        </div>
-                                        <div class="col-span-2 sm:col-span-1">
-                                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
-                                            <input type="password" name="price" id="price"
+                                        <div class="col-span-2">
+                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del proyecto:</label>
+                                            <input type="text" name="name" id="name"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                                placeholder="Contraseña" required="">
+                                                placeholder="Código del proyecto" required="" v-model="editedProject.code">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de proyecto:</label>
+                                            <input type="text" name="name" id="name"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                                placeholder="Nombre de proyecto" required="" v-model="editedProject.name">
+                                        </div>
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="statusUpdateUser"
+                                                class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
+                                            <input type="checkbox" id="statusUpdateUser" />
                                         </div>
                                     </div>
                                     <button type="submit" @click="closeModal"
@@ -106,6 +102,10 @@
                 toast: useToast(),
                 columns: [
                     {
+                        label: "Id de encuesta",
+                        field: "surveyID",
+                    },
+                    {
                         label: "Código",
                         field: "code",
                     },
@@ -124,28 +124,42 @@
                     },
                 ],
                 rows: [],
+                editedProject:{
+                    code: "",
+                    name: "",
+                    surveyID: "",
+                    status: "",
+                }
             };
         },
         mounted() {
-            this.getDataUsers();
+            this.getDataProjects();
         },
         methods: {
-            openModal() {
+            openUpdateProjectModal(item) {
+                console.log(item)
                 this.showModal = true;
+                this.editedProject = { ...item };
+                this.showModal = true;
+                if (item.status === "Activo") {
+                    this.editedUser.status = true;
+                } else {
+                    this.editedUser.status = false;
+                }
             },
             closeModal() {
                 this.showModal = false;
             },
-            getDataUsers() {
-                GlobalService.getData("/auth/list-projects")
+            getDataProjects() {
+                GlobalService.getData("/project/list-projects")
                     .then((response) => {
-                        console.log(response.users);
-                        this.rows = response.users.map((user) => ({
-                            id: user.id,
-                            username: user.username,
-                            role: user.role,
-                            date: dayjs(user.createdAt).format("DD-MM-YYYY HH:mm:ss"),
-                            status: user.status ? "Activo" : "Inactivo",
+                        console.log(response)
+                        this.rows = response.projects.map((project) => ({
+                            id: project.id,
+                            code: project.code,
+                            name: project.name,
+                            surveyID: project.surveyID,
+                            status: project.status ? "Activo" : "Inactivo",
                         }));
                     })
                     .catch((error) => {
