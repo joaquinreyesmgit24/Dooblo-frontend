@@ -3,7 +3,7 @@
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex justify-between mb-6">
                 <div>
-                    <div class="text-2xl font-semibold mb-1">Usuarios</div>
+                    <div class="text-2xl font-semibold mb-1">Proyectos</div>
                     <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
                         :pagination-options="paginationOptions" max-height="450px" :fixed-header="true">
                         <template v-slot:table-row="props">
@@ -106,19 +106,12 @@
                 toast: useToast(),
                 columns: [
                     {
-                        label: "Nombre de usuario",
-                        field: "username",
+                        label: "Código",
+                        field: "code",
                     },
                     {
-                        label: "Rol",
-                        field: "role",
-                    },
-                    {
-                        label: "Fecha de creación",
-                        field: "date",
-                        type: "date",
-                        dateInputFormat: "dd-MM-yyyy HH:mm:ss",
-                        dateOutputFormat: "dd-MM-yyyy",
+                        label: "Nombre",
+                        field: "name",
                     },
                     {
                         label: "Estado",
@@ -144,7 +137,7 @@
                 this.showModal = false;
             },
             getDataUsers() {
-                GlobalService.getData("/auth/listar-usuarios")
+                GlobalService.getData("/auth/list-projects")
                     .then((response) => {
                         console.log(response.users);
                         this.rows = response.users.map((user) => ({

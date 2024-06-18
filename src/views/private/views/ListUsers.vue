@@ -10,7 +10,7 @@
                             <span v-if="props.column.field == 'acciones'
                                     ">
                                 <button type="button" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" data-bs-toggle="modal"
-                                    data-bs-target="#modalUpdateUser" @click="openModal(props.row)">
+                                    data-bs-target="#modalUpdateUser" @click="openEditUserModal(props.row)">
                                     Editar
                                 </button>
                             </span>
@@ -42,24 +42,36 @@
                                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de usuario:</label>
                                             <input type="text" name="name" id="name"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                                placeholder="Nombre de usuario" required="">
+                                                placeholder="Nombre de usuario" required="" v-model="editedUser.username">
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
                                             <select id="category"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500">
-                                                <option selected="">Seleccione el rol</option>
-                                                <!-- <option value="TV">TV/Monitors</option>
-                                                <option value="PC">PC</option>
-                                                <option value="GA">Gaming/Console</option>
-                                                <option value="PH">Phones</option> -->
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" v-model="editedUser.role.id">
+                                                <option value="" disabled selected>
+                                                    Seleccionar rol
+                                                </option>
+                                                <option v-for="role in roles" :key="role.id" :value="role.id">
+                                                    {{ role.name }}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-span-2 sm:col-span-1">
                                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
                                             <input type="password" name="price" id="price"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                                placeholder="Contraseña" required="">
+                                                placeholder="Contraseña" required="" v-model="editedUser.password">
+                                        </div>
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir contraseña:</label>
+                                            <input type="password" name="price" id="price"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                                placeholder="Contraseña" required="" v-model="editedUser.password">
+                                        </div>
+                                        <div class="col-span-2 sm:col-span-1">
+                                            <label for="statusUpdateUser" class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
+                                            <input type="checkbox" id="statusUpdateUser"
+                                            v-model="editedUser.status" />
                                         </div>
                                     </div>
                                     <button type="submit" @click="closeModal"
@@ -131,28 +143,55 @@
                     },
                 ],
                 rows: [],
+                roles:[],
+                editedUser:{
+                    username:"",
+                    password:"",
+                    roleId:"",
+                    status:""
+                }
             };
         },
         mounted() {
             this.getDataUsers();
+            this.getDataRoles();
         },
         methods: {
-            openModal() {
+            openEditUserModal(item) {
+                console.log(item)
+                this.editedUser = { ...item };
+                console.log(this.editedUser)
                 this.showModal = true;
+                if (item.status === "Activo") {
+                    this.editedUser.status = true;
+                } else {
+                    this.editedUser.status = false;
+                }
             },
             closeModal() {
                 this.showModal = false;
             },
             getDataUsers() {
-                GlobalService.getData("/auth/listar-usuarios")
+                GlobalService.getData("/auth/list-users")
                     .then((response) => {
-                        console.log(response.users);
                         this.rows = response.users.map((user) => ({
                             id: user.id,
                             username: user.username,
                             role: user.role,
                             date: dayjs(user.createdAt).format("DD-MM-YYYY HH:mm:ss"),
                             status: user.status ? "Activo" : "Inactivo",
+                        }));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            },
+            getDataRoles() {
+                GlobalService.getData("/auth/list-roles")
+                    .then((response) => {
+                        this.roles = response.roles.map((role) => ({
+                            id: role.id,
+                            name: role.name,
                         }));
                     })
                     .catch((error) => {
