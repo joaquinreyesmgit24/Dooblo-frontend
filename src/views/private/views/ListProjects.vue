@@ -263,9 +263,6 @@
                 }
             };
         },
-        mounted() {
-            this.getDataProjects();
-        },
         methods: {
             openUpdateProjectModal(item) {
                 this.showProjectUpdateModal = true;
@@ -362,6 +359,9 @@
                         }
                     });
             }
+        },
+        mounted() {
+            this.getDataProjects();
         },
     }
 </script>

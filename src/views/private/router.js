@@ -1,6 +1,8 @@
 const home = ()=>import('./views/Home.vue')
 const listUsers = ()=>import('./views/ListUsers.vue')
 const listProjects = ()=>import('./views/ListProjects.vue')
+const reports = ()=>import('./views/Reports.vue')
+
 
 
 export const PrivateRoutes = [
@@ -33,6 +35,15 @@ export const PrivateRoutes = [
         meta: {
         title: 'list-projects',
         menu: 'list-projects',
+        }
+    },
+    {
+        path: '/reports',
+        component: reports,
+        name: 'reports',
+        meta: {
+        title: 'reports',
+        menu: 'reports',
         }
     },
 ]
