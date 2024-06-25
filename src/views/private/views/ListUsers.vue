@@ -109,21 +109,21 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <form @submit.prevent="updateUser(editedUser.id, editedUser)" class="p-4 md:p-5">
+                        <form @submit.prevent="createUser(createdUser)" class="p-4 md:p-5">
                             <div class="grid gap-4 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         usuario:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de usuario" required="" v-model="editedUser.username" />
+                                        placeholder="Nombre de usuario" required="" v-model="createdUser.username" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
                                     <select id="category"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        v-model="editedUser.roleId">
+                                        v-model="createdUser.roleId">
                                         <option value="" disabled selected>
                                             Seleccionar rol
                                         </option>
@@ -137,21 +137,22 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="editedUser.password" />
+                                        placeholder="Contraseña" v-model="createdUser.password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir
                                         contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="editedUser.repeat_password" />
+                                        placeholder="Contraseña" v-model="createdUser.repeat_password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="statusUpdateUser"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="editedUser.status" />
+                                    <input type="checkbox" id="statusUpdateUser" v-model="createdUser.status" />
                                 </div>
                             </div>
+                            {{ createdUser }}
                             <button type="submit"
                                 class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Crear usuario
@@ -228,6 +229,13 @@
                     roleId: "",
                     status: "",
                 },
+                createdUser: {
+                    username: "",
+                    password: "",
+                    repeat_password: "",
+                    roleId: "",
+                    status: false,
+                },
             };
         },
         mounted() {
@@ -280,6 +288,35 @@
                         console.log(error);
                     });
             },
+            createUser(createdUser){
+                GlobalService.createData("/auth/register", createdUser)
+                        .then((response) => {
+                            this.toast.success(response.data.msg);
+                            this.rows = response.data.projects.map((project) => ({
+                                id: project.id,
+                                surveyID: project.surveyID,
+                                code: project.code,
+                                name: project.name,
+                                RegionVarName: project.RegionVarName,
+                                ComunaVarName: project.ComunaVarName,
+                                UMPVarName: project.UMPVarName,
+                                status: project.status ? "Activo" : "Inactivo",
+                            }));
+                            this.closeCreateProjectModal()
+                        })
+                        .catch((e) => {
+                            let errors = e.response.data.errors;
+                            let error = e.response.data.error;
+                            console.log(errors)
+                            if (errors) {
+                                errors.forEach((error_element) => {
+                                    this.toast.error(error_element.msg);
+                                });
+                            } else {
+                                this.toast.error(error);
+                            }
+                        });
+            },
             updateUser(userId, editedUser) {
                 GlobalService.setData("/auth/update", userId, editedUser)
                     .then((response) => {
@@ -291,7 +328,7 @@
                             date: dayjs(user.createdAt).format("DD-MM-YYYY HH:mm:ss"),
                             status: user.status ? "Activo" : "Inactivo",
                         }));
-                        this.closeModal()
+                        this.closeUpdateUserModal()
                     })
                     .catch((e) => {
                         let errors = e.response.data.errors;

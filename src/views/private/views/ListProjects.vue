@@ -140,30 +140,27 @@
                                         placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
-                                        proyecto:</label>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
+                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
-                                        proyecto:</label>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
+                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.ComunaVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
-                                        proyecto:</label>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
+                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="statusUpdateUser"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="createdProject" />
+                                    <input type="checkbox" id="statusUpdateUser" v-model="createdProject.status" />
                                 </div>
                             </div>
                             <button type="submit" @click="closeModal"
@@ -256,7 +253,7 @@
                     code: "",
                     name: "",
                     surveyID: "",
-                    status: "",
+                    status: false,
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: ""
@@ -304,8 +301,9 @@
             createProject(createdProject) {
                     GlobalService.createData("/project/create", createdProject)
                         .then((response) => {
-                            this.toast.success(response.msg);
-                            this.rows = response.projects.map((project) => ({
+                            console.log(response)
+                            this.toast.success(response.data.msg);
+                            this.rows = response.data.projects.map((project) => ({
                                 id: project.id,
                                 surveyID: project.surveyID,
                                 code: project.code,

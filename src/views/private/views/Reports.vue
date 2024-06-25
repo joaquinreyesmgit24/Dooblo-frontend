@@ -21,9 +21,9 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-1 gap-6 mb-6">
+    <div class="grid grid-cols-1 gap-6 mb-6" v-if="activado">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-            <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
+            <!-- <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
                 :pagination-options="paginationOptions" max-height="450px" :fixed-header="true">
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
@@ -40,7 +40,13 @@
                         No hay datos disponibles
                     </div>
                 </template>
-            </VueGoodTable>
+            </VueGoodTable> -->
+                <h3>
+                    Total de encuestas: {{ surveyID.length }}
+                </h3>
+                <h3>
+                    Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
+                </h3>
         </div>
     </div>
 </template>
@@ -60,6 +66,7 @@
                         password: "j.reyes"
                     }
                 },
+                activado:false,
                 surveyID: [],
                 expiredcanceledSurveyID: [],
             }
@@ -76,6 +83,7 @@
             },
             async getSurveyId(project) {
                 try {
+                    this.activado=true;
                     //Total
                     const response = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${project.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`, this.dooblouser)
                     this.surveyID = response.data
