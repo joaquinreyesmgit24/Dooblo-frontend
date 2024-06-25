@@ -41,12 +41,15 @@
                     </div>
                 </template>
             </VueGoodTable> -->
-                <h3>
-                    Total de encuestas: {{ surveyID.length }}
-                </h3>
-                <h3>
-                    Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
-                </h3>
+            <h3>
+                Total de encuestas: {{ surveyID.length }}
+            </h3>
+            <div v-for="(item, index) in formattedData">
+                {{item}}
+            </div>
+            <h3>
+                Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
+            </h3>
         </div>
     </div>
 </template>
@@ -66,9 +69,10 @@
                         password: "j.reyes"
                     }
                 },
-                activado:false,
+                activado: false,
                 surveyID: [],
                 expiredcanceledSurveyID: [],
+                formattedData:[]
             }
         },
         methods: {
@@ -83,22 +87,37 @@
             },
             async getSurveyId(project) {
                 try {
-                    this.activado=true;
+                    this.activado = true;
                     //Total
                     const response = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${project.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`, this.dooblouser)
                     this.surveyID = response.data
                     //Expiradas y canceladas
                     const responseB = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${project.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`, this.dooblouser);
                     this.expiredcanceledSurveyID = responseB.data
-                    this.getDataSurvey(project,this.surveyID)
+                    this.getDataSurvey(project, this.surveyID)
                 } catch (error) {
                     console.error("Error", error);
                 }
             },
             async getDataSurvey(project, surveyID) {
-                const unifiedSurveyID=surveyID.slice(0,10).join(',')
-                const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${project.surveyID}&subjectIDs=${unifiedSurveyID}`, this.dooblouser)
-                console.log(response)
+                let group = [];
+                for (let i = 0; i < surveyID.length; i += 99) {
+                    group.push(surveyID.slice(i, i + 99));
+                }
+                let formattedGroups = group.map(grupo => grupo.join(','));
+                let allData = []
+                try {
+                    let respuestas = await Promise.all(formattedGroups.map(async grupo => {
+                        const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${project.surveyID}&subjectIDs=${grupo}`, this.dooblouser);
+                        return response.data; // Aquí puedes ajustar según lo que necesites
+                    }));
+                    for (let i = 0; i < respuestas.length; i++) {
+                        allData.push(respuestas[i].Subjects)
+                    }
+                    this.formattedData = [...allData.flat()]
+                } catch (error) {
+                    console.error('Error al obtener los registros:', error);
+                }
             }
         },
         mounted() {
