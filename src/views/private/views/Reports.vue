@@ -89,7 +89,6 @@
             },
             async getDataSurvey(project, surveyID) {
                 const unifiedSurveyID=surveyID.slice(0,10).join(',')
-                console.log(unifiedSurveyID)
                 const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${project.surveyID}&subjectIDs=${unifiedSurveyID}`, this.dooblouser)
                 console.log(response)
             }
