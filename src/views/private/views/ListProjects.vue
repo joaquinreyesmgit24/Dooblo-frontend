@@ -45,16 +45,16 @@
                         <form @submit.prevent="updateProject(editedProject.id, editedProject)" class="p-4 md:p-5">
                             <div class="grid gap-4 mb-4 grid-cols-2">
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Id de
+                                    <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Id de encuesta" required="" v-model="editedProject.surveyID">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del
+                                    <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         proyecto:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Código del proyecto" required="" v-model="editedProject.code">
                                 </div>
@@ -66,31 +66,47 @@
                                         placeholder="Nombre de proyecto" required="" v-model="editedProject.name">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name"
+                                    <label for="expectedCase"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
+                                    <input type="number" name="expectedCase" id="expectedCase"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" required=""
+                                        v-model="editedProject.expectedCase" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="startDate"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del proyecto:</label>
+                                    <input type="date" name="startDate" id="startDate"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        required=""
+                                        v-model="editedProject.startDate">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="RegionVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="RegionVarName" id="RegionVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de proyecto" required=""
                                         v-model="editedProject.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name"
+                                    <label for="ComunaVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="ComunaVarName" id="ComunaVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de proyecto" required=""
                                         v-model="editedProject.ComunaVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
-                                    <input type="text" name="name" id="name"
+                                    <label for="UMPVarName" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
+                                    <input type="text" name="UMPVarName" id="UMPVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de proyecto" required="" v-model="editedProject.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="statusUpdateUser"
+                                    <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="editedProject.status" />
+                                    <input type="checkbox" name="status" id="status" v-model="editedProject.status" />
                                 </div>
                             </div>
                             <button type="submit" @click="closeModal"
@@ -119,16 +135,16 @@
                         <form  @submit.prevent="createProject(createdProject)" class="p-4 md:p-5">
                             <div class="grid gap-4 mb-4 grid-cols-2">
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Id de
+                                    <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Id de encuesta" required="" v-model="createdProject.surveyID">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del
+                                    <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         proyecto:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Código del proyecto" required="" v-model="createdProject.code">
                                 </div>
@@ -138,6 +154,22 @@
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCase"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
+                                    <input type="number" name="expectedCase" id="expectedCase"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" required=""
+                                        v-model="createdProject.expectedCase" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="name"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del proyecto:</label>
+                                    <input type="date" name="name" id="name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Nombre de proyecto" required=""
+                                        v-model="createdProject.startDate">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
@@ -158,9 +190,9 @@
                                         placeholder="Nombre de proyecto" required="" v-model="createdProject.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="statusUpdateUser"
+                                    <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="createdProject.status" />
+                                    <input type="checkbox" name="status" id="status" v-model="createdProject.status" />
                                 </div>
                             </div>
                             <button type="submit" @click="closeModal"
@@ -247,7 +279,9 @@
                     status: "",
                     RegionVarName: "",
                     ComunaVarName: "",
-                    UMPVarName: ""
+                    UMPVarName: "",
+                    expectedCase:"",
+                    startDate:""
                 },
                 createdProject: {
                     code: "",
@@ -256,7 +290,9 @@
                     status: false,
                     RegionVarName: "",
                     ComunaVarName: "",
-                    UMPVarName: ""
+                    UMPVarName: "",
+                    expectedCase:"",
+                    startDate:""
                 }
             };
         },
@@ -283,6 +319,7 @@
             getDataProjects() {
                 GlobalService.getData("/project/list-projects")
                     .then((response) => {
+                        console.log(response)
                         this.rows = response.projects.map((project) => ({
                             id: project.id,
                             surveyID: project.surveyID,
