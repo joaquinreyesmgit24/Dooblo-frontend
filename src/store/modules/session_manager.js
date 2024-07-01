@@ -52,7 +52,7 @@ const getters = {
 const actions = {
     registerUser({ commit }, payload){
         return new Promise((resolve, reject) => {
-            axios.post(`${BASE_URL}/auth/register`, payload)
+            axios.post(`${BASE_URL}/auth/create-user`, payload)
             .then(response => {
                 resolve(response)
             })
@@ -63,7 +63,7 @@ const actions = {
     },
     loginUser({ commit }, payload){
         return new Promise((resolve, reject) => {
-            axios.post(`${BASE_URL}/auth/authenticate`, payload)
+            axios.post(`${BASE_URL}/auth/authenticate-user`, payload)
             .then(response => {
                 console.log(response)
                 commit('setUserInfo', response)
@@ -76,7 +76,7 @@ const actions = {
     },
     logoutUser({ commit }){
         new Promise((resolve, reject) => {
-            axios.post(`${BASE_URL}/auth/logout`)
+            axios.post(`${BASE_URL}/auth/logout-user`)
             .then(response => {
                 commit('resetUserInfo', response)
                 resolve(response)

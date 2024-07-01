@@ -1,6 +1,6 @@
 const home = ()=>import('./views/Home.vue')
 const listUsers = ()=>import('./views/ListUsers.vue')
-const listProjects = ()=>import('./views/ListProjects.vue')
+const listStudies = ()=>import('./views/ListStudies.vue')
 const reports = ()=>import('./views/Reports.vue')
 
 
@@ -29,12 +29,12 @@ export const PrivateRoutes = [
         }
     },
     {
-        path: '/projects',
-        component: listProjects,
-        name: 'list-projects',
+        path: '/studies',
+        component: listStudies,
+        name: 'list-studies',
         meta: {
-        title: 'list-projects',
-        menu: 'list-projects',
+        title: 'list-studies',
+        menu: 'list-studies',
         }
     },
     {

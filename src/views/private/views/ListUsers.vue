@@ -4,7 +4,7 @@
             <div class="flex">
                 <button type="button"
                     class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
-                    data-bs-toggle="modal" data-bs-target="#modalUpdateUser" @click="openCreateUserModal()">
+                    data-bs-toggle="modal" data-bs-target="#modalCreateUser" @click="openCreateUserModal()">
                     Agregar
                 </button>
             </div>
@@ -44,7 +44,7 @@
                             </svg>
                         </button>
                         <form @submit.prevent="updateUser(editedUser.id, editedUser)" class="p-4 md:p-5">
-                            <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         usuario:</label>
@@ -110,7 +110,7 @@
                             </svg>
                         </button>
                         <form @submit.prevent="createUser(createdUser)" class="p-4 md:p-5">
-                            <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         usuario:</label>
@@ -152,7 +152,6 @@
                                     <input type="checkbox" id="statusUpdateUser" v-model="createdUser.status" />
                                 </div>
                             </div>
-                            {{ createdUser }}
                             <button type="submit"
                                 class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Crear usuario
@@ -289,7 +288,7 @@
                     });
             },
             createUser(createdUser){
-                GlobalService.createData("/auth/register", createdUser)
+                GlobalService.createData("/auth/create-user", createdUser)
                         .then((response) => {
                             this.toast.success(response.data.msg);
                             this.rows = response.data.projects.map((project) => ({
@@ -318,7 +317,7 @@
                         });
             },
             updateUser(userId, editedUser) {
-                GlobalService.setData("/auth/update", userId, editedUser)
+                GlobalService.setData("/auth/update-user", userId, editedUser)
                     .then((response) => {
                         this.toast.success(response.msg);
                         this.rows = response.users.map((user) => ({

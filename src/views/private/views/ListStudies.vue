@@ -4,19 +4,19 @@
             <div class="flex">
                 <button type="button"
                     class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
-                    data-bs-toggle="modal" data-bs-target="#modalUpdateUser" @click="openCreateProjectModal()">
+                    data-bs-toggle="modal" data-bs-target="#modalcreateStudy" @click="openCreateStudyModal()">
                     Agregar
                 </button>
             </div>
-            <div class="text-2xl font-semibold mb-1">Proyectos</div>
+            <div class="text-2xl font-semibold mb-1">Estudios</div>
             <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
                 :pagination-options="paginationOptions" max-height="450px" :fixed-header="true">
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
                         <button type="button"
                             class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                            data-bs-toggle="modal" data-bs-target="#modalUpdateUser"
-                            @click="openUpdateProjectModal(props.row)">
+                            data-bs-toggle="modal" data-bs-target="#modalUpdateStudy"
+                            @click="openUpdateStudyModal(props.row)">
                             Editar
                         </button>
                     </span>
@@ -27,14 +27,14 @@
                     </div>
                 </template>
             </VueGoodTable>
-            <div v-if="showProjectUpdateModal" class="fixed z-10 inset-0 overflow-y-auto">
+            <div v-if="showStudyUpdateModal" class="fixed z-10 inset-0 overflow-y-auto">
                 <div class="flex items-center justify-center min-h-screen">
-                    <div class="fixed inset-0 transition-opacity" @click="closeUpdateProjectModal" aria-hidden="true">
+                    <div class="fixed inset-0 transition-opacity" @click="closeUpdateStudytModal" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                     <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                        <button @click="closeUpdateProjectModal"
+                        <button @click="closeUpdateStudyModal"
                             class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -42,89 +42,88 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <form @submit.prevent="updateProject(editedProject.id, editedProject)" class="p-4 md:p-5">
-                            <div class="grid gap-4 mb-4 grid-cols-2">
+                        <form @submit.prevent="updateStudy(editedStudy.id, editedStudy)" class="p-4 md:p-5">
+                            <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
                                     <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Id de encuesta" required="" v-model="editedProject.surveyID">
+                                        placeholder="Id de encuesta" v-model="editedStudy.surveyID">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
-                                        proyecto:</label>
+                                        estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Código del proyecto" required="" v-model="editedProject.code">
+                                        placeholder="Código del estudio"  v-model="editedStudy.code">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
-                                        proyecto:</label>
+                                        estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="editedProject.name">
+                                        placeholder="Nombre de estudio"  v-model="editedStudy.name">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCase"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
                                     <input type="number" name="expectedCase" id="expectedCase"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados" required=""
-                                        v-model="editedProject.expectedCase" min="0">
+                                        placeholder="Casos esperados" 
+                                        v-model="editedStudy.expectedCase" min="0">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="startDate"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del proyecto:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del estudio:</label>
                                     <input type="date" name="startDate" id="startDate"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        required=""
-                                        v-model="editedProject.startDate">
+                                        v-model="editedStudy.startDate">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="RegionVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required=""
-                                        v-model="editedProject.RegionVarName">
+                                        placeholder="Región"
+                                        v-model="editedStudy.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="ComunaVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="ComunaVarName" id="ComunaVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required=""
-                                        v-model="editedProject.ComunaVarName">
+                                        placeholder="Comuna"
+                                        v-model="editedStudy.ComunaVarName">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="UMPVarName" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="UMPVarName" id="UMPVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="editedProject.UMPVarName">
+                                        placeholder="UMP" v-model="editedStudy.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" name="status" id="status" v-model="editedProject.status" />
+                                    <input type="checkbox" name="status" id="status" v-model="editedStudy.status" />
                                 </div>
                             </div>
-                            <button type="submit" @click="closeModal"
+                            <button type="submit"
                                 class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                Editar usuario
+                                Editar estudio
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-            <div v-if="showProjectCreateModal" class="fixed z-10 inset-0 overflow-y-auto">
+            <div v-if="showStudyCreateModal" class="fixed z-10 inset-0 overflow-y-auto">
                 <div class="flex items-center justify-center min-h-screen">
-                    <div class="fixed inset-0 transition-opacity" @click="closeCreateProjectModal" aria-hidden="true">
+                    <div class="fixed inset-0 transition-opacity" @click="closeCreateStudyModal" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                     <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                        <button @click="closeCreateProjectModal"
+                        <button @click="closeCreateStudyModal"
                             class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -132,72 +131,71 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <form  @submit.prevent="createProject(createdProject)" class="p-4 md:p-5">
-                            <div class="grid gap-4 mb-4 grid-cols-2">
+                        <form  @submit.prevent="createStudy(createdStudy)" class="p-4 md:p-5">
+                            <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
                                     <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Id de encuesta" required="" v-model="createdProject.surveyID">
+                                        placeholder="Id de encuesta" v-model="createdStudy.surveyID">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
-                                        proyecto:</label>
+                                        estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Código del proyecto" required="" v-model="createdProject.code">
+                                        placeholder="Código del estudio" v-model="createdStudy.code">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
-                                        proyecto:</label>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre del
+                                        estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.name">
+                                        placeholder="Nombre del estudio"  v-model="createdStudy.name">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCase"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
                                     <input type="number" name="expectedCase" id="expectedCase"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados" required=""
-                                        v-model="createdProject.expectedCase" min="0">
+                                        placeholder="Casos esperados"
+                                        v-model="createdStudy.expectedCase" min="0">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del proyecto:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del estudio:</label>
                                     <input type="date" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required=""
-                                        v-model="createdProject.startDate">
+                                        v-model="createdStudy.startDate">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.RegionVarName">
+                                        placeholder="Región" v-model="createdStudy.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.ComunaVarName">
+                                        placeholder="Comuna" v-model="createdStudy.ComunaVarName">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de proyecto" required="" v-model="createdProject.UMPVarName">
+                                        placeholder="UMP"  v-model="createdStudy.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" name="status" id="status" v-model="createdProject.status" />
+                                    <input type="checkbox" name="status" id="status" v-model="createdStudy.status" />
                                 </div>
                             </div>
-                            <button type="submit" @click="closeModal"
+                            <button type="submit"
                                 class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                Crear usuario
+                                Crear estudio
                             </button>
                         </form>
                     </div>
@@ -214,14 +212,14 @@
     import { useToast } from "vue-toastification";
     import dayjs from "dayjs"; // Importa dayjs
     export default {
-        name: "list-users",
+        name: "list-studies",
         components: {
             VueGoodTable,
         },
         data() {
             return {
-                showProjectUpdateModal: false,
-                showProjectCreateModal: false,
+                showStudyUpdateModal: false,
+                showStudyCreateModal: false,
                 searchOptions: {
                     enabled: true,
                     placeholder: "Buscar",
@@ -272,7 +270,7 @@
                     },
                 ],
                 rows: [],
-                editedProject: {
+                editedStudy: {
                     code: "",
                     name: "",
                     surveyID: "",
@@ -283,7 +281,7 @@
                     expectedCase:"",
                     startDate:""
                 },
-                createdProject: {
+                createdStudy: {
                     code: "",
                     name: "",
                     surveyID: "",
@@ -297,60 +295,59 @@
             };
         },
         methods: {
-            openUpdateProjectModal(item) {
-                this.showProjectUpdateModal = true;
-                this.editedProject = { ...item };
-                this.showProjectUpdateModal = true;
+            openUpdateStudyModal(item) {
+                this.showStudyUpdateModal = true;
+                this.editedStudy = { ...item };
                 if (item.status === "Activo") {
-                    this.editedProject.status = true;
+                    this.editedStudy.status = true;
                 } else {
-                    this.editedProject.status = false;
+                    this.editedStudy.status = false;
                 }
             },
-            openCreateProjectModal() {
-                this.showProjectCreateModal = true;
+            openCreateStudyModal() {
+                this.showStudyCreateModal = true;
             },
-            closeUpdateProjectModal() {
-                this.showProjectUpdateModal = false;
+            closeUpdateStudyModal() {
+                this.showStudyUpdateModal = false;
             },
-            closeCreateProjectModal() {
-                this.showProjectCreateModal = false;
+            closeCreateStudyModal() {
+                this.showStudyCreateModal = false;
             },
-            getDataProjects() {
-                GlobalService.getData("/project/list-projects")
+            getDataStudies() {
+                GlobalService.getData("/study/list-studies")
                     .then((response) => {
                         console.log(response)
-                        this.rows = response.projects.map((project) => ({
-                            id: project.id,
-                            surveyID: project.surveyID,
-                            code: project.code,
-                            name: project.name,
-                            RegionVarName: project.RegionVarName,
-                            ComunaVarName: project.ComunaVarName,
-                            UMPVarName: project.UMPVarName,
-                            status: project.status ? "Activo" : "Inactivo",
+                        this.rows = response.studies.map((study) => ({
+                            id: study.id,
+                            surveyID: study.surveyID,
+                            code: study.code,
+                            name: study.name,
+                            RegionVarName: study.RegionVarName,
+                            ComunaVarName: study.ComunaVarName,
+                            UMPVarName: study.UMPVarName,
+                            status: study.status ? "Activo" : "Inactivo",
                         }));
                     })
                     .catch((error) => {
                         console.log(error);
                     });
             },
-            createProject(createdProject) {
-                    GlobalService.createData("/project/create", createdProject)
+            createStudy(createdStudy) {
+                    GlobalService.createData("/study/create-study", createdStudy)
                         .then((response) => {
                             console.log(response)
                             this.toast.success(response.data.msg);
-                            this.rows = response.data.projects.map((project) => ({
-                                id: project.id,
-                                surveyID: project.surveyID,
-                                code: project.code,
-                                name: project.name,
-                                RegionVarName: project.RegionVarName,
-                                ComunaVarName: project.ComunaVarName,
-                                UMPVarName: project.UMPVarName,
-                                status: project.status ? "Activo" : "Inactivo",
+                            this.rows = response.data.studies.map((study) => ({
+                                id: study.id,
+                                surveyID: study.surveyID,
+                                code: study.code,
+                                name: study.name,
+                                RegionVarName: study.RegionVarName,
+                                ComunaVarName: study.ComunaVarName,
+                                UMPVarName: study.UMPVarName,
+                                status: study.status ? "Activo" : "Inactivo",
                             }));
-                            this.closeCreateProjectModal()
+                            this.closeCreateStudyModal()
                         })
                         .catch((e) => {
                             let errors = e.response.data.errors;
@@ -365,21 +362,21 @@
                             }
                         });
                 },
-            updateProject(projectId, editedProject) {
-                GlobalService.setData("/project/update", projectId, editedProject)
+            updateStudy(studyId, editedStudy) {
+                GlobalService.setData("/study/update-study", studyId, editedStudy)
                     .then((response) => {
                         this.toast.success(response.msg);
-                        this.rows = response.projects.map((project) => ({
-                            id: project.id,
-                            surveyID: project.surveyID,
-                            code: project.code,
-                            name: project.name,
-                            RegionVarName: project.RegionVarName,
-                            ComunaVarName: project.ComunaVarName,
-                            UMPVarName: project.UMPVarName,
-                            status: project.status ? "Activo" : "Inactivo",
+                        this.rows = response.studies.map((study) => ({
+                            id: study.id,
+                            surveyID: study.surveyID,
+                            code: study.code,
+                            name: study.name,
+                            RegionVarName: study.RegionVarName,
+                            ComunaVarName: study.ComunaVarName,
+                            UMPVarName: study.UMPVarName,
+                            status: study.status ? "Activo" : "Inactivo",
                         }));
-                        this.closeUpdateProjectModal()
+                        this.closeUpdateStudyModal()
                     })
                     .catch((e) => {
                         let errors = e.response.data.errors;
@@ -396,7 +393,7 @@
             }
         },
         mounted() {
-            this.getDataProjects();
+            this.getDataStudies();
         },
     }
 </script>
