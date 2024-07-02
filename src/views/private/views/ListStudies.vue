@@ -316,7 +316,6 @@
             getDataStudies() {
                 GlobalService.getData("/study/list-studies")
                     .then((response) => {
-                        console.log(response)
                         this.rows = response.studies.map((study) => ({
                             id: study.id,
                             surveyID: study.surveyID,

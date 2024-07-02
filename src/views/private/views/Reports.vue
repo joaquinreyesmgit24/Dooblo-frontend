@@ -10,12 +10,12 @@
             <div class="flex items-center">
                 <select id="countries"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                    v-model="selectedProject" @change="getSurveyId(this.selectedProject)">
+                    v-model="selectedStudy" @change="getSurveyId(this.selectedStudy)">
                     <option value="" disabled selected>
                         Selecciona un estudio
                     </option>
-                    <option v-for="project in projects" :key="project.id" :value="project">
-                        {{ project.name }}
+                    <option v-for="study in studies" :key="study.id" :value="study">
+                        {{ study.name }}
                     </option>
                 </select>
             </div>
@@ -41,15 +41,22 @@
                     </div>
                 </template>
             </VueGoodTable> -->
-            <h3>
-                Total de encuestas: {{ surveyID.length }}
-            </h3>
-            <div v-for="(item, index) in formattedData">
-                {{item}}
-            </div>
-            <h3>
-                Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
-            </h3>
+            <template v-if="loading">
+                <p>Cargando...</p>
+                <!-- Aquí puedes usar un spinner de carga -->
+            </template>
+            <template v-else>
+                <h3>
+                    Total de encuestas: {{ surveyID.length }}
+                </h3>
+                {{ formattedData }}
+                <div v-for="(item, index) in formattedData">
+                    {{item}}
+                </div>
+                <h3>
+                    Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
+                </h3>
+            </template>
         </div>
     </div>
 </template>
@@ -61,8 +68,8 @@
         name: "reports",
         data() {
             return {
-                selectedProject: "",
-                projects: [],
+                selectedStudy: "",
+                studies: [],
                 dooblouser: {
                     auth: {
                         username: "c1982d08-43d1-4956-aff8-59c1a8db840c/j.reyes",
@@ -70,58 +77,63 @@
                     }
                 },
                 activado: false,
+                loading: false,
                 surveyID: [],
                 expiredcanceledSurveyID: [],
                 formattedData:[]
             }
         },
         methods: {
-            getDataProjects() {
-                GlobalService.getData("/project/list-projects")
+            getDataStudies() {
+                GlobalService.getData("/study/list-studies")
                     .then((response) => {
-                        this.projects = response.projects
+                        this.studies = response.studies
                     })
                     .catch((error) => {
                         console.log(error);
                     });
             },
-            async getSurveyId(project) {
+            async getSurveyId(study) {
                 try {
+                    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
                     this.activado = true;
+                    this.loading = true;
                     //Total
-                    const response = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${project.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`, this.dooblouser)
+                    const response = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`, this.dooblouser)
                     this.surveyID = response.data
+                    await sleep(500);
                     //Expiradas y canceladas
-                    const responseB = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${project.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`, this.dooblouser);
+                    const responseB = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`, this.dooblouser);
                     this.expiredcanceledSurveyID = responseB.data
-                    this.getDataSurvey(project, this.surveyID)
+                    await sleep(500);
+                    await this.getDataSurvey(study, this.surveyID)
+                    this.loading = false;
                 } catch (error) {
                     console.error("Error", error);
                 }
             },
-            async getDataSurvey(project, surveyID) {
+            async getDataSurvey(study, surveyID) {
                 let group = [];
                 for (let i = 0; i < surveyID.length; i += 99) {
                     group.push(surveyID.slice(i, i + 99));
                 }
                 let formattedGroups = group.map(grupo => grupo.join(','));
-                let allData = []
                 try {
-                    let respuestas = await Promise.all(formattedGroups.map(async grupo => {
-                        const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${project.surveyID}&subjectIDs=${grupo}`, this.dooblouser);
-                        return response.data; // Aquí puedes ajustar según lo que necesites
-                    }));
-                    for (let i = 0; i < respuestas.length; i++) {
-                        allData.push(respuestas[i].Subjects)
+                    let respuestas = []
+                    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+                    for (let i=0; i<formattedGroups.length;i++) {
+                        const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${study.surveyID}&subjectIDs=${formattedGroups[i]}`, this.dooblouser);
+                        respuestas.push(response.data); // Aquí puedes ajustar según lo que necesites
+                        await sleep(500);
                     }
-                    this.formattedData = [...allData.flat()]
+                    this.formattedData = [...respuestas.flat()]
                 } catch (error) {
                     console.error('Error al obtener los registros:', error);
                 }
             }
         },
         mounted() {
-            this.getDataProjects()
+            this.getDataStudies()
         }
     }
 </script>
