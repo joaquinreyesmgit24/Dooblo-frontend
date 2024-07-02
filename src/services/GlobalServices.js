@@ -22,4 +22,11 @@ export default {
             .catch((err) => reject(err))
         }))
     },
+    deleteDataById(url,id){
+        return new Promise(((resolve, reject) => {
+        http.delete(`${url}/${id}`)
+        .then((response) => resolve(response.data))
+        .catch((err) => reject(err))
+    }))
+    }
 }

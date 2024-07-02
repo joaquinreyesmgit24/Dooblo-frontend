@@ -3,7 +3,7 @@
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex">
                 <button type="button"
-                    class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
+                    class="text-white bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
                     data-bs-toggle="modal" data-bs-target="#modalCreateUser" @click="openCreateUserModal()">
                     Agregar
                 </button>
@@ -14,10 +14,15 @@
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
                         <button type="button"
-                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3"
                             data-bs-toggle="modal" data-bs-target="#modalUpdateUser"
                             @click="openUpdateUserModal(props.row)">
                             Editar
+                        </button>
+                        <button type="button"
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            @click="openDeleteUserAlert(props.row)">
+                            Eliminar
                         </button>
                     </span>
                     <span v-if="props.column.field == 'role'">
@@ -28,6 +33,33 @@
                     <div style="text-align: center">No hay datos disponibles</div>
                 </template>
             </VueGoodTable>
+            <div v-if="showUserDeleteAlert" class="fixed z-10 inset-0 overflow-y-auto">
+                <div class="flex items-center justify-center min-h-screen">
+                    <div class="fixed inset-0 transition-opacity" @click="closeDeleteUserAlert" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full p-4 mb-4"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="flex items-center">
+                            <h3 class="text-lg font-medium">¿Estás seguro que deseas eliminar al usuario {{userDeleted.username}}?</h3>
+                        </div>
+                        <div class="mt-2 mb-4 text-sm">
+                            Este elemento se eliminará permanentemente. Esta acción no se puede revertir.
+                        </div>
+                        <div class="flex">
+                            <button @click="deleteUser(this.userDeleted.id)" type="button"
+                                class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 border border-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+                                Eliminar
+                            </button>
+                            <button @click="closeDeleteUserAlert()" type="button"
+                                class="text-red-800 bg-transparent inline-flex items-center hover:bg-red-800 hover:text-white border border-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div v-if="showUserUpdateModal" class="fixed z-10 inset-0 overflow-y-auto">
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="fixed inset-0 transition-opacity" @click="closeUpdateUserModal" aria-hidden="true">
@@ -153,7 +185,7 @@
                                 </div>
                             </div>
                             <button type="submit"
-                                class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                class="text-white inline-flex items-center bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Crear usuario
                             </button>
                         </form>
@@ -179,6 +211,7 @@
             return {
                 showUserUpdateModal: false,
                 showUserCreateModal: false,
+                showUserDeleteAlert: false,
                 searchOptions: {
                     enabled: true,
                     placeholder: "Buscar",
@@ -222,6 +255,7 @@
                 rows: [],
                 roles: [],
                 editedUser: {
+                    id:"",
                     username: "",
                     password: "",
                     repeat_password: "",
@@ -235,6 +269,15 @@
                     roleId: "",
                     status: false,
                 },
+                userDeleted:{
+                    id:"",
+                    username: "",
+                    password: "",
+                    repeat_password: "",
+                    roleId: "",
+                    status: "",
+                }
+                
             };
         },
         mounted() {
@@ -259,6 +302,13 @@
             },
             closeCreateUserModal() {
                 this.showUserCreateModal = false;
+            },
+            openDeleteUserAlert(item){
+                this.userDeleted={...item}
+                this.showUserDeleteAlert = true;
+            },
+            closeDeleteUserAlert(){
+                this.showUserDeleteAlert = false;
             },
             getDataUsers() {
                 GlobalService.getData("/auth/list-users")
@@ -287,34 +337,31 @@
                         console.log(error);
                     });
             },
-            createUser(createdUser){
+            createUser(createdUser) {
                 GlobalService.createData("/auth/create-user", createdUser)
-                        .then((response) => {
-                            this.toast.success(response.data.msg);
-                            this.rows = response.data.projects.map((project) => ({
-                                id: project.id,
-                                surveyID: project.surveyID,
-                                code: project.code,
-                                name: project.name,
-                                RegionVarName: project.RegionVarName,
-                                ComunaVarName: project.ComunaVarName,
-                                UMPVarName: project.UMPVarName,
-                                status: project.status ? "Activo" : "Inactivo",
-                            }));
-                            this.closeCreateProjectModal()
-                        })
-                        .catch((e) => {
-                            let errors = e.response.data.errors;
-                            let error = e.response.data.error;
-                            console.log(errors)
-                            if (errors) {
-                                errors.forEach((error_element) => {
-                                    this.toast.error(error_element.msg);
-                                });
-                            } else {
-                                this.toast.error(error);
-                            }
-                        });
+                    .then((response) => {
+                        this.toast.success(response.data.msg);
+                        this.rows = response.data.users.map((user) => ({
+                            id: user.id,
+                            username: user.username,
+                            role: user.role,
+                            date: dayjs(user.createdAt).format("DD-MM-YYYY HH:mm:ss"),
+                            status: user.status ? "Activo" : "Inactivo",
+                        }));
+                        this.closeCreateUserModal()
+                    })
+                    .catch((e) => {
+                        let errors = e.response.data.errors;
+                        let error = e.response.data.error;
+                        console.log(errors)
+                        if (errors) {
+                            errors.forEach((error_element) => {
+                                this.toast.error(error_element.msg);
+                            });
+                        } else {
+                            this.toast.error(error);
+                        }
+                    });
             },
             updateUser(userId, editedUser) {
                 GlobalService.setData("/auth/update-user", userId, editedUser)
@@ -332,7 +379,6 @@
                     .catch((e) => {
                         let errors = e.response.data.errors;
                         let error = e.response.data.error;
-                        console.log(errors)
                         if (errors) {
                             errors.forEach((error_element) => {
                                 this.toast.error(error_element.msg);
@@ -342,6 +388,32 @@
                         }
                     });
             },
+            deleteUser(userId) {
+                GlobalService.deleteDataById("/auth/delete-user", userId)
+                    .then((response) => {
+                        this.toast.success(response.msg);
+                        this.rows = response.users.map((user) => ({
+                            id: user.id,
+                            username: user.username,
+                            role: user.role,
+                            date: dayjs(user.createdAt).format("DD-MM-YYYY HH:mm:ss"),
+                            status: user.status ? "Activo" : "Inactivo",
+                        }));
+                        this.closeDeleteUserAlert()
+                    })
+                    .catch((e) => {
+                        let errors = e.response.data.errors;
+                        let error = e.response.data.error;
+                        console.log(errors)
+                        if (errors) {
+                            errors.forEach((error_element) => {
+                                this.toast.error(error_element.msg);
+                            });
+                        } else {
+                            this.toast.error(error);
+                        }
+                    });
+            }
         },
     };
 </script>

@@ -3,7 +3,7 @@
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex">
                 <button type="button"
-                    class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
+                    class="text-white bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ml-auto"
                     data-bs-toggle="modal" data-bs-target="#modalcreateStudy" @click="openCreateStudyModal()">
                     Agregar
                 </button>
@@ -14,10 +14,15 @@
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
                         <button type="button"
-                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3"
                             data-bs-toggle="modal" data-bs-target="#modalUpdateStudy"
                             @click="openUpdateStudyModal(props.row)">
                             Editar
+                        </button>
+                        <button type="button"
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            @click="openDeleteStudyAlert(props.row)">
+                            Eliminar
                         </button>
                     </span>
                 </template>
@@ -56,26 +61,25 @@
                                         estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Código del estudio"  v-model="editedStudy.code">
+                                        placeholder="Código del estudio" v-model="editedStudy.code">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de estudio"  v-model="editedStudy.name">
+                                        placeholder="Nombre de estudio" v-model="editedStudy.name">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="expectedCase"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
+                                    <label for="expectedCase" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados:</label>
                                     <input type="number" name="expectedCase" id="expectedCase"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados" 
-                                        v-model="editedStudy.expectedCase" min="0">
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCase" min="0">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="startDate"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del estudio:</label>
+                                    <label for="startDate" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
+                                        inicio del estudio:</label>
                                     <input type="date" name="startDate" id="startDate"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="editedStudy.startDate">
@@ -85,19 +89,18 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Región"
-                                        v-model="editedStudy.RegionVarName">
+                                        placeholder="Región" v-model="editedStudy.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="ComunaVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="ComunaVarName" id="ComunaVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Comuna"
-                                        v-model="editedStudy.ComunaVarName">
+                                        placeholder="Comuna" v-model="editedStudy.ComunaVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="UMPVarName" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
+                                    <label for="UMPVarName"
+                                        class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="UMPVarName" id="UMPVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="UMP" v-model="editedStudy.UMPVarName">
@@ -131,7 +134,7 @@
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
-                        <form  @submit.prevent="createStudy(createdStudy)" class="p-4 md:p-5">
+                        <form @submit.prevent="createStudy(createdStudy)" class="p-4 md:p-5">
                             <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
@@ -152,31 +155,32 @@
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre del estudio"  v-model="createdStudy.name">
+                                        placeholder="Nombre del estudio" v-model="createdStudy.name">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="expectedCase"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
+                                    <label for="expectedCase" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados:</label>
                                     <input type="number" name="expectedCase" id="expectedCase"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados"
-                                        v-model="createdStudy.expectedCase" min="0">
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCase" min="0">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio del estudio:</label>
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
+                                        inicio del estudio:</label>
                                     <input type="date" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="createdStudy.startDate">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
+                                    <label for="name"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Región" v-model="createdStudy.RegionVarName">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
+                                    <label for="name"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Comuna" v-model="createdStudy.ComunaVarName">
@@ -185,7 +189,7 @@
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="UMP"  v-model="createdStudy.UMPVarName">
+                                        placeholder="UMP" v-model="createdStudy.UMPVarName">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
@@ -194,7 +198,7 @@
                                 </div>
                             </div>
                             <button type="submit"
-                                class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                class="text-white inline-flex items-center bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Crear estudio
                             </button>
                         </form>
@@ -220,6 +224,7 @@
             return {
                 showStudyUpdateModal: false,
                 showStudyCreateModal: false,
+                showStudyDeleteAlert: false,
                 searchOptions: {
                     enabled: true,
                     placeholder: "Buscar",
@@ -271,6 +276,7 @@
                 ],
                 rows: [],
                 editedStudy: {
+                    id:"",
                     code: "",
                     name: "",
                     surveyID: "",
@@ -278,8 +284,8 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
-                    expectedCase:"",
-                    startDate:""
+                    expectedCase: "",
+                    startDate: ""
                 },
                 createdStudy: {
                     code: "",
@@ -289,8 +295,20 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
-                    expectedCase:"",
-                    startDate:""
+                    expectedCase: "",
+                    startDate: ""
+                },
+                studyDeleted:{
+                    id:"",
+                    code: "",
+                    name: "",
+                    surveyID: "",
+                    status: "",
+                    RegionVarName: "",
+                    ComunaVarName: "",
+                    UMPVarName: "",
+                    expectedCase: "",
+                    startDate: ""
                 }
             };
         },
@@ -313,6 +331,10 @@
             closeCreateStudyModal() {
                 this.showStudyCreateModal = false;
             },
+            openDeleteStudyAlert(item){
+                this.userDeleted={...item}
+                this.showUserDeleteAlert = true;
+            },
             getDataStudies() {
                 GlobalService.getData("/study/list-studies")
                     .then((response) => {
@@ -332,35 +354,35 @@
                     });
             },
             createStudy(createdStudy) {
-                    GlobalService.createData("/study/create-study", createdStudy)
-                        .then((response) => {
-                            console.log(response)
-                            this.toast.success(response.data.msg);
-                            this.rows = response.data.studies.map((study) => ({
-                                id: study.id,
-                                surveyID: study.surveyID,
-                                code: study.code,
-                                name: study.name,
-                                RegionVarName: study.RegionVarName,
-                                ComunaVarName: study.ComunaVarName,
-                                UMPVarName: study.UMPVarName,
-                                status: study.status ? "Activo" : "Inactivo",
-                            }));
-                            this.closeCreateStudyModal()
-                        })
-                        .catch((e) => {
-                            let errors = e.response.data.errors;
-                            let error = e.response.data.error;
-                            console.log(errors)
-                            if (errors) {
-                                errors.forEach((error_element) => {
-                                    this.toast.error(error_element.msg);
-                                });
-                            } else {
-                                this.toast.error(error);
-                            }
-                        });
-                },
+                GlobalService.createData("/study/create-study", createdStudy)
+                    .then((response) => {
+                        console.log(response)
+                        this.toast.success(response.data.msg);
+                        this.rows = response.data.studies.map((study) => ({
+                            id: study.id,
+                            surveyID: study.surveyID,
+                            code: study.code,
+                            name: study.name,
+                            RegionVarName: study.RegionVarName,
+                            ComunaVarName: study.ComunaVarName,
+                            UMPVarName: study.UMPVarName,
+                            status: study.status ? "Activo" : "Inactivo",
+                        }));
+                        this.closeCreateStudyModal()
+                    })
+                    .catch((e) => {
+                        let errors = e.response.data.errors;
+                        let error = e.response.data.error;
+                        console.log(errors)
+                        if (errors) {
+                            errors.forEach((error_element) => {
+                                this.toast.error(error_element.msg);
+                            });
+                        } else {
+                            this.toast.error(error);
+                        }
+                    });
+            },
             updateStudy(studyId, editedStudy) {
                 GlobalService.setData("/study/update-study", studyId, editedStudy)
                     .then((response) => {
@@ -376,6 +398,35 @@
                             status: study.status ? "Activo" : "Inactivo",
                         }));
                         this.closeUpdateStudyModal()
+                    })
+                    .catch((e) => {
+                        let errors = e.response.data.errors;
+                        let error = e.response.data.error;
+                        console.log(errors)
+                        if (errors) {
+                            errors.forEach((error_element) => {
+                                this.toast.error(error_element.msg);
+                            });
+                        } else {
+                            this.toast.error(error);
+                        }
+                    });
+            },
+            deleteStudy(studyId) {
+                GlobalService.deleteDataById("/auth/delete-study", studyId)
+                    .then((response) => {
+                        this.toast.success(response.msg);
+                        this.rows = response.users.map((study) => ({
+                            id: study.id,
+                            surveyID: study.surveyID,
+                            code: study.code,
+                            name: study.name,
+                            RegionVarName: study.RegionVarName,
+                            ComunaVarName: study.ComunaVarName,
+                            UMPVarName: study.UMPVarName,
+                            status: study.status ? "Activo" : "Inactivo",
+                        }));
+                        this.closeDeleteUserAlert()
                     })
                     .catch((e) => {
                         let errors = e.response.data.errors;
