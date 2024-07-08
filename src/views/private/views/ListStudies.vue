@@ -32,9 +32,36 @@
                     </div>
                 </template>
             </VueGoodTable>
+            <div v-if="showStudyDeleteAlert" class="fixed z-10 inset-0 overflow-y-auto">
+                <div class="flex items-center justify-center min-h-screen">
+                    <div class="fixed inset-0 transition-opacity" @click="closeDeleteStudyalert" aria-hidden="true">
+                        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                    </div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full p-4 mb-4"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="flex items-center">
+                            <h3 class="text-lg font-medium">¿Estás seguro que deseas eliminar al usuario {{studyDeleted.name}}?</h3>
+                        </div>
+                        <div class="mt-2 mb-4 text-sm">
+                            Este elemento se eliminará permanentemente. Esta acción no se puede revertir.
+                        </div>
+                        <div class="flex">
+                            <button @click="deleteStudy(this.studyDeleted.id)" type="button"
+                                class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 border border-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">
+                                Eliminar
+                            </button>
+                            <button @click="closeDeleteStudyalert()" type="button"
+                                class="text-red-800 bg-transparent inline-flex items-center hover:bg-red-800 hover:text-white border border-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                data-dismiss-target="#alert-additional-content-2" aria-label="Close">
+                                Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div v-if="showStudyUpdateModal" class="fixed z-10 inset-0 overflow-y-auto">
                 <div class="flex items-center justify-center min-h-screen">
-                    <div class="fixed inset-0 transition-opacity" @click="closeUpdateStudytModal" aria-hidden="true">
+                    <div class="fixed inset-0 transition-opacity" @click="closeUpdateStudyModal" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                     <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
@@ -331,9 +358,12 @@
             closeCreateStudyModal() {
                 this.showStudyCreateModal = false;
             },
+            closeDeleteStudyalert() {
+                this.showStudyDeleteAlert = false;
+            },
             openDeleteStudyAlert(item){
-                this.userDeleted={...item}
-                this.showUserDeleteAlert = true;
+                this.studyDeleted={...item}
+                this.showStudyDeleteAlert = true;
             },
             getDataStudies() {
                 GlobalService.getData("/study/list-studies")
@@ -413,10 +443,10 @@
                     });
             },
             deleteStudy(studyId) {
-                GlobalService.deleteDataById("/auth/delete-study", studyId)
+                GlobalService.deleteDataById("/study/delete-study", studyId)
                     .then((response) => {
                         this.toast.success(response.msg);
-                        this.rows = response.users.map((study) => ({
+                        this.rows = response.studies.map((study) => ({
                             id: study.id,
                             surveyID: study.surveyID,
                             code: study.code,
@@ -426,7 +456,7 @@
                             UMPVarName: study.UMPVarName,
                             status: study.status ? "Activo" : "Inactivo",
                         }));
-                        this.closeDeleteUserAlert()
+                        this.closeDeleteStudyalert()
                     })
                     .catch((e) => {
                         let errors = e.response.data.errors;
