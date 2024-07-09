@@ -1,12 +1,12 @@
 <template>
     <div class="grid grid-cols-1 gap-6 mb-6">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-            <div class="flex mb-6">
+            <!-- <div class="flex mb-6">
                 <div>
                     <label for="countries" class="block font-semibold text-gray-900 dark:text-white">
                         Estudio:</label>
                 </div>
-            </div>
+            </div> -->
             <div class="flex items-center">
                 <select id="countries"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
@@ -109,7 +109,13 @@
                                 </td>
                                 <td class="px-6 py-3">
                                     <div class="relative h-4 bg-neutral-400 rounded-full">
-                                        <div class="absolute inset-y-0 left-0 flex items-center rounded-full bg-violet-700" :style="{ width: `${Math.min((regionInfo.total / regionInfo.total_reg) * 100, 100)}%`}">
+                                        <div class="absolute inset-y-0 left-0 flex items-center rounded-full"
+                                            :class="{
+                                                'bg-green-500': regionInfo.total / regionInfo.total_reg >= 1,
+                                                'bg-orange-500': regionInfo.total / regionInfo.total_reg >= 0.5 && regionInfo.total / regionInfo.total_reg < 1,
+                                                'bg-red-500': regionInfo.total / regionInfo.total_reg < 0.5
+                                            }"
+                                             :style="{ width: `${Math.min((regionInfo.total / regionInfo.total_reg) * 100, 100)}%`}">
                                             <span class="text-xs text-white px-2">
                                                 {{ Math.round((regionInfo.total / regionInfo.total_reg) * 100) }}%
                                             </span>
@@ -208,7 +214,7 @@
                     regionCounter[i] = {
                         number: i,
                         name: this.regionName(i),
-                        total: "",
+                        total: 0,
                         total_reg:this.selectedStudy[`reg${i}ExpectedCase`],
                         today: 0
                     }
@@ -265,5 +271,4 @@
 </script>
 
 <style>
-
 </style>
