@@ -60,15 +60,9 @@
             </template>
             <template v-else>
                 <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm border text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-white uppercase bg-violet-700 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-sm border text-left rtl:text-right">
+                        <thead class="text-white uppercase bg-violet-700">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Fecha de termino
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Fecha de reporte
-                                </th>
                                 <th scope="col" class="px-6 py-3">
                                     Número de la región
                                 </th>
@@ -85,16 +79,7 @@
                                     Faltantes
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Realizadas diarias
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Encargado de terreno
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Días restantes
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Cantidad de encuestas esperadas
+                                    Realizadas el día de hoy
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     % de avance
@@ -102,14 +87,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="regionInfo in regionCounts" :key="region"
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="px-6 py-3">
-
-                                </td>
-                                <td class="px-6 py-3">
-
-                                </td>
+                            <tr v-for="regionInfo in regionCounts" :key="regionInfo.number"
+                                class="bg-white border-b">
                                 <td class="px-6 py-3">
                                     {{ regionInfo.number }}
                                 </td>
@@ -117,25 +96,25 @@
                                     {{regionInfo.name}}
                                 </td>
                                 <td class="px-6 py-3">
-                                    
+                                    {{ regionInfo.total_reg }}
                                 </td>
                                 <td class="px-6 py-3">
-                                    {{regionInfo.total}}
+                                    {{regionInfo.total || 0}}
                                 </td>
                                 <td class="px-6 py-3">
-
+                                    {{regionInfo.total_reg - regionInfo.total}}
                                 </td>
                                 <td class="px-6 py-3">
                                     {{regionInfo.today}}
                                 </td>
                                 <td class="px-6 py-3">
-            
-                                </td>
-                                <td class="px-6 py-3">
-            
-                                </td>
-                                <td class="px-6 py-3">
-                                   
+                                    <div class="relative h-4 bg-neutral-400 rounded-full">
+                                        <div class="absolute inset-y-0 left-0 flex items-center rounded-full bg-violet-700" :style="{ width: `${Math.min((regionInfo.total / regionInfo.total_reg) * 100, 100)}%`}">
+                                            <span class="text-xs text-white px-2">
+                                                {{ Math.round((regionInfo.total / regionInfo.total_reg) * 100) }}%
+                                            </span>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -229,11 +208,11 @@
                     regionCounter[i] = {
                         number: i,
                         name: this.regionName(i),
-                        total: 0,
+                        total: "",
+                        total_reg:this.selectedStudy[`reg${i}ExpectedCase`],
                         today: 0
                     }
                 }
-                console.log(regionCounter[5])
                 this.formattedData.forEach(survey => {
                     survey.Subjects.forEach(subject => {
                         const regionColumn = subject.Columns.find(column => column.Var === 'region');
@@ -276,7 +255,7 @@
                     15: 'Arica y parinacota',
                     16: 'Ñuble',
                 };
-                return regionNames[region] || `Región ${region}`;
+                return regionNames[region];
             }
         },
         mounted() {
