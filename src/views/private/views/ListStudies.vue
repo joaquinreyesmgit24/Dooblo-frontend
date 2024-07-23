@@ -40,7 +40,8 @@
                     <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full p-4 mb-4"
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                         <div class="flex items-center">
-                            <h3 class="text-lg font-medium">¿Estás seguro que deseas eliminar al usuario {{studyDeleted.name}}?</h3>
+                            <h3 class="text-lg font-medium">¿Estás seguro que deseas eliminar al usuario
+                                {{studyDeleted.name}}?</h3>
                         </div>
                         <div class="mt-2 mb-4 text-sm">
                             Este elemento se eliminará permanentemente. Esta acción no se puede revertir.
@@ -98,11 +99,11 @@
                                         placeholder="Nombre de estudio" v-model="editedStudy.name">
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="expectedCase" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                    <label for="expectedCases" class="block mb-2 text-sm font-medium text-gray-900">Casos
                                         esperados:</label>
-                                    <input type="number" name="expectedCase" id="expectedCase"
+                                    <input type="number" name="expectedCases" id="expectedCases"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados" v-model="editedStudy.expectedCase" min="0">
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCases" min="0">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="startDate" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
@@ -162,7 +163,7 @@
                             </svg>
                         </button>
                         <form @submit.prevent="createStudy(createdStudy)" class="p-4 md:p-5">
-                            <div class="grid gap-2 mb-4 grid-cols-2">
+                            <div v-show="nextStudyCreateModal" class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
@@ -189,7 +190,7 @@
                                         esperados:</label>
                                     <input type="number" name="expectedCase" id="expectedCase"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Casos esperados" v-model="createdStudy.expectedCase" min="0">
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCases" min="0">
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
@@ -224,10 +225,136 @@
                                     <input type="checkbox" name="status" id="status" v-model="createdStudy.status" />
                                 </div>
                             </div>
-                            <button type="submit"
-                                class="text-white inline-flex items-center bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                Crear estudio
-                            </button>
+                            <div class="flex justify-end mt-4" v-show="nextStudyCreateModal">
+                                <button type="button" @click="nextCreateModal"
+                                    class="text-white inline-flex items-center bg-zinc-500 hover:bg-zinc-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    Siguiente
+                                </button>
+                            </div>
+                            <div v-show="!nextStudyCreateModal" class="grid gap-2 mb-4 grid-cols-4">
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion1" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 1:</label>
+                                    <input type="number" name="expectedCaseRegion1" id="expectedCaseRegion1"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion1" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion2" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 2:</label>
+                                    <input type="number" name="expectedCaseRegion2" id="expectedCaseRegion2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion2" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion3" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 3:</label>
+                                    <input type="number" name="expectedCaseRegion3" id="expectedCaseRegion3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion3" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion4" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 4:</label>
+                                    <input type="number" name="expectedCaseRegion4" id="expectedCaseRegion4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion4" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion5" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 5:</label>
+                                    <input type="number" name="expectedCaseRegion5" id="expectedCaseRegion5"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion5" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion6" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 6:</label>
+                                    <input type="number" name="expectedCaseRegion6" id="expectedCaseRegion6"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion6" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion7" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 7:</label>
+                                    <input type="number" name="expectedCaseRegion7" id="expectedCaseRegion7"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion7" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion8" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 8:</label>
+                                    <input type="number" name="expectedCasesRegion8" id="expectedCaseRegion8"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion8" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion9" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 9:</label>
+                                    <input type="number" name="expectedCasesRegion9" id="expectedCasesRegion9"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion9" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion10" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 10:</label>
+                                    <input type="number" name="expectedCasesRegion10" id="expectedCasesRegion10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion10" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion11" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 11:</label>
+                                    <input type="number" name="expectedCasesRegion11" id="expectedCasesRegion11"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCaseRegion11" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion12" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados región 12:</label>
+                                    <input type="number" name="expectedCasesRegion12" id="expectedCasesRegion12"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion12" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion13" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 13:</label>
+                                    <input type="number" name="expectedCasesRegion13" id="expectedCasesRegion13"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion13" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion14" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 14:</label>
+                                    <input type="number" name="expectedCasesRegion14" id="expectedCasesRegion14"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion14" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRegion15" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 15:</label>
+                                    <input type="number" name="expectedCasesRegion15" id="expectedCasesRegion15"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion15" min="0">
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCaseRegion16" class="block mb-2 text-sm font-medium text-gray-900">Casos
+                                        esperados 16:</label>
+                                    <input type="number" name="expectedCasesRegion16" id="expectedCasesRegion16"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion16" min="0">
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-4" v-show="!nextStudyCreateModal">
+                                <button type="button" @click="returnCreateModal"
+                                    class="text-white inline-flex items-center bg-zinc-500 hover:bg-zinc-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    Volver
+                                </button>
+                                <button type="submit"
+                                    class="text-white inline-flex items-center bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    Crear estudio
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -252,6 +379,8 @@
                 showStudyUpdateModal: false,
                 showStudyCreateModal: false,
                 showStudyDeleteAlert: false,
+                nextStudyCreateModal: true,
+                nextStudyUpdateModal: true,
                 searchOptions: {
                     enabled: true,
                     placeholder: "Buscar",
@@ -303,7 +432,7 @@
                 ],
                 rows: [],
                 editedStudy: {
-                    id:"",
+                    id: "",
                     code: "",
                     name: "",
                     surveyID: "",
@@ -322,11 +451,13 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
-                    expectedCase: "",
-                    startDate: ""
+                    expectedCases: "",
+                    startDate: "",
+                    expectedCaseRegion16,
+
                 },
-                studyDeleted:{
-                    id:"",
+                studyDeleted: {
+                    id: "",
                     code: "",
                     name: "",
                     surveyID: "",
@@ -334,7 +465,7 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
-                    expectedCase: "",
+                    expectedCases: "",
                     startDate: ""
                 }
             };
@@ -350,6 +481,7 @@
                 }
             },
             openCreateStudyModal() {
+                this.nextStudyCreateModal = true;
                 this.showStudyCreateModal = true;
             },
             closeUpdateStudyModal() {
@@ -361,8 +493,8 @@
             closeDeleteStudyalert() {
                 this.showStudyDeleteAlert = false;
             },
-            openDeleteStudyAlert(item){
-                this.studyDeleted={...item}
+            openDeleteStudyAlert(item) {
+                this.studyDeleted = { ...item }
                 this.showStudyDeleteAlert = true;
             },
             getDataStudies() {
@@ -470,7 +602,19 @@
                             this.toast.error(error);
                         }
                     });
-            }
+            },
+            nextCreateModal() {
+                this.nextStudyCreateModal = false;
+            },
+            returnCreateModal() {
+                this.nextStudyCreateModal = true;
+            },
+            nextUpdateModal() {
+                this.nextStudyUpdateModal = false;
+            },
+            returnCreateModel() {
+                this.nextStudyUpdateModal = true;
+            },
         },
         mounted() {
             this.getDataStudies();
