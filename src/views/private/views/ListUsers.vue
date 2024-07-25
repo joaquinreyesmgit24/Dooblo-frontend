@@ -84,6 +84,10 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" required="" v-model="editedUser.username" />
                                     </div>
+                                    <div class="col-span-2">
+                                        <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Selecciona una imagen:</label>
+                                        <input  @change="updatehandleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
+                                    </div>    
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
@@ -152,7 +156,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Selecciona una imagen:</label>
-                                    <input  @change="handleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
+                                    <input  @change="createhandleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
@@ -264,6 +268,7 @@
                     password: "",
                     repeat_password: "",
                     roleId: "",
+                    file:null,
                     status: "",
                 },
                 createdUser: {
@@ -290,7 +295,11 @@
             this.getDataRoles();
         },
         methods: {
-            handleFileChange(event) {
+            updatehandleFileChange(event){
+                this.editedUser.file = event.target.files[0];
+
+            },
+            createhandleFileChange(event) {
                 this.createdUser.file = event.target.files[0];
             },      
             openUpdateUserModal(item) {
@@ -381,7 +390,17 @@
                     });
             },
             updateUser(userId, editedUser) {
-                GlobalService.setData("/auth/update-user", userId, editedUser)
+                const formData = new FormData();
+                formData.append('username', editedUser.username)
+                formData.append('password', editedUser.password)
+                formData.append('repeat_password', editedUser.repeat_password)
+                formData.append('roleId', editedUser.roleId)
+                formData.append('status', editedUser.status)
+                if(editedUser.file){
+                    formData.append('file', editedUser.file);
+                }
+
+                GlobalService.setData("/auth/update-user", userId, formData)
                     .then((response) => {
                         this.toast.success(response.msg);
                         this.rows = response.users.map((user) => ({
