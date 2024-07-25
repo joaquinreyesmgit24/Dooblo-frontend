@@ -17,7 +17,11 @@ export default {
     },
     createData(url,form){
         return new Promise(((resolve, reject) => {
-            http.post(`${url}`,form)
+            http.post(`${url}`,form,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             .then((response) => resolve(response))
             .catch((err) => reject(err))
         }))

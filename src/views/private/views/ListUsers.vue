@@ -83,7 +83,7 @@
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" required="" v-model="editedUser.username" />
-                                </div>
+                                    </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
@@ -149,7 +149,8 @@
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" required="" v-model="createdUser.username" />
-                                </div>
+                                        <input type="file" @change="handleFileChange" />
+                                    </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
@@ -267,6 +268,7 @@
                     password: "",
                     repeat_password: "",
                     roleId: "",
+                    file:null,
                     status: false,
                 },
                 userDeleted:{
@@ -285,6 +287,9 @@
             this.getDataRoles();
         },
         methods: {
+            handleFileChange(event) {
+                this.createdUser.file = event.target.files[0];
+            },      
             openUpdateUserModal(item) {
                 this.editedUser = { ...item, roleId: item.role.id };
                 this.showUserUpdateModal = true;
@@ -338,7 +343,16 @@
                     });
             },
             createUser(createdUser) {
-                GlobalService.createData("/auth/create-user", createdUser)
+                const formData = new FormData();
+                formData.append('username', createdUser.username)
+                formData.append('password', createdUser.password)
+                formData.append('repeat_password', createdUser.repeat_password)
+                formData.append('roleId', createdUser.roleId)
+                formData.append('status', createdUser.status)
+                if (createdUser.file) {
+                    formData.append('file', createdUser.file);
+                }
+                GlobalService.createData("/auth/create-user", formData)
                     .then((response) => {
                         this.toast.success(response.data.msg);
                         this.rows = response.data.users.map((user) => ({

@@ -33,6 +33,12 @@ const getters = {
         }
         return state.rol.id
     },
+    getImageUrl(){
+        if(!state.user.imageUrl){
+            state.user.imageUrl = JSON.parse(localStorage.getItem('user')).imageUrl
+        }
+        return state.user.imageUrl
+    },
     getRolName(state){
     if(!state.user.rol.nombre){
         state.user.rol.nombre = JSON.parse(localStorage.getItem('user')).rol.name
@@ -65,7 +71,6 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post(`${BASE_URL}/auth/authenticate-user`, payload)
             .then(response => {
-                console.log(response)
                 commit('setUserInfo', response)
                 resolve(response);
             })
@@ -91,6 +96,7 @@ const mutations = {
     setUserInfo(state, data){
         state.user.id = data.data.user.id
         state.user.username = data.data.user.username
+        state.user.imageUrl = data.data.user.imageUrl
         state.auth_token = data.data.user.token
         state.user.role.id = data.data.user.role.id
         state.user.role.name = data.data.user.role.name

@@ -2,7 +2,7 @@
     <div class="text-gray-800 font-inter">
       <Sidebar />
       <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-        <Navbar @logout="logout()" :username="getUsername" />
+        <Navbar @logout="logout()" :userName="getUsername" :imageUrl="getImageUrl" />
         <div class="p-6">
           <router-view></router-view>
         </div>
@@ -24,15 +24,15 @@
       };
     },
     mounted() {
-      this.initSidebar();
-      this.initDropdowns();
-      this.initTabs();
+      this.initDropdowns()
+      this.initSidebar()
+      this.initTabs()
     },
     methods: {
       ...mapActions(["logoutUser"]),
       logout() {
           this.logoutUser().then(response => {
-            this.$router.push('/login');
+            // this.$router.push({ name: "login" });
           })
       },
       initSidebar() {
@@ -80,8 +80,8 @@
         const popperInstance = this.popperInstance;
         document.querySelectorAll('.dropdown').forEach((item, index) => {
           const popperId = 'popper-' + index;
-          const toggle = item.querySelector('.dropdown-toggle');
-          const menu = item.querySelector('.dropdown-menu');
+          const toggle = item.querySelector('.dropdown-toggle')
+          const menu = item.querySelector('.dropdown-menu')
           menu.dataset.popperId = popperId;
           popperInstance[popperId] = createPopper(toggle, menu, {
             modifiers: [
@@ -101,7 +101,6 @@
             placement: 'bottom-end'
           });
         });
-  
         document.addEventListener('click', (e) => {
           const toggle = e.target.closest('.dropdown-toggle');
           const menu = e.target.closest('.dropdown-menu');
@@ -186,7 +185,7 @@
       }
     },
       computed: {
-          ...mapGetters(["getUsername","getRolName"]),
+          ...mapGetters(["getUsername","getRolName", "getImageUrl"]),
     }
   }
   </script>

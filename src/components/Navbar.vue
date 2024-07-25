@@ -13,6 +13,7 @@
             <ul class="ml-auto flex items-center">
                 <li class="dropdown ml-3">
                     <button type="button" class="dropdown-toggle flex items-center">
+                        <span class="mr-5  text-[14px] text-gray-600">{{ userName }}</span>
                         <img src="../assets/img/persona.png" alt="" class="w-8 h-8 rounded-full block object-cover align-middle">
                     </button>
                     <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
@@ -35,7 +36,8 @@
 export default {
     name:"navbar",
     props: {
-    userName: { type: String, default: 'invitado' }
+        userName: { type: String, default: 'invitado' },
+        imageUrl: { type: String }
   },
 }
 </script>
