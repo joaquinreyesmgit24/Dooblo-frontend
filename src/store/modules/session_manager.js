@@ -5,6 +5,7 @@ const state ={
     user: {
         id: null,
         username: null,
+        imgUrl:null,
         role:{
             id:null,
             name:null
@@ -29,19 +30,19 @@ const getters = {
     },
     getRolId(state){
         if(!state.user.rol.id){
-            state.user.rol.id = JSON.parse(localStorage.getItem('user')).rol.id
+            state.user.rol.id = JSON.parse(localStorage.getItem('user')).role.id
         }
         return state.rol.id
     },
-    getImageUrl(){
-        if(!state.user.imageUrl){
-            state.user.imageUrl = JSON.parse(localStorage.getItem('user')).imageUrl
+    getImgUrl(state){
+        if(!state.user.imgUrl){
+            state.user.imgUrl = JSON.parse(localStorage.getItem('user')).imgUrl
         }
-        return state.user.imageUrl
+        return state.user.imgUrl
     },
     getRolName(state){
     if(!state.user.rol.nombre){
-        state.user.rol.nombre = JSON.parse(localStorage.getItem('user')).rol.name
+        state.user.rol.nombre = JSON.parse(localStorage.getItem('user')).role.name
     }
     return state.user.rol.name
     },  
@@ -94,9 +95,10 @@ const actions = {
 }
 const mutations = {
     setUserInfo(state, data){
+        console.log(data.data.user.imgUrl)
         state.user.id = data.data.user.id
         state.user.username = data.data.user.username
-        state.user.imageUrl = data.data.user.imageUrl
+        state.user.imgUrl = data.data.user.imgUrl
         state.auth_token = data.data.user.token
         state.user.role.id = data.data.user.role.id
         state.user.role.name = data.data.user.role.name
@@ -104,13 +106,14 @@ const mutations = {
         localStorage.setItem('user', JSON.stringify(data.data.user))
     },
     resetUserInfo(state, data){
-        state.user = {
-                id: null,
-                username: null,
-                role:{
-                    id:null,
-                    name:null
-                }
+        state.user ={
+            id: null,
+            username: null,
+            imgUrl:null,
+            role:{
+                id:null,
+                name:null
+            }
         }
         state.auth_token = null
         localStorage.removeItem('auth_token')

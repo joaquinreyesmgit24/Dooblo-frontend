@@ -149,8 +149,11 @@
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" required="" v-model="createdUser.username" />
-                                        <input type="file" @change="handleFileChange" />
-                                    </div>
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Selecciona una imagen:</label>
+                                    <input  @change="handleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
+                                </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="category"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
