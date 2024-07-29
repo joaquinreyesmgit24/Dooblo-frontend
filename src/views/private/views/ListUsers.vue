@@ -303,7 +303,7 @@
                 this.createdUser.file = event.target.files[0];
             },      
             openUpdateUserModal(item) {
-                this.editedUser = { ...item, roleId: item.role.id };
+                this.editedUser = { ...item, roleId: item.role.id,file:'', password: '', repeat_password: '' };
                 this.showUserUpdateModal = true;
                 if (item.status === "Activo") {
                     this.editedUser.status = true;
@@ -399,7 +399,6 @@
                 if(editedUser.file){
                     formData.append('file', editedUser.file);
                 }
-
                 GlobalService.setData("/auth/update-user", userId, formData)
                     .then((response) => {
                         this.toast.success(response.msg);
@@ -440,7 +439,6 @@
                     .catch((e) => {
                         let errors = e.response.data.errors;
                         let error = e.response.data.error;
-                        console.log(errors)
                         if (errors) {
                             errors.forEach((error_element) => {
                                 this.toast.error(error_element.msg);

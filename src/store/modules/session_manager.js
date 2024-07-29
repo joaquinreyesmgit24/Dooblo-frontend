@@ -95,7 +95,6 @@ const actions = {
 }
 const mutations = {
     setUserInfo(state, data){
-        console.log(data.data.user.imgUrl)
         state.user.id = data.data.user.id
         state.user.username = data.data.user.username
         state.user.imgUrl = data.data.user.imgUrl

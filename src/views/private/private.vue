@@ -32,7 +32,7 @@
       ...mapActions(["logoutUser"]),
       logout() {
           this.logoutUser().then(response => {
-            this.$router.push({ name: "login" });
+            window.location.href = '/login';
           })
       },
       initSidebar() {
