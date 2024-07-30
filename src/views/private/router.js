@@ -50,7 +50,7 @@ export const PrivateRoutes = [
         },
         children: [
             {
-                path: 'region',  // Path relativo a '/reports'
+                path: 'region',
                 component: reportRegion,
                 name: 'report-region',
                 meta: {
@@ -59,7 +59,7 @@ export const PrivateRoutes = [
                 },
             },
             {
-                path: 'general',  // Path relativo a '/reports'
+                path: 'general',
                 component: generalSummary,
                 name: 'general-summary',
                 meta: {

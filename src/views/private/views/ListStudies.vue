@@ -787,6 +787,7 @@
                     });
             },
             createStudy(createdStudy) {
+                console.log(createdStudy)
                 GlobalService.createData("/study/create-study", createdStudy)
                     .then((response) => {
                         this.toast.success(response.data.msg);

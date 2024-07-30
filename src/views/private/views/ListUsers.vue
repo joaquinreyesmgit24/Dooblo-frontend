@@ -364,7 +364,7 @@
                 if (createdUser.file) {
                     formData.append('file', createdUser.file);
                 }
-                GlobalService.createData("/auth/create-user", formData)
+                GlobalService.createDataImage("/auth/create-user", formData)
                     .then((response) => {
                         this.toast.success(response.data.msg);
                         this.rows = response.data.users.map((user) => ({

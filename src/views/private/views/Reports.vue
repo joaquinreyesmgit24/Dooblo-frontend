@@ -54,8 +54,7 @@
                 <span class="text-sm">Flags</span>
             </router-link>
             </div>
-
-            <router-view :regionCounts="regionCounts" :selectedStudy="selectedStudy"></router-view>
+            <router-view :regionCounts="regionCounts" :selectedStudy="selectedStudy" :surveyID="surveyID" :expiredcanceledSurveyID="expiredcanceledSurveyID"></router-view>
             <!-- <h3>
                     Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
                 </h3> -->
