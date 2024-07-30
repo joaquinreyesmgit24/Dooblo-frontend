@@ -79,7 +79,6 @@
                         <form @submit.prevent="updateStudy(editedStudy.id, editedStudy)" class="p-4 md:p-5">
                             <div v-show="nextStudyUpdateModal" class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
-                                    {{editedStudy.startDate}}
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
                                     <input type="text" name="surveyID" id="surveyID"
