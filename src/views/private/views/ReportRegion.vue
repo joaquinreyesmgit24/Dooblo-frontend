@@ -64,9 +64,6 @@
             </tbody>
         </table>
     </div>
-    <!-- <h3>
-                    Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
-    </h3> -->
 </template>
 
 <script>

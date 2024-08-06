@@ -49,15 +49,12 @@
                 class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                 <span class="text-sm">Diferencia del GPS</span>
             </router-link>
-            <router-link :to="{name:'report-region'}"
+            <router-link :to="{name:'flags-report'}"
                 class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                 <span class="text-sm">Flags</span>
             </router-link>
             </div>
-            <router-view :regionCounts="regionCounts" :selectedStudy="selectedStudy" :surveyID="surveyID" :expiredcanceledSurveyID="expiredcanceledSurveyID"></router-view>
-            <!-- <h3>
-                    Cantidad de encuestas canceladas y expiradas: {{ expiredcanceledSurveyID.length}}
-                </h3> -->
+            <router-view :regionCounts="regionCounts" :formattedData="formattedData" :selectedStudy="selectedStudy" :surveyID="surveyID" :expiredcanceledSurveyID="expiredcanceledSurveyID"></router-view>
         </template>
     </div>
 </template>
@@ -128,7 +125,6 @@
                         resp.push(response.data); // Aquí puedes ajustar según lo que necesites
                         await sleep(500);
                     }
-                    console.log(resp)
                     this.formattedData = [...resp.flat()]
                     this.countSurveysByRegion();
                 } catch (error) {

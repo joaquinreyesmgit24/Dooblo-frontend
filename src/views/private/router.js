@@ -4,7 +4,7 @@ const listStudies = ()=>import('./views/ListStudies.vue')
 const reports = ()=>import('./views/Reports.vue')
 const reportRegion = ()=>import('./views/ReportRegion.vue')
 const generalSummary = ()=>import('./views/GeneralSummary.vue')
-
+const flagsReport = ()=>import('./views/FlagsReport.vue')
 
 
 
@@ -65,6 +65,15 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'general-summary',
                     menu: 'general-summary',
+                },
+            },
+            {
+                path: 'flags',
+                component: flagsReport,
+                name: 'flags-report',
+                meta: {
+                    title: 'flags-report',
+                    menu: 'flags-report',
                 },
             },
         ]
