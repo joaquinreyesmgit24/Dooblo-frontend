@@ -1,18 +1,32 @@
 <template>
     <div class="relative overflow-x-auto">
+        <button @click="downloadSurveyExcel"  class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center mb-4">Descargar todas las
+            encuestas</button>
         <table class="w-full text-sm border text-left rtl:text-right">
             <thead class="text-white uppercase bg-violet-700">
                 <tr>
                     <th scope="col" class="px-6 py-3">Encuestador</th>
-                    <th scope="col" class="px-6 py-3">Encuestas marcadas con servicio de gps desactivado</th>
-                    <th scope="col" class="px-6 py-3">Encuestas encontradas con horas inusuales</th>
+                    <th scope="col" class="px-6 py-3">Horas inusuales</th>
+                    <th scope="col" class="px-6 py-3">Dispositivo rooteado</th>
+                    <th scope="col" class="px-6 py-3">Gps desactivado</th>
+                    <th scope="col" class="px-6 py-3">Grabación en silencio</th>
+                    <th scope="col" class="px-6 py-3">Demora excesiva de tiempo en pregunta</th>
+                    <th scope="col" class="px-6 py-3">Duración</th>
+                    <th scope="col" class="px-6 py-3">Gps falso</th>
+                    <th scope="col" class="px-6 py-3">No cuenta con gps</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, Srvyr) in getSurveyCounts()" :key="surveyID" class="bg-white border-b">
+                <tr v-for="(item, Srvyr) in getSurveyCounts()" :key="Srvyr" class="bg-white border-b">
                     <td class="px-6 py-3">{{ Srvyr }}</td>
+                    <td class="px-6 py-3">{{ item.FlaggedByClockChanged }}</td>
+                    <td class="px-6 py-3">{{ item.FlaggedByDeviceRooted }}</td>
                     <td class="px-6 py-3">{{ item.FlaggedByGPSServicesOff }}</td>
-                    <td class="px-6 py-3">{{ item.FlagsOddHours }}</td>
+                    <td class="px-6 py-3">{{ item.FlaggedByNoSilentRecordings }}</td>
+                    <td class="px-6 py-3">{{ item.FlaggedByQuestionTakingTooLong }}</td>
+                    <td class="px-6 py-3">{{ item.FlagsByDuration }}</td>
+                    <td class="px-6 py-3">{{ item.FlagsByFakeGPS }}</td>
+                    <td class="px-6 py-3">{{ item.FlagsByNoGPS }}</td>
                 </tr>
             </tbody>
         </table>
@@ -20,6 +34,7 @@
 </template>
 
 <script>
+    import * as XLSX from 'xlsx';
     export default {
         props: {
             formattedData: { type: Array, default: [] },
@@ -41,7 +56,10 @@
 
                     // Inicializar el conteo para este valor de Srvyr
                     if (!counts[srvyr]) {
-                        counts[srvyr] = { FlaggedByGPSServicesOff: 0, FlagsOddHours: 0 };
+                        counts[srvyr] = {
+                            FlaggedByClockChanged: 0, FlaggedByDeviceRooted: 0, FlaggedByGPSServicesOff: 0, FlaggedByNoSilentRecordings: 0, FlaggedByQuestionTakingTooLong: 0,
+                            FlagsByDuration: 0, FlagsByFakeGPS: 0, FlagsByNoGPS: 0
+                        };
                     }
 
                     const flaggedByClockChanged = survey.Subjects.some((subject) =>
@@ -95,24 +113,47 @@
                         counts[srvyr].FlaggedByGPSServicesOff += 1;
                     }
                     if (flaggedByNoSilentRecordings) {
-                        counts[srvyr].FlaggedByGPSServicesOff += 1;
+                        counts[srvyr].FlaggedByNoSilentRecordings += 1;
                     }
                     if (flaggedByQuestionTakingTooLong) {
-                        counts[srvyr].FlaggedByGPSServicesOff += 1;
+                        counts[srvyr].FlaggedByQuestionTakingTooLong += 1;
                     }
                     if (flagsByDuration) {
-                        counts[srvyr].FlaggedByGPSServicesOff += 1;
+                        counts[srvyr].FlagsByDuration += 1;
                     }
                     if (flagsByFakeGPS) {
-                        counts[srvyr].FlaggedByGPSServicesOff += 1;
+                        counts[srvyr].FlagsByFakeGPS += 1;
                     }
                     if (flagsByNoGPS) {
-                        counts[srvyr].FlaggedByGPSServicesOff += 1;
+                        counts[srvyr].FlagsByNoGPS += 1;
                     }
                 });
 
                 return counts;
             },
+            downloadSurveyExcel() {
+                // Recorre cada encuesta en formattedData
+                const ws_data = this.formattedData.map(survey => {
+                    // Acumula todos los registros de Subjects
+                    return survey.Subjects.map(subject => {
+                        const surveyData = {};
+                        // Recorre cada columna del subject y agrega los datos al objeto surveyData
+                        subject.Columns.forEach(col => {
+                            surveyData[col.Var] = col.Value;
+                        });
+                        return surveyData;
+                    });
+                }
+            ).flat(); // Aplana el arreglo para combinar todos los registros
+
+                // Crea la hoja de Excel a partir de los datos procesados
+                const ws = XLSX.utils.json_to_sheet(ws_data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
+
+                // Escribe el archivo Excel
+                XLSX.writeFile(wb, "encuestas.xlsx");
+            }
         },
     };
 </script>
