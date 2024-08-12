@@ -55,7 +55,6 @@
             selectedStudy: { type: Object, default: {} },
             surveyID: { type: Array, default: [] },
             expiredcanceledSurveyID: { type: Array, default: [] },
-
         },
         data() {
             return {
