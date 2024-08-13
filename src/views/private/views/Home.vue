@@ -49,7 +49,7 @@
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
                 <div>
-                    <apexchart type="bar" :options="chartOptionsSecond" :series="chartSeries" />
+                    <apexchart type="bar" :options="chartOptionsSecond" :series="chartSeries" width="100%"/>
                 </div>
             </div>
         </div>
@@ -67,80 +67,42 @@
         data() {
             return {
                 chartOptionsFirst: {
-                    labels: ["Usuarios activos", "Usuarios inactivos"],
-                    title: {
-                        text: "Gráfico circular sobre la cantidad de usuarios activos e inactivos", // Aquí pones el título del gráfico
-                        align: "center", // Puedes ajustar la alineación del título
-                        margin: 10, // Espaciado alrededor del título
-                        offsetY: 0, // Ajusta la posición vertical del título
-                        style: {
-                            fontSize: "18px", // Tamaño de fuente del título
-                            fontWeight: "bold", // Peso de fuente del título
-                        },
-                    },
-                    legend: {
-                        position: "bottom",
-                    },
+                },
+                chartOptionsSecond: {
                 },
                 totalUsers: 0,
                 activePercentageUsers: 0,
                 inactivePercentageUsers: 0,
                 chartSeries: [],
-                chartOptionsSecond: {
-                    chart: {
-                        type: "bar",
-                        height: 350,
-                    },
-                    title: {
-                        text: "Título del Gráfico de Barras", // Aquí defines el título del gráfico
-                        align: 'center', // Alineación del título
-                        margin: 20, // Espacio alrededor del título
-
-                        style: {
-                            fontSize: '16px', // Tamaño de la fuente
-                            fontWeight: 'bold', // Peso de la fuente
-                            color: '#333' // Color del texto
-                        }
-                    },
-                    plotOptions: {
-                        bar: {
-                            horizontal: false,
-                            endingShape: "rounded",
-                        },
-                    },
-                    dataLabels: {
-                        enabled: false,
-                    },
-                    stroke: {
-                        show: true,
-                        width: 2,
-                        colors: ["transparent"],
-                    },
-                    xaxis: {
-                        categories: [],
-                    },
-                    yaxis: {
-                        title: {
-                            text: "Number of Studies",
-                        },
-                    },
-                    fill: {
-                        opacity: 1,
-                    },
-                    tooltip: {
-                        y: {
-                            formatter: function (val) {
-                                return val + " studies";
-                            },
-                        },
-                    },
-                },
             };
         },
         methods: {
             getDataUserReport() {
                 GlobalService.getData("/auth/user-report")
                     .then((response) => {
+                        this.chartOptionsFirst = {
+                            labels: ["Usuarios activos", "Usuarios inactivos"],
+                            title: {
+                                text: "Gráfico circular sobre la cantidad de usuarios activos e inactivos", // Aquí pones el título del gráfico
+                                align: "center", // Puedes ajustar la alineación del título
+                                margin: 50, // Espaciado alrededor del título
+                                offsetY: 0, // Ajusta la posición vertical del título
+                                style: {
+                                    fontSize: "14px", // Tamaño de fuente del título
+                                    fontWeight: "bold", // Peso de fuente del título
+                                },
+                            },
+                            legend: {
+                                position: "bottom",
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function (value) {
+                                        return value + "%";
+                                    },
+                                },
+                            },
+                        }
                         this.totalUsers = response.totalUsers;
                         this.activePercentageUsers = response.activePercentageUsers;
                         this.inactivePercentageUsers = response.inactivePercentageUsers;
@@ -152,27 +114,28 @@
             getDataStudyReport() {
                 GlobalService.getData("/study/study-report")
                     .then((response) => {
-                        const data = response
+                        const data = response;
                         this.chartOptionsSecond = {
                             chart: {
                                 type: "bar",
-                                height: 350,
+                                height: 500,
+                                width:600
                             },
                             title: {
-                                text: "Título del Gráfico de Barras", // Aquí defines el título del gráfico
-                                align: 'center', // Alineación del título
-                                margin: 20, // Espacio alrededor del título
-
+                                text: `Gráfico de barras sobre el número de estudios que se han realizado en los últimos 5 años`, // Aquí defines el título del gráfico
+                                align: "center", // Alineación del título
+                                margin: 50, // Espacio alrededor del título
                                 style: {
-                                    fontSize: '16px', // Tamaño de la fuente
-                                    fontWeight: 'bold', // Peso de la fuente
-                                    color: '#333' // Color del texto
-                                }
+                                    fontSize: "14px", // Tamaño de la fuente
+                                    fontWeight: "bold", // Peso de la fuente
+                                    color: "#333", // Color del texto
+                                },
                             },
                             plotOptions: {
                                 bar: {
                                     horizontal: false,
                                     endingShape: "rounded",
+                                    distributed: true,
                                 },
                             },
                             dataLabels: {
@@ -184,11 +147,11 @@
                                 colors: ["transparent"],
                             },
                             xaxis: {
-                                categories: data.map(d => d.year)
+                                categories: data.map((d) => d.year),
                             },
                             yaxis: {
                                 title: {
-                                    text: "Número de estudios",
+                                    text: "Cantidad de estudios",
                                 },
                             },
                             fill: {
@@ -201,13 +164,14 @@
                                     },
                                 },
                             },
-                        }
-                        this.chartSeries = [{
-                            name: 'Número de estudios',
-                            data: data.map(d => d.count)
-                        }];
-                        console.log(this.chartSeries)
-
+                            colors: ['#ff7562', '#b2e981', '#3357FF', '#FF33A1', '#FFAA33'],
+                        };
+                        this.chartSeries = [
+                            {
+                                name: "Número de estudios",
+                                data: data.map((d) => d.count),
+                            },
+                        ];
                     })
                     .catch((error) => {
                         console.log(error);
