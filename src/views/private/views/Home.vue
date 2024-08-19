@@ -23,7 +23,7 @@
             <div class="flex justify-between mb-4">
                 <div>
                     <div class="flex items-center mb-1">
-                        <div class="text-2xl font-semibold">324</div>
+                        <div class="text-2xl font-semibold">{{ totalStudies }}</div>
                     </div>
                     <div class="text-sm font-medium text-gray-400">
                         Cantidad de estudios
@@ -71,6 +71,7 @@
                 chartOptionsSecond: {
                 },
                 totalUsers: 0,
+                totalStudies:0,
                 activePercentageUsers: 0,
                 inactivePercentageUsers: 0,
                 chartSeries: [],
@@ -115,6 +116,7 @@
                 GlobalService.getData("/study/study-report")
                     .then((response) => {
                         const data = response;
+                        this.totalStudies =data.totalStudies
                         this.chartOptionsSecond = {
                             chart: {
                                 type: "bar",
@@ -147,7 +149,7 @@
                                 colors: ["transparent"],
                             },
                             xaxis: {
-                                categories: data.map((d) => d.year),
+                                categories: data.studiesByYear.map((d) => d.year),
                             },
                             yaxis: {
                                 title: {
@@ -169,7 +171,7 @@
                         this.chartSeries = [
                             {
                                 name: "Número de estudios",
-                                data: data.map((d) => d.count),
+                                data: data.studiesByYear.map((d) => d.count),
                             },
                         ];
                     })

@@ -12,9 +12,9 @@ const routes = [
     component: Private,
     children: PrivateRoutes,
     props: true,
-    // meta: {
-    //     // requiresAuth: true
-    // }
+    meta: {
+        requiresAuth: true
+    }
   },
   {
     path: '/public',

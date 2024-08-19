@@ -84,7 +84,7 @@
         },
         methods: {
             getDataStudies() {
-                GlobalService.getData("/study/list-studies")
+                GlobalService.getData("/study/list-active-studies")
                     .then((response) => {
                         this.studies = response.studies
                     })

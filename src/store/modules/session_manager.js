@@ -13,9 +13,6 @@ const state ={
     }
 };
 const getters = {
-    getAuthToken(state){
-        return state.auth_token
-    },
     getUsername(state){
         if(!state.user.username){
             state.user.username = JSON.parse(localStorage.getItem('user')).username
@@ -29,10 +26,10 @@ const getters = {
         return state.user.id
     },
     getRolId(state){
-        if(!state.user.rol.id){
-            state.user.rol.id = JSON.parse(localStorage.getItem('user')).role.id
+        if(!state.user.role.id){
+            state.user.role.id = JSON.parse(localStorage.getItem('user')).role.id
         }
-        return state.rol.id
+        return state.user.role.id
     },
     getImgUrl(state){
         if(!state.user.imgUrl){
@@ -41,19 +38,16 @@ const getters = {
         return state.user.imgUrl
     },
     getRolName(state){
-    if(!state.user.rol.nombre){
-        state.user.rol.nombre = JSON.parse(localStorage.getItem('user')).role.name
+    if(!state.user.role.name){
+        state.user.role.name = JSON.parse(localStorage.getItem('user')).role.name
     }
-    return state.user.rol.name
+    return state.user.role.name
     },  
-    isLoggedIn(state){
-        const loggedOut = state.auth_token === null || state.auth_token == JSON.stringify(null)
-        return !loggedOut
-    },
-    haveToken(){
-        const auth_token = localStorage.getItem('auth_token')
-        const authTokenExists = auth_token !== 'undefined' && auth_token !== null
-        return authTokenExists
+    haveToken(state){
+        if(!state.auth_token){
+            state.auth_token = localStorage.getItem('auth_token')
+        }
+        return state.auth_token
     }
 }
 const actions = {

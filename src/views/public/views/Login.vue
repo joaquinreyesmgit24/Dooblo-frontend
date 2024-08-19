@@ -55,7 +55,6 @@
         this.loginUser(user)
           .then((response) => {
             if (response.status == 200) {
-              this.resetDataUser();
               this.$router.push({ name: "home" });
             }
           })

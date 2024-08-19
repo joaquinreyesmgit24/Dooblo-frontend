@@ -39,7 +39,7 @@
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                         <div class="flex items-center">
                             <h3 class="text-lg font-medium">
-                                ¿Estás seguro que deseas eliminar al usuario
+                                ¿Estás seguro que deseas eliminar al estudio
                                 {{ studyDeleted.name }}?
                             </h3>
                         </div>
@@ -83,21 +83,21 @@
                                         encuesta:</label>
                                     <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Id de encuesta" v-model="editedStudy.surveyID" />
+                                        placeholder="Id de encuesta" v-model.trim="editedStudy.surveyID" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Código del estudio" v-model="editedStudy.code" />
+                                        placeholder="Código del estudio" v-model.trim="editedStudy.code" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de estudio" v-model="editedStudy.name" />
+                                        placeholder="Nombre de estudio" v-model.trim="editedStudy.name" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCases"
@@ -118,21 +118,21 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Región" v-model="editedStudy.RegionVarName" />
+                                        placeholder="Región" v-model.trim="editedStudy.RegionVarName" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="ComunaVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="ComunaVarName" id="ComunaVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Comuna" v-model="editedStudy.ComunaVarName" />
+                                        placeholder="Comuna" v-model.trim="editedStudy.ComunaVarName" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="UMPVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="UMPVarName" id="UMPVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="UMP" v-model="editedStudy.UMPVarName" />
+                                        placeholder="UMP" v-model.trim="editedStudy.UMPVarName" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
@@ -320,21 +320,21 @@
                                         encuesta:</label>
                                     <input type="text" name="surveyID" id="surveyID"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Id de encuesta" v-model="createdStudy.surveyID" />
+                                        placeholder="Id de encuesta" v-model.trim="createdStudy.surveyID" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Código del estudio" v-model="createdStudy.code" />
+                                        placeholder="Código del estudio" v-model.trim="createdStudy.code" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre del
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre del estudio" v-model="createdStudy.name" />
+                                        placeholder="Nombre del estudio" v-model.trim="createdStudy.name" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCases" class="block mb-2 text-sm font-medium text-gray-900">Casos
@@ -355,20 +355,20 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Región" v-model="createdStudy.RegionVarName" />
+                                        placeholder="Región" v-model.trim="createdStudy.RegionVarName" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Comuna" v-model="createdStudy.ComunaVarName" />
+                                        placeholder="Comuna" v-model.trim="createdStudy.ComunaVarName" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="UMP" v-model="createdStudy.UMPVarName" />
+                                        placeholder="UMP" v-model.trim="createdStudy.UMPVarName" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"

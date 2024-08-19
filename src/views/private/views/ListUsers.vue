@@ -82,7 +82,7 @@
                                         usuario:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de usuario" required="" v-model="editedUser.username" />
+                                        placeholder="Nombre de usuario" v-model.trim="editedUser.username" />
                                     </div>
                                     <div class="col-span-2">
                                         <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Selecciona una imagen:</label>
@@ -107,14 +107,14 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="editedUser.password" />
+                                        placeholder="Contraseña" v-model.trim="editedUser.password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir
                                         contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="editedUser.repeat_password" />
+                                        placeholder="Contraseña" v-model.trim="editedUser.repeat_password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="statusUpdateUser"
@@ -152,7 +152,7 @@
                                         usuario:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Nombre de usuario" required="" v-model="createdUser.username" />
+                                        placeholder="Nombre de usuario" v-model.trim="createdUser.username" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="img" class="block mb-2 text-sm font-medium text-gray-900">Selecciona una imagen:</label>
@@ -177,14 +177,14 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="createdUser.password" />
+                                        placeholder="Contraseña" v-model.trim="createdUser.password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir
                                         contraseña:</label>
                                     <input type="password" name="price" id="price"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Contraseña" v-model="createdUser.repeat_password" />
+                                        placeholder="Contraseña" v-model.trim="createdUser.repeat_password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="statusUpdateUser"
