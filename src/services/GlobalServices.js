@@ -33,6 +33,17 @@ export default {
             .catch((err) => reject(err))
         }))
     },
+    setDataImage(url,id,form){
+        return new Promise(((resolve, reject) => {
+            http.put(`${url}/${id}`,form,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then((response) => resolve(response.data))
+            .catch((err) => reject(err))
+        }))
+    },
     deleteDataById(url,id){
         return new Promise(((resolve, reject) => {
         http.delete(`${url}/${id}`)

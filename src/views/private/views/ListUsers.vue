@@ -78,9 +78,9 @@
                         <form @submit.prevent="updateUser(editedUser.id, editedUser)" class="p-4 md:p-5">
                             <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
+                                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         usuario:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="username" id="username"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" v-model.trim="editedUser.username" />
                                     </div>
@@ -89,9 +89,9 @@
                                         <input  @change="updatehandleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
                                     </div>    
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="category"
+                                    <label for="role"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
-                                    <select id="category"
+                                    <select id="role"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="editedUser.roleId">
                                         <option value="" disabled selected>
@@ -103,23 +103,23 @@
                                     </select>
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="price"
+                                    <label for="password"
                                         class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
-                                    <input type="password" name="price" id="price"
+                                    <input type="password" name="password" id="password"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Contraseña" v-model.trim="editedUser.password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir
+                                    <label for="repeatPassword" class="block mb-2 text-sm font-medium text-gray-900">Repetir
                                         contraseña:</label>
-                                    <input type="password" name="price" id="price"
+                                    <input type="password" name="repeatPassword" id="repeatPassword"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Contraseña" v-model.trim="editedUser.repeat_password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="statusUpdateUser"
+                                    <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="editedUser.status" />
+                                    <input type="checkbox" id="status" v-model="editedUser.status" />
                                 </div>
                             </div>
                             <button type="submit"
@@ -148,9 +148,9 @@
                         <form @submit.prevent="createUser(createdUser)" class="p-4 md:p-5">
                             <div class="grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
-                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
+                                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         usuario:</label>
-                                    <input type="text" name="name" id="name"
+                                    <input type="text" name="username" id="username"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de usuario" v-model.trim="createdUser.username" />
                                 </div>
@@ -159,9 +159,9 @@
                                     <input  @change="createhandleFileChange" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500" id="img" type="file">
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="category"
+                                    <label for="role"
                                         class="block mb-2 text-sm font-medium text-gray-900">Rol:</label>
-                                    <select id="category"
+                                    <select id="role"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="createdUser.roleId">
                                         <option value="" disabled selected>
@@ -173,23 +173,23 @@
                                     </select>
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="price"
+                                    <label for="password"
                                         class="block mb-2 text-sm font-medium text-gray-900">Contraseña:</label>
-                                    <input type="password" name="price" id="price"
+                                    <input type="password" name="password" id="password"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Contraseña" v-model.trim="createdUser.password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Repetir
+                                    <label for="repeatPassword" class="block mb-2 text-sm font-medium text-gray-900">Repetir
                                         contraseña:</label>
-                                    <input type="password" name="price" id="price"
+                                    <input type="password" name="repeatPassword" id="repeatPassword"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Contraseña" v-model.trim="createdUser.repeat_password" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
-                                    <label for="statusUpdateUser"
+                                    <label for="status"
                                         class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="statusUpdateUser" v-model="createdUser.status" />
+                                    <input type="checkbox" id="status" v-model="createdUser.status" />
                                 </div>
                             </div>
                             <button type="submit"
@@ -399,8 +399,9 @@
                 if(editedUser.file){
                     formData.append('file', editedUser.file);
                 }
-                GlobalService.setData("/auth/update-user", userId, formData)
+                GlobalService.setDataImage("/auth/update-user", userId, formData)
                     .then((response) => {
+                        console.log(editedUser)
                         this.toast.success(response.msg);
                         this.rows = response.users.map((user) => ({
                             id: user.id,
