@@ -45,7 +45,7 @@
                 class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                 <span class="text-sm">Resumen General</span>
             </router-link>
-            <router-link :to="{name:'report-region'}"
+            <router-link :to="{name:'gps-report'}"
                 class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                 <span class="text-sm">Diferencia del GPS</span>
             </router-link>

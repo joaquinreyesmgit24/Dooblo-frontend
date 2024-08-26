@@ -5,6 +5,7 @@ const reports = ()=>import('./views/Reports.vue')
 const reportRegion = ()=>import('./views/ReportRegion.vue')
 const generalSummary = ()=>import('./views/GeneralSummary.vue')
 const flagsReport = ()=>import('./views/FlagsReport.vue')
+const gpsReport = ()=>import('./views/GPSReport.vue')
 
 
 
@@ -74,6 +75,15 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'flags-report',
                     menu: 'flags-report',
+                },
+            },
+            {
+                path: 'gps',
+                component: gpsReport,
+                name: 'gps-report',
+                meta: {
+                    title: 'gps-report',
+                    menu: 'gps-report',
                 },
             },
         ]
