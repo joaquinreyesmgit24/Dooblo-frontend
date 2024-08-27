@@ -5,9 +5,7 @@
                 <select id="countries"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                     v-model="selectedStudy" @change="getSurveyId(this.selectedStudy)">
-                    <option value="" disabled selected>
-                        Selecciona un estudio
-                    </option>
+                    <option value="" disabled selected>Selecciona un estudio</option>
                     <option v-for="study in studies" :key="study.id" :value="study">
                         {{ study.name }}
                     </option>
@@ -37,31 +35,37 @@
         </template>
         <template v-else>
             <div class="flex">
-                <router-link :to="{name:'report-region'}"
-                class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center">
-                <span class="text-sm">Reporte de regiones</span>
-            </router-link>
-            <router-link :to="{name:'general-summary'}"
-                class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
-                <span class="text-sm">Resumen General</span>
-            </router-link>
-            <router-link :to="{name:'gps-report'}"
-                class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
-                <span class="text-sm">Diferencia del GPS</span>
-            </router-link>
-            <router-link :to="{name:'flags-report'}"
-                class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
-                <span class="text-sm">Flags</span>
-            </router-link>
+                <router-link :to="{ name: 'report-region' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center">
+                    <span class="text-sm">Reporte de regiones</span>
+                </router-link>
+                <router-link :to="{ name: 'general-summary' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
+                    <span class="text-sm">Resumen General</span>
+                </router-link>
+                <router-link :to="{ name: 'gps-report' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
+                    <span class="text-sm">Diferencia del GPS</span>
+                </router-link>
+                <router-link :to="{ name: 'flags-report' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
+                    <span class="text-sm">Flags</span>
+                </router-link>
+                <button @click="downloadSurveyExcel"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto">
+                    Descargar todas las encuestas
+                </button>
             </div>
-            <router-view :regionCounts="regionCounts" :formattedData="formattedData" :selectedStudy="selectedStudy" :surveyID="surveyID" :expiredcanceledSurveyID="expiredcanceledSurveyID"></router-view>
+            <router-view :regionCounts="regionCounts" :formattedData="formattedData" :selectedStudy="selectedStudy"
+                :surveyID="surveyID" :expiredcanceledSurveyID="expiredcanceledSurveyID"></router-view>
         </template>
     </div>
 </template>
 
 <script>
     import GlobalService from "../../../services/GlobalServices";
-    import axios from 'axios';
+    import axios from "axios";
+    import * as XLSX from "xlsx";
     export default {
         name: "reports",
         data() {
@@ -71,22 +75,22 @@
                 dooblouser: {
                     auth: {
                         username: "c1982d08-43d1-4956-aff8-59c1a8db840c/j.reyes",
-                        password: "j.reyes"
-                    }
+                        password: "j.reyes",
+                    },
                 },
                 activado: false,
                 loading: false,
                 surveyID: [],
                 expiredcanceledSurveyID: [],
                 formattedData: [],
-                regionCounts: []
-            }
+                regionCounts: [],
+            };
         },
         methods: {
             getDataStudies() {
                 GlobalService.getData("/study/list-active-studies")
                     .then((response) => {
-                        this.studies = response.studies
+                        this.studies = response.studies;
                     })
                     .catch((error) => {
                         console.log(error);
@@ -94,18 +98,24 @@
             },
             async getSurveyId(study) {
                 try {
-                    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+                    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                     this.activado = true;
                     this.loading = true;
                     //Total
-                    const response = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`, this.dooblouser)
-                    this.surveyID = response.data
+                    const response = await axios.get(
+                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`,
+                        this.dooblouser
+                    );
+                    this.surveyID = response.data;
                     await sleep(500);
                     //Expiradas y canceladas
-                    const responseB = await axios.get(`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`, this.dooblouser);
-                    this.expiredcanceledSurveyID = responseB.data
+                    const responseB = await axios.get(
+                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`,
+                        this.dooblouser
+                    );
+                    this.expiredcanceledSurveyID = responseB.data;
                     await sleep(500);
-                    await this.getDataSurvey(study, this.surveyID)
+                    await this.getDataSurvey(study, this.surveyID);
                     this.loading = false;
                 } catch (error) {
                     console.error("Error", error);
@@ -116,24 +126,27 @@
                 for (let i = 0; i < surveyID.length; i += 99) {
                     group.push(surveyID.slice(i, i + 99));
                 }
-                let formattedGroups = group.map(g => g.join(','));
+                let formattedGroups = group.map((g) => g.join(","));
                 try {
-                    let resp = []
-                    const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+                    let resp = [];
+                    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                     for (let i = 0; i < formattedGroups.length; i++) {
-                        const response = await axios.get(`http://api.dooblo.net/newapi/SimpleExport?surveyID=${study.surveyID}&subjectIDs=${formattedGroups[i]}`, this.dooblouser);
+                        const response = await axios.get(
+                            `http://api.dooblo.net/newapi/SimpleExport?surveyID=${study.surveyID}&subjectIDs=${formattedGroups[i]}`,
+                            this.dooblouser
+                        );
                         resp.push(response.data); // Aquí puedes ajustar según lo que necesites
                         await sleep(500);
                     }
-                    this.formattedData = [...resp.flat()]
+                    this.formattedData = [...resp.flat()];
                     this.countSurveysByRegion();
                 } catch (error) {
-                    console.error('Error al obtener los registros:', error);
+                    console.error("Error al obtener los registros:", error);
                 }
             },
             countSurveysByRegion() {
                 const regionCounter = {};
-                const today = new Date().toISOString().split('T')[0];
+                const today = new Date().toISOString().split("T")[0];
                 // Inicializar todas las regiones del 1 al 16 con 0
                 for (let i = 1; i <= 16; i++) {
                     regionCounter[i] = {
@@ -141,18 +154,24 @@
                         name: this.regionName(i),
                         total: 0,
                         total_reg: this.selectedStudy[`expectedCasesRegion${i}`],
-                        today: 0
-                    }
+                        today: 0,
+                    };
                 }
-                this.formattedData.forEach(survey => {
-                    survey.Subjects.forEach(subject => {
-                        const regionColumn = subject.Columns.find(column => column.Var === 'region');
-                        const dateColumn = subject.Columns.find(column => column.Var === 'Date');
+                this.formattedData.forEach((survey) => {
+                    survey.Subjects.forEach((subject) => {
+                        const regionColumn = subject.Columns.find(
+                            (column) => column.Var === "region"
+                        );
+                        const dateColumn = subject.Columns.find(
+                            (column) => column.Var === "Date"
+                        );
                         if (regionColumn) {
                             const regionValue = regionColumn.Value;
                             regionCounter[regionValue].total++;
                             if (dateColumn) {
-                                const surveyDate = new Date(dateColumn.Value).toISOString().split('T')[0];
+                                const surveyDate = new Date(dateColumn.Value)
+                                    .toISOString()
+                                    .split("T")[0];
                                 if (surveyDate === today) {
                                     regionCounter[regionValue].today++;
                                 }
@@ -169,30 +188,53 @@
                 // para mapear el número de región a su nombre correspondiente.
                 // Por ejemplo, un simple mapeo podría ser:
                 const regionNames = {
-                    1: 'Tarapacá',
-                    2: 'Antofagasta',
-                    3: 'Atacama',
-                    4: 'Coquimbo',
-                    5: 'Valparaíso',
-                    6: 'O higgins',
-                    7: 'Maule',
-                    8: 'Biobío',
-                    9: 'Araucanía',
-                    10: 'Los lagos',
-                    11: 'Aysén',
-                    12: 'Magallanes',
-                    13: 'Metropolitana',
-                    14: 'Los ríos',
-                    15: 'Arica y parinacota',
-                    16: 'Ñuble',
+                    1: "Tarapacá",
+                    2: "Antofagasta",
+                    3: "Atacama",
+                    4: "Coquimbo",
+                    5: "Valparaíso",
+                    6: "O higgins",
+                    7: "Maule",
+                    8: "Biobío",
+                    9: "Araucanía",
+                    10: "Los lagos",
+                    11: "Aysén",
+                    12: "Magallanes",
+                    13: "Metropolitana",
+                    14: "Los ríos",
+                    15: "Arica y parinacota",
+                    16: "Ñuble",
                 };
                 return regionNames[region];
-            }
+            },
+            downloadSurveyExcel() {
+                // Recorre cada encuesta en formattedData
+                const ws_data = this.formattedData
+                    .map((survey) => {
+                        // Acumula todos los registros de Subjects
+                        return survey.Subjects.map((subject) => {
+                            const surveyData = {};
+                            // Recorre cada columna del subject y agrega los datos al objeto surveyData
+                            subject.Columns.forEach((col) => {
+                                surveyData[col.Var] = col.Value;
+                            });
+                            return surveyData;
+                        });
+                    })
+                    .flat(); // Aplana el arreglo para combinar todos los registros
+                // Crea la hoja de Excel a partir de los datos procesados
+                const ws = XLSX.utils.json_to_sheet(ws_data);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
+
+                // Escribe el archivo Excel
+                XLSX.writeFile(wb, "encuestas.xlsx");
+            },
         },
         mounted() {
-            this.getDataStudies()
-        }
-    }
+            this.getDataStudies();
+        },
+    };
 </script>
 
 <style>

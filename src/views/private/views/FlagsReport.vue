@@ -1,11 +1,5 @@
 <template>
   <div class="relative overflow-x-auto">
-    <button
-      @click="downloadSurveyExcel"
-      class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center mb-4"
-    >
-      Descargar todas las encuestas
-    </button>
     <table class="w-full text-sm border text-left rtl:text-right">
       <thead class="text-white uppercase bg-violet-700">
         <tr>
@@ -44,7 +38,6 @@
 </template>
 
 <script>
-import * as XLSX from "xlsx";
 export default {
   props: {
     formattedData: { type: Array, default: [] },
@@ -130,29 +123,6 @@ export default {
       });
 
       return counts;
-    },
-    downloadSurveyExcel() {
-      // Recorre cada encuesta en formattedData
-      const ws_data = this.formattedData
-        .map((survey) => {
-          // Acumula todos los registros de Subjects
-          return survey.Subjects.map((subject) => {
-            const surveyData = {};
-            // Recorre cada columna del subject y agrega los datos al objeto surveyData
-            subject.Columns.forEach((col) => {
-              surveyData[col.Var] = col.Value;
-            });
-            return surveyData;
-          });
-        })
-        .flat(); // Aplana el arreglo para combinar todos los registros
-      // Crea la hoja de Excel a partir de los datos procesados
-      const ws = XLSX.utils.json_to_sheet(ws_data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
-
-      // Escribe el archivo Excel
-      XLSX.writeFile(wb, "encuestas.xlsx");
     },
   },
 };
