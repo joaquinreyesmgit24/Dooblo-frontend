@@ -55,7 +55,12 @@
         this.loginUser(user)
           .then((response) => {
             if (response.status == 200) {
-              this.$router.push({ name: "home" });
+              if(response.data.user.role.name=='Analista'){
+                this.$router.push({ name: "reports" });
+              }
+              else{
+                this.$router.push({ name: "statistics" });
+              }
             }
           })
           .catch((e) => {

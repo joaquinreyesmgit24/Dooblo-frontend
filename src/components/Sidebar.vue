@@ -4,19 +4,19 @@
             <span class="text-lg font-bold text-white ml-3">Dooblo</span>
         </a>
         <ul class="mt-4">
-            <li class="mb-1 group active">
+            <li class="mb-1" v-if="userRol=='Administrador'">
                 <router-link to="/" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-bar-chart-2-line mr-3 text-lg"></i>
                     <span class="text-sm">Estadística</span>
                 </router-link>
             </li>
-            <li class="mb-1">
+            <li class="mb-1" v-if="userRol=='Administrador'">
                 <router-link to="/users" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-user-line mr-3 text-lg"></i>
                     <span class="text-sm">Usuarios</span>
                 </router-link>
             </li>
-            <li class="mb-1">
+            <li class="mb-1" v-if="userRol=='Administrador'">
                 <router-link to="/studies" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-file-ppt-2-fill mr-3 text-lg"></i>
                     <span class="text-sm">Estudios</span>
@@ -35,7 +35,10 @@
 
 <script>
 export default {
-
+    name:"sidebar",
+    props: {
+        userRol: { type: String, default: 'No posee permisos' },
+    },
 }
 </script>
 

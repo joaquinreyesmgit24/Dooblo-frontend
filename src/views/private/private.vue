@@ -1,6 +1,6 @@
 <template>
     <div class="text-gray-800 font-inter">
-      <Sidebar />
+      <Sidebar :userRol="getRolName"/>
       <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
         <Navbar @logout="logout()" :userName="getUsername" :imgUrl="getImgUrl" />
         <div class="p-6">

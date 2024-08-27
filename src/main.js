@@ -13,10 +13,10 @@ createApp(App).use(router).use(store).use(Toast, options).use(VueApexCharts).mou
 
 function checkRole(route, userRoles) {
     if(route.meta.requiredRole){
-      return route.meta.requiredRole.includes(userRoles)
+        return route.meta.requiredRole.includes(userRoles)
     }
     else{
-      return true;
+        return true;
     }
 }
 router.beforeEach((to, from, next) => {
@@ -35,7 +35,11 @@ router.beforeEach((to, from, next) => {
             if (!checkRole(to, userRoles)) {
                 // El usuario no tiene el rol necesario para acceder a esta ruta
                 // Puedes redirigirlo a una página de error o hacer lo que desees
-                next({ name: 'home' });
+                if(userRoles==='Analista'){
+                    next({ name: 'reports' })
+                }else{
+                    next({ name: 'statistics' })
+                }
             } else {
                 next();
             }

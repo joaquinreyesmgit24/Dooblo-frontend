@@ -1,4 +1,4 @@
-const home = ()=>import('./views/Home.vue')
+const statistics = ()=>import('./views/Statistics.vue')
 const listUsers = ()=>import('./views/ListUsers.vue')
 const listStudies = ()=>import('./views/ListStudies.vue')
 const reports = ()=>import('./views/Reports.vue')
@@ -11,16 +11,17 @@ const gpsReport = ()=>import('./views/GPSReport.vue')
 
 export const PrivateRoutes = [
     {
-        path:'',
-        redirect:'/home',
+        path: '',
+        redirect: '/statistics',
     },
     {
-        path: '/home',
-        component: home,
-        name: 'home',
+        path: '/statistics',
+        component: statistics,
+        name: 'statistics',
         meta: {
-        title: 'home',
-        menu: 'home',
+            title: 'statistics',
+            menu: 'statistics',
+            requiredRole: ['Administrador']
         }
     },
     {
@@ -28,8 +29,9 @@ export const PrivateRoutes = [
         component: listUsers,
         name: 'list-users',
         meta: {
-        title: 'list-users',
-        menu: 'list-users',
+            title: 'list-users',
+            menu: 'list-users',
+            requiredRole: ['Administrador']
         }
     },
     {
@@ -37,8 +39,9 @@ export const PrivateRoutes = [
         component: listStudies,
         name: 'list-studies',
         meta: {
-        title: 'list-studies',
-        menu: 'list-studies',
+            title: 'list-studies',
+            menu: 'list-studies',
+            requiredRole: ['Administrador']
         }
     },
     {
@@ -48,6 +51,7 @@ export const PrivateRoutes = [
         meta: {
             title: 'reports',
             menu: 'reports',
+            requiredRole: ['Administrador', 'Analista']
         },
         children: [
             {
@@ -57,6 +61,7 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'report-region',
                     menu: 'report-region',
+                    requiredRole: ['Administrador', 'Analista']
                 },
             },
             {
@@ -66,6 +71,7 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'general-summary',
                     menu: 'general-summary',
+                    requiredRole: ['Administrador', 'Analista']
                 },
             },
             {
@@ -75,6 +81,7 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'flags-report',
                     menu: 'flags-report',
+                    requiredRole: ['Administrador', 'Analista']
                 },
             },
             {
@@ -84,6 +91,7 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'gps-report',
                     menu: 'gps-report',
+                    requiredRole: ['Administrador', 'Analista']
                 },
             },
         ]
