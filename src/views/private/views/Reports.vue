@@ -155,19 +155,55 @@
                         total: 0,
                         total_reg: this.selectedStudy[`expectedCasesRegion${i}`],
                         today: 0,
+                        urban: 0,
+                        total_urban:this.selectedStudy[`expectedCasesUrbanAreaRegion${i}`],
+                        rural: 0,
+                        total_rural:this.selectedStudy[`expectedCasesRuralAreaRegion${i}`],
+                        todayUrban: 0,
+                        todayRural: 0
                     };
                 }
                 this.formattedData.forEach((survey) => {
                     survey.Subjects.forEach((subject) => {
                         const regionColumn = subject.Columns.find(
-                            (column) => column.Var === "region"
+                            (column) => column.Var === "nro_region"
                         );
                         const dateColumn = subject.Columns.find(
                             (column) => column.Var === "Date"
                         );
+                        const zoneColumn = subject.Columns.find(
+                            (column) => column.Var === "nom_area"
+                        ); // Asegúrate de que el nombre de la variable sea correcto
+
                         if (regionColumn) {
                             const regionValue = regionColumn.Value;
                             regionCounter[regionValue].total++;
+
+                            if (zoneColumn) {
+                                const zoneValue = zoneColumn.Value.toLowerCase(); // Normaliza el valor a minúsculas
+                                if (zoneValue === "urbano") {
+                                    regionCounter[regionValue].urban++;
+                                    if (dateColumn) {
+                                        const surveyDate = new Date(dateColumn.Value)
+                                            .toISOString()
+                                            .split("T")[0];
+                                        if (surveyDate === today) {
+                                            regionCounter[regionValue].todayUrban++;
+                                        }
+                                    }
+                                } else if (zoneValue === "rural") {
+                                    regionCounter[regionValue].rural++;
+                                    if (dateColumn) {
+                                        const surveyDate = new Date(dateColumn.Value)
+                                            .toISOString()
+                                            .split("T")[0];
+                                        if (surveyDate === today) {
+                                            regionCounter[regionValue].todayRural++;
+                                        }
+                                    }
+                                }
+                            }
+
                             if (dateColumn) {
                                 const surveyDate = new Date(dateColumn.Value)
                                     .toISOString()
@@ -179,7 +215,6 @@
                         }
                     });
                 });
-
                 this.regionCounts = regionCounter;
             },
             regionName(region) {

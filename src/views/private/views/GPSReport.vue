@@ -4,17 +4,17 @@
             <thead class="text-white uppercase bg-violet-700">
                 <tr>
                     <th class="px-6 py-3">ID</th>
-                    <!-- <th class="px-6 py-3">Lat Base</th>
-                      <th class="px-6 py-3">Lon Base</th>
-                      <th class="px-6 py-3">Lat 1</th>
-                      <th class="px-6 py-3">Lon 1</th> -->
-                    <th class="px-6 py-3">GPS Base</th>
-                    <th class="px-6 py-3">GPS 1</th>
-                    <th class="px-6 py-3">Distancia 1</th>
-                    <th class="px-6 py-3">GPS 2</th>
-                    <th class="px-6 py-3">Distancia 2</th>
-                    <th class="px-6 py-3">GPS 3</th>
-                    <th class="px-6 py-3">Distancia 3</th>
+                    <!-- <th scope="col" class="px-6 py-3">Lat Base</th>
+                      <th scope="col" class="px-6 py-3">Lon Base</th>
+                      <th scope="col" class="px-6 py-3">Lat 1</th>
+                      <th scope="col" class="px-6 py-3">Lon 1</th> -->
+                    <th scope="col" class="px-6 py-3">GPS Base</th>
+                    <th scope="col" class="px-6 py-3">GPS 1</th>
+                    <th scope="col" class="px-6 py-3">Distancia 1</th>
+                    <th scope="col" class="px-6 py-3">GPS 2</th>
+                    <th scope="col" class="px-6 py-3">Distancia 2</th>
+                    <th scope="col" class="px-6 py-3">GPS 3</th>
+                    <th scope="col" class="px-6 py-3">Distancia 3</th>
                 </tr>
             </thead>
             <tbody>
