@@ -77,7 +77,7 @@
                             </svg>
                         </button>
                         <form @submit.prevent="updateStudy(editedStudy.id, editedStudy)" class="p-4 md:p-5">
-                            <div v-show="nextStudyUpdateModal" class="grid gap-2 mb-4 grid-cols-2">
+                            <div v-show="nextStudyUpdateModal" class="modal-content grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
@@ -146,7 +146,7 @@
                                     Siguiente
                                 </button>
                             </div>
-                            <div v-show="!nextStudyUpdateModal" class="grid gap-2 mb-4 grid-cols-4">
+                            <div v-show="!nextStudyUpdateModal" class="modal-content grid gap-2 mb-4 grid-cols-6">
                                 <div class="col-span-2">
                                     <label for="expectedCasesRegion1"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
@@ -157,12 +157,43 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion1"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion1" id="expectedCasesUrbanAreaRegion1"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion1"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion1"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion1" id="expectedCasesRuralAreaRegion1"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion1"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
-                                        2:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 2:</label>
                                     <input type="number" name="expectedCasesRegion2" id="expectedCasesRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion2"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion2"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion2" id="expectedCasesUrbanAreaRegion2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion2"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion2"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion2" id="expectedCasesRuralAreaRegion2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion2"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -175,6 +206,22 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion3"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion3" id="expectedCasesUrbanAreaRegion3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion3"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion3"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion3" id="expectedCasesRuralAreaRegion3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion3"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion4"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         4:</label>
@@ -184,35 +231,115 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion4"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion4" id="expectedCasesUrbanAreaRegion4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion4"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion4"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion4" id="expectedCasesRuralAreaRegion4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion4"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 5:</label>
-                                    <input type="number" name="expectedCasesRegion5" id="expectedCaseRegion5"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 5:</label>
+                                    <input type="number" name="expectedCasesRegion5" id="expectedCasesRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion5"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion5"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion5" id="expectedCasesUrbanAreaRegion5"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion5"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion5"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion5" id="expectedCasesRuralAreaRegion5"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion5"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 6:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 6:</label>
                                     <input type="number" name="expectedCasesRegion6" id="expectedCasesRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion6"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion6"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion6" id="expectedCasesUrbanAreaRegion6"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion6"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion6"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion6" id="expectedCasesRuralAreaRegion6"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion6"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 7:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 7:</label>
                                     <input type="number" name="expectedCasesRegion7" id="expectedCasesRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion7"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion7"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion7" id="expectedCasesUrbanAreaRegion7"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion7"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion7"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion7" id="expectedCasesRuralAreaRegion7"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion7"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 8:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 8:</label>
                                     <input type="number" name="expectedCasesRegion8" id="expectedCasesRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion8"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion8"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion8" id="expectedCasesUrbanAreaRegion8"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion8"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion8"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion8" id="expectedCasesRuralAreaRegion8"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion8"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -225,12 +352,44 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion9"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion9" id="expectedCasesUrbanAreaRegion9"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion9"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion9"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion9" id="expectedCasesRuralAreaRegion9"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion9"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion10"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         10:</label>
                                     <input type="number" name="expectedCasesRegion10" id="expectedCasesRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion10"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion10"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion10" id="expectedCasesUrbanAreaRegion10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion10"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion10"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion10" id="expectedCasesRuralAreaRegion10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion10"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -243,6 +402,22 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion11"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion11" id="expectedCasesUrbanAreaRegion11"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion11"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion11"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion11" id="expectedCasesRuralAreaRegion11"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion11"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion12"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         12:</label>
@@ -252,35 +427,115 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion12"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion12" id="expectedCasesUrbanAreaRegion12"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion12"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion12"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion12" id="expectedCasesRuralAreaRegion12"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion12"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 13:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 13:</label>
                                     <input type="number" name="expectedCasesRegion13" id="expectedCasesRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion13"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion13"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion13" id="expectedCasesUrbanAreaRegion13"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion13"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion13"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion13" id="expectedCasesRuralAreaRegion13"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion13"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 14:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 14:</label>
                                     <input type="number" name="expectedCasesRegion14" id="expectedCasesRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion14"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion14"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion14" id="expectedCasesUrbanAreaRegion14"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion14"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion14"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion14" id="expectedCasesRuralAreaRegion14"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion14"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 15:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 15:</label>
                                     <input type="number" name="expectedCasesRegion15" id="expectedCasesRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion15"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion15"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion15" id="expectedCasesUrbanAreaRegion15"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion15"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion15"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion15" id="expectedCasesRuralAreaRegion15"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion15"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 16:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 16:</label>
                                     <input type="number" name="expectedCasesRegion16" id="expectedCasesRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRegion16"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion16"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion16" id="expectedCasesUrbanAreaRegion16"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion16"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion16"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion16" id="expectedCasesRuralAreaRegion16"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion16"
                                         min="0" />
                                 </div>
                             </div>
@@ -314,7 +569,7 @@
                             </svg>
                         </button>
                         <form @submit.prevent="createStudy(createdStudy)" class="p-4 md:p-5">
-                            <div v-show="nextStudyCreateModal" class="grid gap-2 mb-4 grid-cols-2">
+                            <div v-show="nextStudyCreateModal" class="modal-content grid gap-2 mb-4 grid-cols-2">
                                 <div class="col-span-2">
                                     <label for="surveyID" class="block mb-2 text-sm font-medium text-gray-900">Id de
                                         encuesta:</label>
@@ -382,7 +637,7 @@
                                     Siguiente
                                 </button>
                             </div>
-                            <div v-show="!nextStudyCreateModal" class="grid gap-2 mb-4 grid-cols-4">
+                            <div v-show="!nextStudyCreateModal" class="modal-content grid gap-2 mb-4 grid-cols-6">
                                 <div class="col-span-2">
                                     <label for="expectedCasesRegion1"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
@@ -393,12 +648,43 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion1"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion1" id="expectedCasesUrbanAreaRegion1"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion1"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion1"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion1" id="expectedCasesRuralAreaRegion1"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion1"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
-                                        2:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 2:</label>
                                     <input type="number" name="expectedCasesRegion2" id="expectedCasesRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion2"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion2"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion2" id="expectedCasesUrbanAreaRegion2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion2"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion2"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion2" id="expectedCasesRuralAreaRegion2"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion2"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -411,6 +697,22 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion3"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion3" id="expectedCasesUrbanAreaRegion3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion3"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion3"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion3" id="expectedCasesRuralAreaRegion3"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion3"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion4"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         4:</label>
@@ -420,35 +722,115 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion4"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion4" id="expectedCasesUrbanAreaRegion4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion4"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion4"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion4" id="expectedCasesRuralAreaRegion4"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion4"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 5:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 5:</label>
                                     <input type="number" name="expectedCasesRegion5" id="expectedCasesRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion5"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion5"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion5" id="expectedCasesUrbanAreaRegion5"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion5"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion5"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion5" id="expectedCasesRuralAreaRegion5"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion5"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 6:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 6:</label>
                                     <input type="number" name="expectedCasesRegion6" id="expectedCasesRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion6"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion6"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion6" id="expectedCasesUrbanAreaRegion6"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion6"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion6"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion6" id="expectedCasesRuralAreaRegion6"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion6"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 7:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 7:</label>
                                     <input type="number" name="expectedCasesRegion7" id="expectedCasesRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion7"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion7"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion7" id="expectedCasesUrbanAreaRegion7"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion7"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion7"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion7" id="expectedCasesRuralAreaRegion7"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion7"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 8:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 8:</label>
                                     <input type="number" name="expectedCasesRegion8" id="expectedCasesRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion8"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion8"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion8" id="expectedCasesUrbanAreaRegion8"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion8"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion8"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion8" id="expectedCasesRuralAreaRegion8"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion8"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -461,12 +843,44 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion9"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion9" id="expectedCasesUrbanAreaRegion9"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion9"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion9"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion9" id="expectedCasesRuralAreaRegion9"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion9"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion10"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         10:</label>
                                     <input type="number" name="expectedCasesRegion10" id="expectedCasesRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion10"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion10"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion10" id="expectedCasesUrbanAreaRegion10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion10"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion10"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion10" id="expectedCasesRuralAreaRegion10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion10"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
@@ -479,6 +893,22 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion11"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion11" id="expectedCasesUrbanAreaRegion11"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion11"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion11"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion11" id="expectedCasesRuralAreaRegion11"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion11"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion12"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región
                                         12:</label>
@@ -488,35 +918,115 @@
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion12"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion12" id="expectedCasesUrbanAreaRegion12"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion12"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion12"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion12" id="expectedCasesRuralAreaRegion12"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion12"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 13:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 13:</label>
                                     <input type="number" name="expectedCasesRegion13" id="expectedCasesRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion13"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion13"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion13" id="expectedCasesUrbanAreaRegion13"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion13"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion13"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion13" id="expectedCasesRuralAreaRegion13"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion13"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 14:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 14:</label>
                                     <input type="number" name="expectedCasesRegion14" id="expectedCasesRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion14"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion14"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion14" id="expectedCasesUrbanAreaRegion14"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion14"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion14"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion14" id="expectedCasesRuralAreaRegion14"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion14"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 15:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 15:</label>
                                     <input type="number" name="expectedCasesRegion15" id="expectedCasesRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion15"
                                         min="0" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion15"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion15" id="expectedCasesUrbanAreaRegion15"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion15"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion15"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion15" id="expectedCasesRuralAreaRegion15"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion15"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="expectedCasesRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados 16:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados región 16:</label>
                                     <input type="number" name="expectedCasesRegion16" id="expectedCasesRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRegion16"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesUrbanAreaRegion16"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                    <input type="number" name="expectedCasesUrbanAreaRegion16" id="expectedCasesUrbanAreaRegion16"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion16"
+                                        min="0" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="expectedCasesRuralAreaRegion16"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                    <input type="number" name="expectedCasesRuralAreaRegion16" id="expectedCasesRuralAreaRegion16"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion16"
                                         min="0" />
                                 </div>
                             </div>
@@ -618,21 +1128,53 @@
                     expectedCases: "",
                     startDate: "",
                     expectedCasesRegion1: "",
+                    expectedCasesUrbanAreaRegion1: "",
+                    expectedCasesRuralAreaRegion1: "",
                     expectedCasesRegion2: "",
+                    expectedCasesUrbanAreaRegion2: "",
+                    expectedCasesRuralAreaRegion2: "",
                     expectedCasesRegion3: "",
+                    expectedCasesUrbanAreaRegion3: "",
+                    expectedCasesRuralAreaRegion3: "",
                     expectedCasesRegion4: "",
+                    expectedCasesUrbanAreaRegion4: "",
+                    expectedCasesRuralAreaRegion4: "",
                     expectedCasesRegion5: "",
+                    expectedCasesUrbanAreaRegion5: "",
+                    expectedCasesRuralAreaRegion5: "",
                     expectedCasesRegion6: "",
+                    expectedCasesUrbanAreaRegion6: "",
+                    expectedCasesRuralAreaRegion6: "",
                     expectedCasesRegion7: "",
+                    expectedCasesUrbanAreaRegion7: "",
+                    expectedCasesRuralAreaRegion7: "",
                     expectedCasesRegion8: "",
+                    expectedCasesUrbanAreaRegion8: "",
+                    expectedCasesRuralAreaRegion8: "",
                     expectedCasesRegion9: "",
+                    expectedCasesUrbanAreaRegion9: "",
+                    expectedCasesRuralAreaRegion9: "",
                     expectedCasesRegion10: "",
+                    expectedCasesUrbanAreaRegion10: "",
+                    expectedCasesRuralAreaRegion10: "",
                     expectedCasesRegion11: "",
+                    expectedCasesUrbanAreaRegion11: "",
+                    expectedCasesRuralAreaRegion11: "",
                     expectedCasesRegion12: "",
+                    expectedCasesUrbanAreaRegion12: "",
+                    expectedCasesRuralAreaRegion12: "",
                     expectedCasesRegion13: "",
+                    expectedCasesUrbanAreaRegion13: "",
+                    expectedCasesRuralAreaRegion13: "",
                     expectedCasesRegion14: "",
+                    expectedCasesUrbanAreaRegion14: "",
+                    expectedCasesRuralAreaRegion14: "",
                     expectedCasesRegion15: "",
-                    expectedCasesRegion16: ""
+                    expectedCasesUrbanAreaRegion15: "",
+                    expectedCasesRuralAreaRegion15: "",
+                    expectedCasesRegion16: "",
+                    expectedCasesUrbanAreaRegion16: "",
+                    expectedCasesRuralAreaRegion16: "",
                 },
                 createdStudy: {
                     code: "",
@@ -645,21 +1187,53 @@
                     expectedCases: 0,
                     startDate: "",
                     expectedCasesRegion1: 0,
+                    expectedCasesUrbanAreaRegion1: 0,
+                    expectedCasesRuralAreaRegion1: 0,
                     expectedCasesRegion2: 0,
+                    expectedCasesUrbanAreaRegion2: 0,
+                    expectedCasesRuralAreaRegion2: 0,
                     expectedCasesRegion3: 0,
+                    expectedCasesUrbanAreaRegion3: 0,
+                    expectedCasesRuralAreaRegion3: 0,
                     expectedCasesRegion4: 0,
+                    expectedCasesUrbanAreaRegion4: 0,
+                    expectedCasesRuralAreaRegion4: 0,
                     expectedCasesRegion5: 0,
+                    expectedCasesUrbanAreaRegion5: 0,
+                    expectedCasesRuralAreaRegion5: 0,
                     expectedCasesRegion6: 0,
+                    expectedCasesUrbanAreaRegion6: 0,
+                    expectedCasesRuralAreaRegion6: 0,
                     expectedCasesRegion7: 0,
+                    expectedCasesUrbanAreaRegion7: 0,
+                    expectedCasesRuralAreaRegion7: 0,
                     expectedCasesRegion8: 0,
+                    expectedCasesUrbanAreaRegion8: 0,
+                    expectedCasesRuralAreaRegion8: 0,
                     expectedCasesRegion9: 0,
+                    expectedCasesUrbanAreaRegion9: 0,
+                    expectedCasesRuralAreaRegion9: 0,
                     expectedCasesRegion10: 0,
+                    expectedCasesUrbanAreaRegion10: 0,
+                    expectedCasesRuralAreaRegion10: 0,
                     expectedCasesRegion11: 0,
+                    expectedCasesUrbanAreaRegion11: 0,
+                    expectedCasesRuralAreaRegion11: 0,
                     expectedCasesRegion12: 0,
+                    expectedCasesUrbanAreaRegion12: 0,
+                    expectedCasesRuralAreaRegion12: 0,
                     expectedCasesRegion13: 0,
+                    expectedCasesUrbanAreaRegion13: 0,
+                    expectedCasesRuralAreaRegion13: 0,
                     expectedCasesRegion14: 0,
+                    expectedCasesUrbanAreaRegion14: 0,
+                    expectedCasesRuralAreaRegion14: 0,
                     expectedCasesRegion15: 0,
+                    expectedCasesUrbanAreaRegion15: 0,
+                    expectedCasesRuralAreaRegion15: 0,
                     expectedCasesRegion16: 0,
+                    expectedCasesUrbanAreaRegion16: 0,
+                    expectedCasesRuralAreaRegion16: 0
                 },
                 studyDeleted: {
                     id: "",
@@ -673,21 +1247,53 @@
                     expectedCases: "",
                     startDate: "",
                     expectedCasesRegion1: "",
+                    expectedCasesUrbanAreaRegion1: "",
+                    expectedCasesRuralAreaRegion1: "",
                     expectedCasesRegion2: "",
+                    expectedCasesUrbanAreaRegion2: "",
+                    expectedCasesRuralAreaRegion2: "",
                     expectedCasesRegion3: "",
+                    expectedCasesUrbanAreaRegion3: "",
+                    expectedCasesRuralAreaRegion3: "",
                     expectedCasesRegion4: "",
+                    expectedCasesUrbanAreaRegion4: "",
+                    expectedCasesRuralAreaRegion4: "",
                     expectedCasesRegion5: "",
+                    expectedCasesUrbanAreaRegion5: "",
+                    expectedCasesRuralAreaRegion5: "",
                     expectedCasesRegion6: "",
+                    expectedCasesUrbanAreaRegion6: "",
+                    expectedCasesRuralAreaRegion6: "",
                     expectedCasesRegion7: "",
+                    expectedCasesUrbanAreaRegion7: "",
+                    expectedCasesRuralAreaRegion7: "",
                     expectedCasesRegion8: "",
+                    expectedCasesUrbanAreaRegion8: "",
+                    expectedCasesRuralAreaRegion8: "",
                     expectedCasesRegion9: "",
+                    expectedCasesUrbanAreaRegion9: "",
+                    expectedCasesRuralAreaRegion9: "",
                     expectedCasesRegion10: "",
+                    expectedCasesUrbanAreaRegion10: "",
+                    expectedCasesRuralAreaRegion10: "",
                     expectedCasesRegion11: "",
+                    expectedCasesUrbanAreaRegion11: "",
+                    expectedCasesRuralAreaRegion11: "",
                     expectedCasesRegion12: "",
+                    expectedCasesUrbanAreaRegion12: "",
+                    expectedCasesRuralAreaRegion12: "",
                     expectedCasesRegion13: "",
+                    expectedCasesUrbanAreaRegion13: "",
+                    expectedCasesRuralAreaRegion13: "",
                     expectedCasesRegion14: "",
+                    expectedCasesUrbanAreaRegion14: "",
+                    expectedCasesRuralAreaRegion14: "",
                     expectedCasesRegion15: "",
-                    expectedCasesRegion16: ""
+                    expectedCasesUrbanAreaRegion15: "",
+                    expectedCasesRuralAreaRegion15: "",
+                    expectedCasesRegion16: "",
+                    expectedCasesUrbanAreaRegion16: "",
+                    expectedCasesRuralAreaRegion16: "",
                 },
             };
         },
@@ -704,21 +1310,53 @@
                     expectedCases: 0,
                     startDate: "",
                     expectedCasesRegion1: 0,
+                    expectedCasesUrbanAreaRegion1: 0,
+                    expectedCasesRuralAreaRegion1: 0,
                     expectedCasesRegion2: 0,
+                    expectedCasesUrbanAreaRegion2: 0,
+                    expectedCasesRuralAreaRegion2: 0,
                     expectedCasesRegion3: 0,
+                    expectedCasesUrbanAreaRegion3: 0,
+                    expectedCasesRuralAreaRegion3: 0,
                     expectedCasesRegion4: 0,
+                    expectedCasesUrbanAreaRegion4: 0,
+                    expectedCasesRuralAreaRegion4: 0,
                     expectedCasesRegion5: 0,
+                    expectedCasesUrbanAreaRegion5: 0,
+                    expectedCasesRuralAreaRegion5: 0,
                     expectedCasesRegion6: 0,
+                    expectedCasesUrbanAreaRegion6: 0,
+                    expectedCasesRuralAreaRegion6: 0,
                     expectedCasesRegion7: 0,
+                    expectedCasesUrbanAreaRegion7: 0,
+                    expectedCasesRuralAreaRegion7: 0,
                     expectedCasesRegion8: 0,
+                    expectedCasesUrbanAreaRegion8: 0,
+                    expectedCasesRuralAreaRegion8: 0,
                     expectedCasesRegion9: 0,
+                    expectedCasesUrbanAreaRegion9: 0,
+                    expectedCasesRuralAreaRegion9: 0,
                     expectedCasesRegion10: 0,
+                    expectedCasesUrbanAreaRegion10: 0,
+                    expectedCasesRuralAreaRegion10: 0,
                     expectedCasesRegion11: 0,
+                    expectedCasesUrbanAreaRegion11: 0,
+                    expectedCasesRuralAreaRegion11: 0,
                     expectedCasesRegion12: 0,
+                    expectedCasesUrbanAreaRegion12: 0,
+                    expectedCasesRuralAreaRegion12: 0,
                     expectedCasesRegion13: 0,
+                    expectedCasesUrbanAreaRegion13: 0,
+                    expectedCasesRuralAreaRegion13: 0,
                     expectedCasesRegion14: 0,
+                    expectedCasesUrbanAreaRegion14: 0,
+                    expectedCasesRuralAreaRegion14: 0,
                     expectedCasesRegion15: 0,
+                    expectedCasesUrbanAreaRegion15: 0,
+                    expectedCasesRuralAreaRegion15: 0,
                     expectedCasesRegion16: 0,
+                    expectedCasesUrbanAreaRegion16: 0,
+                    expectedCasesRuralAreaRegion16: 0
                 };
             },
             openUpdateStudyModal(item) {
@@ -753,7 +1391,8 @@
                 GlobalService.getData("/study/list-studies")
                     .then((response) => {
                         console.log(response.studies)
-                        this.rows = response.studies.map((study) => ({
+                        this.rows = response.studies.map((study) => (                     
+                        {
                             id: study.id,
                             surveyID: study.surveyID,
                             code: study.code,
@@ -764,21 +1403,53 @@
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
+                            expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
+                            expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
                             expectedCasesRegion2: study.expectedCasesRegion2,
+                            expectedCasesUrbanAreaRegion2: study.expectedCasesUrbanAreaRegion2,
+                            expectedCasesRuralAreaRegion2: study.expectedCasesRuralAreaRegion2,
                             expectedCasesRegion3: study.expectedCasesRegion3,
+                            expectedCasesUrbanAreaRegion3: study.expectedCasesUrbanAreaRegion3,
+                            expectedCasesRuralAreaRegion3: study.expectedCasesRuralAreaRegion3,
                             expectedCasesRegion4: study.expectedCasesRegion4,
+                            expectedCasesUrbanAreaRegion4: study.expectedCasesUrbanAreaRegion4,
+                            expectedCasesRuralAreaRegion4: study.expectedCasesRuralAreaRegion4,
                             expectedCasesRegion5: study.expectedCasesRegion5,
+                            expectedCasesUrbanAreaRegion5: study.expectedCasesUrbanAreaRegion5,
+                            expectedCasesRuralAreaRegion5: study.expectedCasesRuralAreaRegion5,
                             expectedCasesRegion6: study.expectedCasesRegion6,
+                            expectedCasesUrbanAreaRegion6: study.expectedCasesUrbanAreaRegion6,
+                            expectedCasesRuralAreaRegion6: study.expectedCasesRuralAreaRegion6,
                             expectedCasesRegion7: study.expectedCasesRegion7,
+                            expectedCasesUrbanAreaRegion7: study.expectedCasesUrbanAreaRegion7,
+                            expectedCasesRuralAreaRegion7: study.expectedCasesRuralAreaRegion7,
                             expectedCasesRegion8: study.expectedCasesRegion8,
+                            expectedCasesUrbanAreaRegion8: study.expectedCasesUrbanAreaRegion8,
+                            expectedCasesRuralAreaRegion8: study.expectedCasesRuralAreaRegion8,
                             expectedCasesRegion9: study.expectedCasesRegion9,
+                            expectedCasesUrbanAreaRegion9: study.expectedCasesUrbanAreaRegion9,
+                            expectedCasesRuralAreaRegion9: study.expectedCasesRuralAreaRegion9,
                             expectedCasesRegion10: study.expectedCasesRegion10,
+                            expectedCasesUrbanAreaRegion10: study.expectedCasesUrbanAreaRegion10,
+                            expectedCasesRuralAreaRegion10: study.expectedCasesRuralAreaRegion10,
                             expectedCasesRegion11: study.expectedCasesRegion11,
+                            expectedCasesUrbanAreaRegion11: study.expectedCasesUrbanAreaRegion11,
+                            expectedCasesRuralAreaRegion11: study.expectedCasesRuralAreaRegion11,
                             expectedCasesRegion12: study.expectedCasesRegion12,
+                            expectedCasesUrbanAreaRegion12: study.expectedCasesUrbanAreaRegion12,
+                            expectedCasesRuralAreaRegion12: study.expectedCasesRuralAreaRegion12,
                             expectedCasesRegion13: study.expectedCasesRegion13,
+                            expectedCasesUrbanAreaRegion13: study.expectedCasesUrbanAreaRegion13,
+                            expectedCasesRuralAreaRegion13: study.expectedCasesRuralAreaRegion13,
                             expectedCasesRegion14: study.expectedCasesRegion14,
+                            expectedCasesUrbanAreaRegion14: study.expectedCasesUrbanAreaRegion14,
+                            expectedCasesRuralAreaRegion14: study.expectedCasesRuralAreaRegion14,
                             expectedCasesRegion15: study.expectedCasesRegion15,
+                            expectedCasesUrbanAreaRegion15: study.expectedCasesUrbanAreaRegion15,
+                            expectedCasesRuralAreaRegion15: study.expectedCasesRuralAreaRegion15,
                             expectedCasesRegion16: study.expectedCasesRegion16,
+                            expectedCasesUrbanAreaRegion16: study.expectedCasesUrbanAreaRegion16,
+                            expectedCasesRuralAreaRegion16: study.expectedCasesRuralAreaRegion16,
                             status: study.status ? "Activo" : "Inactivo",
                         }));
                     })
@@ -787,7 +1458,6 @@
                     });
             },
             createStudy(createdStudy) {
-                console.log(createdStudy)
                 GlobalService.createData("/study/create-study", createdStudy)
                     .then((response) => {
                         this.toast.success(response.data.msg);
@@ -802,21 +1472,53 @@
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
+                            expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
+                            expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
                             expectedCasesRegion2: study.expectedCasesRegion2,
+                            expectedCasesUrbanAreaRegion2: study.expectedCasesUrbanAreaRegion2,
+                            expectedCasesRuralAreaRegion2: study.expectedCasesRuralAreaRegion2,
                             expectedCasesRegion3: study.expectedCasesRegion3,
+                            expectedCasesUrbanAreaRegion3: study.expectedCasesUrbanAreaRegion3,
+                            expectedCasesRuralAreaRegion3: study.expectedCasesRuralAreaRegion3,
                             expectedCasesRegion4: study.expectedCasesRegion4,
+                            expectedCasesUrbanAreaRegion4: study.expectedCasesUrbanAreaRegion4,
+                            expectedCasesRuralAreaRegion4: study.expectedCasesRuralAreaRegion4,
                             expectedCasesRegion5: study.expectedCasesRegion5,
+                            expectedCasesUrbanAreaRegion5: study.expectedCasesUrbanAreaRegion5,
+                            expectedCasesRuralAreaRegion5: study.expectedCasesRuralAreaRegion5,
                             expectedCasesRegion6: study.expectedCasesRegion6,
+                            expectedCasesUrbanAreaRegion6: study.expectedCasesUrbanAreaRegion6,
+                            expectedCasesRuralAreaRegion6: study.expectedCasesRuralAreaRegion6,
                             expectedCasesRegion7: study.expectedCasesRegion7,
+                            expectedCasesUrbanAreaRegion7: study.expectedCasesUrbanAreaRegion7,
+                            expectedCasesRuralAreaRegion7: study.expectedCasesRuralAreaRegion7,
                             expectedCasesRegion8: study.expectedCasesRegion8,
+                            expectedCasesUrbanAreaRegion8: study.expectedCasesUrbanAreaRegion8,
+                            expectedCasesRuralAreaRegion8: study.expectedCasesRuralAreaRegion8,
                             expectedCasesRegion9: study.expectedCasesRegion9,
+                            expectedCasesUrbanAreaRegion9: study.expectedCasesUrbanAreaRegion9,
+                            expectedCasesRuralAreaRegion9: study.expectedCasesRuralAreaRegion9,
                             expectedCasesRegion10: study.expectedCasesRegion10,
+                            expectedCasesUrbanAreaRegion10: study.expectedCasesUrbanAreaRegion10,
+                            expectedCasesRuralAreaRegion10: study.expectedCasesRuralAreaRegion10,
                             expectedCasesRegion11: study.expectedCasesRegion11,
+                            expectedCasesUrbanAreaRegion11: study.expectedCasesUrbanAreaRegion11,
+                            expectedCasesRuralAreaRegion11: study.expectedCasesRuralAreaRegion11,
                             expectedCasesRegion12: study.expectedCasesRegion12,
+                            expectedCasesUrbanAreaRegion12: study.expectedCasesUrbanAreaRegion12,
+                            expectedCasesRuralAreaRegion12: study.expectedCasesRuralAreaRegion12,
                             expectedCasesRegion13: study.expectedCasesRegion13,
+                            expectedCasesUrbanAreaRegion13: study.expectedCasesUrbanAreaRegion13,
+                            expectedCasesRuralAreaRegion13: study.expectedCasesRuralAreaRegion13,
                             expectedCasesRegion14: study.expectedCasesRegion14,
+                            expectedCasesUrbanAreaRegion14: study.expectedCasesUrbanAreaRegion14,
+                            expectedCasesRuralAreaRegion14: study.expectedCasesRuralAreaRegion14,
                             expectedCasesRegion15: study.expectedCasesRegion15,
+                            expectedCasesUrbanAreaRegion15: study.expectedCasesUrbanAreaRegion15,
+                            expectedCasesRuralAreaRegion15: study.expectedCasesRuralAreaRegion15,
                             expectedCasesRegion16: study.expectedCasesRegion16,
+                            expectedCasesUrbanAreaRegion16: study.expectedCasesUrbanAreaRegion16,
+                            expectedCasesRuralAreaRegion16: study.expectedCasesRuralAreaRegion16,
                             status: study.status ? "Activo" : "Inactivo",
                         }));
                         this.closeCreateStudyModal();
@@ -850,21 +1552,53 @@
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
+                            expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
+                            expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
                             expectedCasesRegion2: study.expectedCasesRegion2,
+                            expectedCasesUrbanAreaRegion2: study.expectedCasesUrbanAreaRegion2,
+                            expectedCasesRuralAreaRegion2: study.expectedCasesRuralAreaRegion2,
                             expectedCasesRegion3: study.expectedCasesRegion3,
+                            expectedCasesUrbanAreaRegion3: study.expectedCasesUrbanAreaRegion3,
+                            expectedCasesRuralAreaRegion3: study.expectedCasesRuralAreaRegion3,
                             expectedCasesRegion4: study.expectedCasesRegion4,
+                            expectedCasesUrbanAreaRegion4: study.expectedCasesUrbanAreaRegion4,
+                            expectedCasesRuralAreaRegion4: study.expectedCasesRuralAreaRegion4,
                             expectedCasesRegion5: study.expectedCasesRegion5,
+                            expectedCasesUrbanAreaRegion5: study.expectedCasesUrbanAreaRegion5,
+                            expectedCasesRuralAreaRegion5: study.expectedCasesRuralAreaRegion5,
                             expectedCasesRegion6: study.expectedCasesRegion6,
+                            expectedCasesUrbanAreaRegion6: study.expectedCasesUrbanAreaRegion6,
+                            expectedCasesRuralAreaRegion6: study.expectedCasesRuralAreaRegion6,
                             expectedCasesRegion7: study.expectedCasesRegion7,
+                            expectedCasesUrbanAreaRegion7: study.expectedCasesUrbanAreaRegion7,
+                            expectedCasesRuralAreaRegion7: study.expectedCasesRuralAreaRegion7,
                             expectedCasesRegion8: study.expectedCasesRegion8,
+                            expectedCasesUrbanAreaRegion8: study.expectedCasesUrbanAreaRegion8,
+                            expectedCasesRuralAreaRegion8: study.expectedCasesRuralAreaRegion8,
                             expectedCasesRegion9: study.expectedCasesRegion9,
+                            expectedCasesUrbanAreaRegion9: study.expectedCasesUrbanAreaRegion9,
+                            expectedCasesRuralAreaRegion9: study.expectedCasesRuralAreaRegion9,
                             expectedCasesRegion10: study.expectedCasesRegion10,
+                            expectedCasesUrbanAreaRegion10: study.expectedCasesUrbanAreaRegion10,
+                            expectedCasesRuralAreaRegion10: study.expectedCasesRuralAreaRegion10,
                             expectedCasesRegion11: study.expectedCasesRegion11,
+                            expectedCasesUrbanAreaRegion11: study.expectedCasesUrbanAreaRegion11,
+                            expectedCasesRuralAreaRegion11: study.expectedCasesRuralAreaRegion11,
                             expectedCasesRegion12: study.expectedCasesRegion12,
+                            expectedCasesUrbanAreaRegion12: study.expectedCasesUrbanAreaRegion12,
+                            expectedCasesRuralAreaRegion12: study.expectedCasesRuralAreaRegion12,
                             expectedCasesRegion13: study.expectedCasesRegion13,
+                            expectedCasesUrbanAreaRegion13: study.expectedCasesUrbanAreaRegion13,
+                            expectedCasesRuralAreaRegion13: study.expectedCasesRuralAreaRegion13,
                             expectedCasesRegion14: study.expectedCasesRegion14,
+                            expectedCasesUrbanAreaRegion14: study.expectedCasesUrbanAreaRegion14,
+                            expectedCasesRuralAreaRegion14: study.expectedCasesRuralAreaRegion14,
                             expectedCasesRegion15: study.expectedCasesRegion15,
+                            expectedCasesUrbanAreaRegion15: study.expectedCasesUrbanAreaRegion15,
+                            expectedCasesRuralAreaRegion15: study.expectedCasesRuralAreaRegion15,
                             expectedCasesRegion16: study.expectedCasesRegion16,
+                            expectedCasesUrbanAreaRegion16: study.expectedCasesUrbanAreaRegion16,
+                            expectedCasesRuralAreaRegion16: study.expectedCasesRuralAreaRegion16,
                             status: study.status ? "Activo" : "Inactivo",
                         }));
                         this.closeUpdateStudyModal();
@@ -897,21 +1631,53 @@
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
+                            expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
+                            expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
                             expectedCasesRegion2: study.expectedCasesRegion2,
+                            expectedCasesUrbanAreaRegion2: study.expectedCasesUrbanAreaRegion2,
+                            expectedCasesRuralAreaRegion2: study.expectedCasesRuralAreaRegion2,
                             expectedCasesRegion3: study.expectedCasesRegion3,
+                            expectedCasesUrbanAreaRegion3: study.expectedCasesUrbanAreaRegion3,
+                            expectedCasesRuralAreaRegion3: study.expectedCasesRuralAreaRegion3,
                             expectedCasesRegion4: study.expectedCasesRegion4,
+                            expectedCasesUrbanAreaRegion4: study.expectedCasesUrbanAreaRegion4,
+                            expectedCasesRuralAreaRegion4: study.expectedCasesRuralAreaRegion4,
                             expectedCasesRegion5: study.expectedCasesRegion5,
+                            expectedCasesUrbanAreaRegion5: study.expectedCasesUrbanAreaRegion5,
+                            expectedCasesRuralAreaRegion5: study.expectedCasesRuralAreaRegion5,
                             expectedCasesRegion6: study.expectedCasesRegion6,
+                            expectedCasesUrbanAreaRegion6: study.expectedCasesUrbanAreaRegion6,
+                            expectedCasesRuralAreaRegion6: study.expectedCasesRuralAreaRegion6,
                             expectedCasesRegion7: study.expectedCasesRegion7,
+                            expectedCasesUrbanAreaRegion7: study.expectedCasesUrbanAreaRegion7,
+                            expectedCasesRuralAreaRegion7: study.expectedCasesRuralAreaRegion7,
                             expectedCasesRegion8: study.expectedCasesRegion8,
+                            expectedCasesUrbanAreaRegion8: study.expectedCasesUrbanAreaRegion8,
+                            expectedCasesRuralAreaRegion8: study.expectedCasesRuralAreaRegion8,
                             expectedCasesRegion9: study.expectedCasesRegion9,
+                            expectedCasesUrbanAreaRegion9: study.expectedCasesUrbanAreaRegion9,
+                            expectedCasesRuralAreaRegion9: study.expectedCasesRuralAreaRegion9,
                             expectedCasesRegion10: study.expectedCasesRegion10,
+                            expectedCasesUrbanAreaRegion10: study.expectedCasesUrbanAreaRegion10,
+                            expectedCasesRuralAreaRegion10: study.expectedCasesRuralAreaRegion10,
                             expectedCasesRegion11: study.expectedCasesRegion11,
+                            expectedCasesUrbanAreaRegion11: study.expectedCasesUrbanAreaRegion11,
+                            expectedCasesRuralAreaRegion11: study.expectedCasesRuralAreaRegion11,
                             expectedCasesRegion12: study.expectedCasesRegion12,
+                            expectedCasesUrbanAreaRegion12: study.expectedCasesUrbanAreaRegion12,
+                            expectedCasesRuralAreaRegion12: study.expectedCasesRuralAreaRegion12,
                             expectedCasesRegion13: study.expectedCasesRegion13,
+                            expectedCasesUrbanAreaRegion13: study.expectedCasesUrbanAreaRegion13,
+                            expectedCasesRuralAreaRegion13: study.expectedCasesRuralAreaRegion13,
                             expectedCasesRegion14: study.expectedCasesRegion14,
+                            expectedCasesUrbanAreaRegion14: study.expectedCasesUrbanAreaRegion14,
+                            expectedCasesRuralAreaRegion14: study.expectedCasesRuralAreaRegion14,
                             expectedCasesRegion15: study.expectedCasesRegion15,
+                            expectedCasesUrbanAreaRegion15: study.expectedCasesUrbanAreaRegion15,
+                            expectedCasesRuralAreaRegion15: study.expectedCasesRuralAreaRegion15,
                             expectedCasesRegion16: study.expectedCasesRegion16,
+                            expectedCasesUrbanAreaRegion16: study.expectedCasesUrbanAreaRegion16,
+                            expectedCasesRuralAreaRegion16: study.expectedCasesRuralAreaRegion16,
                             status: study.status ? "Activo" : "Inactivo",
                         }));
                         this.closeDeleteStudyalert();
@@ -948,4 +1714,10 @@
 </script>
 
 <style>
+.modal-content {
+  padding: 15px;
+  height: 800px;
+  /* width: 800px; */
+  overflow-y: auto;/* Permite el scroll vertical si es necesario */
+}
 </style>
