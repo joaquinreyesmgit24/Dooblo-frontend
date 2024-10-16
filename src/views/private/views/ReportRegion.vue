@@ -3,7 +3,7 @@
         <table class="w-full text-sm border text-left rtl:text-right mb-5">
             <thead class="text-white uppercase bg-violet-700">
                 <tr>
-                    <th colspan="7" class="px-6 py-3 text-center  bg-violet-800">
+                    <th colspan="7" class="px-6 py-3 text-center bg-violet-800">
                         GENERAL
                     </th>
                 </tr>
@@ -79,10 +79,10 @@
                     <th scope="col" class="px-6 py-3">
                         Número de la región
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3k">
                         Nombre de la región
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 border-l-2 border-gray-400">
                         Casos a lograr en zona urbana
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -97,7 +97,7 @@
                     <th scope="col" class="px-6 py-3">
                         % de avance
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 border-l-2 border-gray-400">
                         Casos a lograr en zona rural
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -122,7 +122,7 @@
                     <td class="px-6 py-3">
                         {{regionInfo.name}}
                     </td>
-                    <td class="px-6 py-3">
+                    <td class="px-6 py-3 border-l-2 border-gray-400">
                         {{regionInfo.total_urban}}
                     </td>
                     <td class="px-6 py-3">
@@ -144,11 +144,12 @@
                                 :style="{ width: `${Math.min((regionInfo.urban / regionInfo.total_urban) * 100, 100)}%`}">
                                 <span class="text-xs text-white px-2">
                                     {{ Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}%
+                                    <!-- {{ isNaN(Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100)) ? 0 : Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}% -->
                                 </span>
                             </div>
                         </div>
                     </td>
-                    <td class="px-6 py-3">
+                    <td class="px-6 py-3 border-l-2 border-gray-400">
                         {{regionInfo.total_rural}}
                     </td>
                     <td class="px-6 py-3">
