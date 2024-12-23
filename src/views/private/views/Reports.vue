@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-1 gap-6 mb-6" v-show="activado == true">
+    <div class="grid grid-cols-1 gap-6 mb-6">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex items-center">
                 <select id="countries"
@@ -78,7 +78,6 @@
                         password: "j.reyes",
                     },
                 },
-                activado: true,
                 loading: false,
                 surveyID: [],
                 expiredcanceledSurveyID: [],
@@ -99,7 +98,6 @@
             async getSurveyId(study) {
                 try {
                     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-                    this.activado = false;
                     this.loading = true;
                     //Total
                     const response = await axios.get(
@@ -112,7 +110,9 @@
                     const responseB = await axios.get(
                         `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`,
                         this.dooblouser
+                        
                     );
+                    console.log(responseB)
                     this.expiredcanceledSurveyID = responseB.data;
                     await sleep(500);
                     await this.getDataSurvey(study, this.surveyID);
