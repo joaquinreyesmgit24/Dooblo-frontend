@@ -121,10 +121,13 @@
                             chart: {
                                 type: "bar",
                                 height: 500,
-                                width:600
+                                width:600,
+                                toolbar: {
+                                    show: false
+                                }
                             },
                             title: {
-                                text: `Gráfico de barras sobre el número de estudios que se han realizado en los últimos 5 años`, // Aquí defines el título del gráfico
+                                text: `Número de estudios que se han realizado en los últimos 5 años`, // Aquí defines el título del gráfico
                                 align: "center", // Alineación del título
                                 margin: 50, // Espacio alrededor del título
                                 style: {

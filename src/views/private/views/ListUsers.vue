@@ -8,7 +8,7 @@
                     Agregar
                 </button>
             </div>
-            <div class="text-2xl font-semibold mb-1">Usuarios</div>
+            <div class="text-2xl font-semibold mb-4">Usuarios</div>
             <VueGoodTable :columns="columns" :rows="rows" :search-options="searchOptions"
                 :pagination-options="paginationOptions" max-height="450px" :fixed-header="true">
                 <template v-slot:table-row="props">
@@ -188,8 +188,8 @@
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
-                                        class="block mb-4 text-sm font-medium text-gray-900">Estado</label>
-                                    <input type="checkbox" id="status" v-model="createdUser.status" />
+                                        class="block mb-4 text-sm font-medium text-gray-900">Estado (Activo - No Activo)</label>
+                                        <input type="checkbox" id="status" v-model="createdUser.status"/>
                                 </div>
                             </div>
                             <button type="submit"
@@ -232,6 +232,7 @@
                     rowsPerPageLabel: "Filas por página",
                     paginationComplete: false,
                     ofLabel: "de",
+                    allLabel: 'Todo',
                 },
                 toast: useToast(),
                 columns: [

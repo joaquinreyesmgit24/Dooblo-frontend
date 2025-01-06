@@ -60,7 +60,8 @@
                                             }"
                                 :style="{ width: `${Math.min((regionInfo.total / regionInfo.total_reg) * 100, 100)}%`}">
                                 <span class="text-xs text-white px-2">
-                                    {{ Math.min(Math.round((regionInfo.total / regionInfo.total_reg) * 100), 100) }}%
+                                    <!-- {{ Math.min(Math.round((regionInfo.total / regionInfo.total_reg) * 100), 100) }}% -->
+                                    {{ isNaN(Math.min(Math.round((regionInfo.total / regionInfo.total_reg) * 100), 100)) ? 0 : Math.min(Math.round((regionInfo.total / regionInfo.total_reg) * 100), 100) }}%
                                 </span>
                             </div>
                         </div>
@@ -143,8 +144,8 @@
                                             }"
                                 :style="{ width: `${Math.min((regionInfo.urban / regionInfo.total_urban) * 100, 100)}%`}">
                                 <span class="text-xs text-white px-2">
-                                    {{ Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}%
-                                    <!-- {{ isNaN(Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100)) ? 0 : Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}% -->
+                                    <!-- {{ Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}% -->
+                                    {{ isNaN(Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100)) ? 0 : Math.min(Math.round((regionInfo.urban / regionInfo.total_urban) * 100), 100) }}%
                                 </span>
                             </div>
                         </div>
@@ -170,7 +171,8 @@
                                             }"
                                 :style="{ width: `${Math.min((regionInfo.rural / regionInfo.total_rural) * 100, 100)}%`}">
                                 <span class="text-xs text-white px-2">
-                                    {{ Math.min(Math.round((regionInfo.rural / regionInfo.total_rural) * 100), 100) }}%
+                                    <!-- {{ Math.min(Math.round((regionInfo.rural / regionInfo.total_rural) * 100), 100) }}% -->
+                                    {{ isNaN(Math.min(Math.round((regionInfo.rural / regionInfo.total_rural) * 100), 100)) ? 0 : Math.min(Math.round((regionInfo.rural / regionInfo.total_rural) * 100), 100) }}%
                                 </span>
                             </div>
                         </div>
