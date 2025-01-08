@@ -7,6 +7,7 @@ const generalSummary = ()=>import('./views/GeneralSummary.vue')
 const flagsReport = ()=>import('./views/FlagsReport.vue')
 const gpsReport = ()=>import('./views/GPSReport.vue')
 const supervision = ()=>import('./views/Supervision.vue')
+const selectStudy = ()=>import('./views/SelectStudy.vue')
 
 
 
@@ -104,6 +105,16 @@ export const PrivateRoutes = [
         meta: {
             title: 'supervision',
             menu: 'supervision',
+            requiredRole: ['Administrador', 'Analista']
+        }
+    },
+    {
+        path: '/select',
+        component: selectStudy,
+        name: 'select-study',
+        meta: {
+            title: 'select-study',
+            menu: 'select-study',
             requiredRole: ['Administrador', 'Analista']
         }
     },

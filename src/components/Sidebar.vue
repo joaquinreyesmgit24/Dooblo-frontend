@@ -5,6 +5,12 @@
         </a>
         <ul class="mt-4">
             <li class="mb-1" v-if="userRol=='Administrador'">
+                <router-link to="/select" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
+                    <i class="ri-file-check-line mr-3 text-lg"></i>
+                    <span class="text-sm">Seleccionar</span>
+                </router-link>
+            </li>
+            <li class="mb-1" v-if="userRol=='Administrador'">
                 <router-link to="/" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
                     <i class="ri-bar-chart-2-line mr-3 text-lg"></i>
                     <span class="text-sm">Estadística</span>
