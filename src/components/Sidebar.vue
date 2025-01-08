@@ -28,6 +28,12 @@
                     <span class="text-sm">Reportes</span>
                 </router-link>
             </li>
+            <li class="mb-1">
+                <router-link to="/supervision" class="flex items-center py-2 px-4 text-gray-300 hover:bg-violet-950 hover:text-gray-100 rounded-md">
+                    <i class="ri-survey-line mr-3 text-lg"></i>
+                    <span class="text-sm">Supervisión</span>
+                </router-link>
+            </li>
         </ul>
     </div>
     <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
