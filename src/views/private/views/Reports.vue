@@ -51,6 +51,10 @@
                     class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                     <span class="text-sm">Flags</span>
                 </router-link>
+                <router-link :to="{ name: 'supervision' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
+                    <span class="text-sm">Supervisión</span>
+                </router-link>
                 <button @click="downloadSurveyExcel"
                     class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto">
                     Descargar todas las encuestas

@@ -6,6 +6,7 @@ const reportRegion = ()=>import('./views/ReportRegion.vue')
 const generalSummary = ()=>import('./views/GeneralSummary.vue')
 const flagsReport = ()=>import('./views/FlagsReport.vue')
 const gpsReport = ()=>import('./views/GPSReport.vue')
+const supervision = ()=>import('./views/Supervision.vue')
 
 
 
@@ -91,6 +92,16 @@ export const PrivateRoutes = [
                 meta: {
                     title: 'gps-report',
                     menu: 'gps-report',
+                    requiredRole: ['Administrador', 'Analista']
+                },
+            },
+            {
+                path: 'supervision',
+                component: supervision,
+                name: 'supervision',
+                meta: {
+                    title: 'supervision',
+                    menu: 'supervision',
                     requiredRole: ['Administrador', 'Analista']
                 },
             },
