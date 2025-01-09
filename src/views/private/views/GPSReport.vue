@@ -33,7 +33,7 @@
                     <td v-else>{{ data.latlong_1 }}</td>
 
                     <td v-if="isNaN(data.distance)">-</td>
-                    <td v-else :style="{ color: data.distance > 1 ? 'red' : 'inherit' }">{{ data.distance }} KM</td>
+                    <td v-else :style="{ color: data.distance >= 1 ? 'red' : 'inherit' }">{{ data.distance }} KM</td>
                     
                     <!-- <td v-if="data.latlong_2 == 'NaN,NaN'">-</td>
                     <td v-else>{{ data.latlong_2 }}</td>

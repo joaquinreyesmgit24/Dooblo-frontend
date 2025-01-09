@@ -36,7 +36,7 @@
     <div class="grid grid-cols-1 gap-6 mb-6">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md ">
             <div class="flex flex-col items-center gap-6">
-                    <apexchart type="pie" width="640px" :options="chartOptionsFirst"
+                    <apexchart type="pie" width="500px" :options="chartOptionsFirst"
                         :series="[percentageCompletedSurvey, percentageExpiredcanceledSurvey]" />
             </div>
         </div>
@@ -61,7 +61,7 @@
                 chartOptionsFirst: {
                     labels: ["Encuestas completas", "Encuestas expiradas y canceladas"],
                     title: {
-                    text: 'Gráfico circular sobre la cantidad de encuestas correctas y incorrectas', // Aquí pones el título del gráfico
+                    text: 'Porcentaje de encuestas correctas y incorrectas', // Aquí pones el título del gráfico
                     align: 'center', // Puedes ajustar la alineación del título
                     margin: 10, // Espaciado alrededor del título
                     offsetY: 0, // Ajusta la posición vertical del título
