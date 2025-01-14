@@ -612,6 +612,18 @@
                                         v-model="createdStudy.startDate" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
+                                    <input type="text" name="telefono" id="telefono"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Teléfono" v-model.trim="createdStudy.CorreoVarName" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900">Dirección:</label>
+                                    <input type="text" name="direccion" id="direccion"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Dirección" v-model.trim="createdStudy.DireccionVarName" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
                                     <input type="text" name="telefono" id="telefono"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
@@ -1106,6 +1118,14 @@
                         field: "name",
                     },
                     {
+                        label: "Correo",
+                        field: "CorreoVarName",
+                    },
+                    {
+                        label: "Dirección",
+                        field: "DireccionVarName",
+                    },
+                    {
                         label: "Teléfono",
                         field: "TelefonoVarName",
                     },
@@ -1138,6 +1158,8 @@
                     name: "",
                     surveyID: "",
                     status: "",
+                    CorreoVarName:"",
+                    DireccionVarName:"",
                     TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
@@ -1198,6 +1220,8 @@
                     name: "",
                     surveyID: "",
                     status: false,
+                    CorreoVarName:"",
+                    DireccionVarName:"",
                     TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
@@ -1259,6 +1283,8 @@
                     name: "",
                     surveyID: "",
                     status: "",
+                    CorreoVarName:"",
+                    DireccionVarName:"",
                     TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
@@ -1323,6 +1349,8 @@
                     name: "",
                     surveyID: "",
                     status: false,
+                    CorreoVarName:"",
+                    DireccionVarName:"",
                     TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
@@ -1419,6 +1447,8 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            CorreoVarName:study.CorreoVarName,
+                            DireccionVarName: study.DireccionVarName,
                             TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
@@ -1489,6 +1519,8 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            CorreoVarName: study.CorreoVarName,
+                            DireccionVarName: study.DireccionVarName,
                             TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
@@ -1570,6 +1602,8 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            CorreoVarName: study.CorreoVarName,
+                            DireccionVarName: study.DireccionVarName,
                             TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
@@ -1650,6 +1684,8 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCase: study.expectedCases,
+                            CorreoVarName: study.CorreoVarName,
+                            DireccionVarName: study.DireccionVarName,
                             TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
@@ -1739,9 +1775,9 @@
 
 <style>
 .modal-content {
-  padding: 15px;
-  height: 800px;
-  /* width: 800px; */
-  overflow-y: auto;/* Permite el scroll vertical si es necesario */
+    padding: 15px;
+    height: 800px;
+    /* width: 800px; */
+    overflow-y: auto;/* Permite el scroll vertical si es necesario */
 }
 </style>

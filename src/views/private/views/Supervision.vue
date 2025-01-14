@@ -39,6 +39,9 @@
         >
           <ul>
             <li v-for="(encuesta, index) in encuestas" :key="index" class="flex justify-between items-center">
+              <span v-if="telefonoVarName" class="ml-2">
+                Teléfono: {{ obtenerTelefono(encuesta) }}
+              </span>
               <span>{{ encuesta.SubjectID }}</span>
               <button @click="eliminarEncuesta(encuestador, index)" class="text-red-500 hover:text-red-700">
                 <i class="ri-delete-bin-line"></i> <!-- Ícono de basurero de RemyIcon -->
@@ -51,12 +54,15 @@
   </div>
 </template>
 <script>
+import GlobalService from "../../../services/GlobalServices";
 export default {
   props: {
     formattedData: { type: Array, default: () => [] },
+    selectedStudy: { type: Object, default: {} },
   },
   data() {
     return {
+      telefonoVarName:"",
       resultado: {},
       encuestasFiltradas: {},
       percentage: 0, // Porcentaje ingresado por el usuario
@@ -64,6 +70,21 @@ export default {
     };
   },
   methods: {
+    obtenerTelefonoVarName() {
+      GlobalService.getData(`/study/list-study/${this.selectedStudy.id}`)
+      .then((response) => {
+        this.telefonoVarName=response.study.TelefonoVarName
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    obtenerTelefono(encuesta) {
+      // Encuentra la columna que tiene el nombre almacenado en telefonoVarName
+      console.log(encuesta)
+      const telefonoColumna = encuesta.Columns.find(col => col.Var === this.telefonoVarName);
+      // console.log(telefonoColumna)
+      return telefonoColumna ? telefonoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+    },
     encuestasPorEncuestador() {
       // Construir el objeto `resultado`
       for (const item of this.formattedData) {
@@ -106,6 +127,7 @@ export default {
   
   mounted() {
     this.encuestasPorEncuestador();
+    this.obtenerTelefonoVarName();
   },
 };
 </script>
