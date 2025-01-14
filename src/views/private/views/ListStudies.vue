@@ -120,6 +120,18 @@
                                         placeholder="Teléfono" v-model.trim="editedStudy.TelefonoVarName" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900">Dirección:</label>
+                                    <input type="text" name="direccion" id="direccion"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Dirección" v-model.trim="editedStudy.DireccionVarName" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label for="correo" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
+                                    <input type="text" name="correo" id="correo"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Correo" v-model.trim="editedStudy.CorreoVarName" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="RegionVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
@@ -612,10 +624,10 @@
                                         v-model="createdStudy.startDate" />
                                 </div>
                                 <div class="col-span-2">
-                                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
-                                    <input type="text" name="telefono" id="telefono"
+                                    <label for="correo" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
+                                    <input type="text" name="correo" id="correo"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
-                                        placeholder="Teléfono" v-model.trim="createdStudy.CorreoVarName" />
+                                        placeholder="Correo" v-model.trim="createdStudy.CorreoVarName" />
                                 </div>
                                 <div class="col-span-2">
                                     <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900">Dirección:</label>
