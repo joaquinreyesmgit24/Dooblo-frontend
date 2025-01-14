@@ -114,6 +114,12 @@
                                         v-model="editedStudy.startDate"/>
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
+                                    <input type="text" name="telefono" id="telefono"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Teléfono" v-model.trim="editedStudy.TelefonoVarName" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="RegionVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
@@ -606,6 +612,12 @@
                                         v-model="createdStudy.startDate" />
                                 </div>
                                 <div class="col-span-2">
+                                    <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
+                                    <input type="text" name="telefono" id="telefono"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Teléfono" v-model.trim="createdStudy.TelefonoVarName" />
+                                </div>
+                                <div class="col-span-2">
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
@@ -1094,6 +1106,10 @@
                         field: "name",
                     },
                     {
+                        label: "Teléfono",
+                        field: "TelefonoVarName",
+                    },
+                    {
                         label: "Región",
                         field: "RegionVarName",
                     },
@@ -1122,6 +1138,7 @@
                     name: "",
                     surveyID: "",
                     status: "",
+                    TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
@@ -1181,6 +1198,7 @@
                     name: "",
                     surveyID: "",
                     status: false,
+                    TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
@@ -1241,6 +1259,7 @@
                     name: "",
                     surveyID: "",
                     status: "",
+                    TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
@@ -1304,6 +1323,7 @@
                     name: "",
                     surveyID: "",
                     status: false,
+                    TelefonoVarName:"",
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
@@ -1399,6 +1419,7 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
@@ -1468,6 +1489,7 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
@@ -1548,6 +1570,7 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCases: study.expectedCases,
+                            TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
@@ -1627,6 +1650,7 @@
                             name: study.name,
                             startDate:study.startDate,
                             expectedCase: study.expectedCases,
+                            TelefonoVarName: study.TelefonoVarName,
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
