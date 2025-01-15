@@ -12,7 +12,8 @@
     />
     <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2">Calcular porcentaje</button>
     <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center">Guardar encuestas para supervisión</button>
-    <!-- Mostrar encuestas filtradas en un acordeón -->   
+
+    <!-- Mostrar encuestas filtradas en una tabla -->
     <div class="space-y-2 mt-4">
       <div
         v-for="(encuestas, encuestador) in encuestasFiltradas"
@@ -25,9 +26,6 @@
         >
           <span>{{ encuestador }} ({{ encuestas.length }} encuestas)</span>
           <div class="flex items-center">
-            <!-- <button @click="eliminarEncuestador(encuestador)" class="text-red-500 hover:text-red-700 text-sm ml-4">
-              Eliminar todas las encuestas del encuestador
-            </button> -->
             <span :class="accordionState[encuestador] ? 'rotate-180' : ''" class="transition-transform transform ml-2">
               &#9660;
             </span>
@@ -37,22 +35,36 @@
           v-show="accordionState[encuestador]"
           class="p-4 bg-gray-100 border-t"
         >
-          <ul>
-            <li v-for="(encuesta, index) in encuestas" :key="index" class="flex justify-between items-center">
-              <span v-if="telefonoVarName" class="ml-2">
-                Teléfono: {{ obtenerTelefono(encuesta) }}
-              </span>
-              <span>{{ encuesta.SubjectID }}</span>
-              <button @click="eliminarEncuesta(encuestador, index)" class="text-red-500 hover:text-red-700">
-                <i class="ri-delete-bin-line"></i> <!-- Ícono de basurero de RemyIcon -->
-              </button>
-            </li>
-          </ul>
+          <table class="min-w-full table-auto">
+            <thead>
+              <tr>
+                <th class="px-4 py-2">ID de la encuesta</th>
+                <th class="px-4 py-2">Correo</th>
+                <th class="px-4 py-2">Teléfono</th>
+                <th class="px-4 py-2">Dirección</th>
+                <th class="px-4 py-2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(encuesta, index) in encuestas" :key="index">
+                <td class="border px-4 py-2">{{ encuesta.SubjectID }}</td>
+                <td class="border px-4 py-2">{{ obtenerCorreo(encuesta) }}</td>
+                <td class="border px-4 py-2">{{ obtenerTelefono(encuesta) }}</td>
+                <td class="border px-4 py-2">{{ obtenerDireccion(encuesta) }}</td>
+                <td class="border px-4 py-2">
+                  <button @click="eliminarEncuesta(encuestador, index)" class="text-red-500 hover:text-red-700">
+                    <i class="ri-delete-bin-line"></i> <!-- Ícono de basurero de RemyIcon -->
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import GlobalService from "../../../services/GlobalServices";
 export default {
@@ -62,7 +74,9 @@ export default {
   },
   data() {
     return {
+      correoVarName:"",
       telefonoVarName:"",
+      direccionVarName:"",
       resultado: {},
       encuestasFiltradas: {},
       percentage: 0, // Porcentaje ingresado por el usuario
@@ -70,20 +84,27 @@ export default {
     };
   },
   methods: {
-    obtenerTelefonoVarName() {
+    obtenerVarName() {
       GlobalService.getData(`/study/list-study/${this.selectedStudy.id}`)
       .then((response) => {
+        this.correoVarName=response.study.CorreoVarName
         this.telefonoVarName=response.study.TelefonoVarName
+        this.direccionVarName=response.study.DireccionVarName
       }).catch((error) => {
         console.log(error);
       });
     },
+    obtenerCorreo(encuesta) {
+      const correoColumna = encuesta.Columns.find(col => col.Var === this.correoVarName);
+      return correoColumna ? correoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+    },
     obtenerTelefono(encuesta) {
-      // Encuentra la columna que tiene el nombre almacenado en telefonoVarName
-      console.log(encuesta)
       const telefonoColumna = encuesta.Columns.find(col => col.Var === this.telefonoVarName);
-      // console.log(telefonoColumna)
       return telefonoColumna ? telefonoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+    },
+    obtenerDireccion(encuesta) {
+      const direccionColumna = encuesta.Columns.find(col => col.Var === this.direccionVarName);
+      return direccionColumna ? direccionColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
     },
     encuestasPorEncuestador() {
       // Construir el objeto `resultado`
@@ -127,18 +148,28 @@ export default {
   
   mounted() {
     this.encuestasPorEncuestador();
-    this.obtenerTelefonoVarName();
+    this.obtenerVarName();
   },
 };
 </script>
   
   <style scoped>
-  ul {
-    list-style: none;
-    padding: 0;
+  table {
+    width: 100%;
+    border-collapse: collapse;
   }
-  li {
-    margin: 5px 0;
+  th, td {
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  td {
+    padding: 8px;
+  }
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
   }
   </style>
   
