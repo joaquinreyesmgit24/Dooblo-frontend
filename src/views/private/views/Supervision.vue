@@ -11,7 +11,7 @@
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 placeholder-gray-400 focus:ring-primary-500 w-40 mr-2 ml-2"
     />
     <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2">Calcular porcentaje</button>
-    <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center">Guardar encuestas para supervisión</button>
+    <button @click="guardarEncuestasParaSupervision" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center">Guardar encuestas para supervisión</button>
 
     <!-- Mostrar encuestas filtradas en una tabla -->
     <div class="space-y-2 mt-4">
@@ -84,6 +84,37 @@ export default {
     };
   },
   methods: {
+    guardarEncuestasParaSupervision() {
+      // Recorre las encuestas filtradas por encuestador
+      const encuestasParaGuardar = [];
+
+      for (const [encuestador, encuestas] of Object.entries(this.encuestasFiltradas)) {
+        encuestas.forEach(encuesta => {
+          console.log(encuesta)
+          // Prepara el objeto que será enviado a la API
+          const encuestaData = {
+            subjNum: encuesta.SubjectID,
+            mail: this.obtenerCorreo(encuesta),
+            phone: this.obtenerTelefono(encuesta),
+            address: this.obtenerDireccion(encuesta),
+            // createdAt: new Date().toISOString(), // Fecha de creación actual
+            // updatedAt: new Date().toISOString(), // Fecha de actualización actual
+          };
+          encuestasParaGuardar.push(encuestaData);
+        });
+      }
+      console.log(encuestasParaGuardar)
+      // Llamada API para guardar las encuestas en la base de datos
+      GlobalService.createData('/supervision/create-supervision/', encuestasParaGuardar)
+        .then(response => {
+          console.log('Encuestas guardadas correctamente', response);
+          // Aquí puedes añadir alguna acción tras el éxito, como mostrar un mensaje o limpiar los datos
+        })
+        .catch(error => {
+          console.error('Error al guardar encuestas', error);
+          // Mostrar mensaje de error si ocurre algún problema con la API
+        });
+    },
     obtenerVarName() {
       GlobalService.getData(`/study/list-study/${this.selectedStudy.id}`)
       .then((response) => {
