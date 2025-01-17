@@ -89,21 +89,19 @@ export default {
       const encuestasParaGuardar = [];
 
       for (const [encuestador, encuestas] of Object.entries(this.encuestasFiltradas)) {
+        console.log(this.selectedStudy)
         encuestas.forEach(encuesta => {
-          console.log(encuesta)
           // Prepara el objeto que será enviado a la API
           const encuestaData = {
             subjNum: encuesta.SubjectID,
             mail: this.obtenerCorreo(encuesta),
             phone: this.obtenerTelefono(encuesta),
             address: this.obtenerDireccion(encuesta),
-            // createdAt: new Date().toISOString(), // Fecha de creación actual
-            // updatedAt: new Date().toISOString(), // Fecha de actualización actual
+            studyId: this.selectedStudy
           };
           encuestasParaGuardar.push(encuestaData);
         });
       }
-      console.log(encuestasParaGuardar)
       // Llamada API para guardar las encuestas en la base de datos
       GlobalService.createData('/supervision/create-supervision/', encuestasParaGuardar)
         .then(response => {
