@@ -1,5 +1,9 @@
 <template>
     <div>
+        <button @click="downloadExcel"
+            class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto mb-4">
+            Descargar Excel
+        </button>
         <table class="w-full text-sm border text-left rtl:text-right">
             <thead class="text-white uppercase bg-violet-700">
                 <tr>
@@ -10,7 +14,7 @@
                       <th scope="col" class="px-6 py-3">Lat 1</th>
                       <th scope="col" class="px-6 py-3">Lon 1</th> -->
                     <th scope="col" class="px-6 py-3">GPS Base</th>
-                    <th scope="col" class="px-6 py-3">GPS Enc.</th>
+                    <th scope="col" class="px-6 py-3">GPS Encuesta</th>
                     <th scope="col" class="px-6 py-3">Distancia</th>
                     <!-- <th scope="col" class="px-6 py-3">GPS 2</th>
                     <th scope="col" class="px-6 py-3">Distancia 2</th>
@@ -21,7 +25,7 @@
             <tbody>
                 <tr v-for="(data, index) in gpsDatos" :key="index">
                     <td>{{ data.sbjnum }}</td>
-                    <td>{{ data.encu }}</td>
+                    <td class="capitalize">{{ data.encu }}</td>
                     <!-- <td>{{ data.lat_base }}</td>
                       <td>{{ data.lon_base }}</td>
                       <td>{{ data.lat_1 }}</td>
@@ -52,6 +56,7 @@
     </div>
 </template>
 <script>
+    import * as XLSX from "xlsx";
     export default {
         props: {
             formattedData: { type: Array, default: [] },
@@ -150,6 +155,29 @@
 
                     });
                 });
+            },
+
+            downloadExcel() {
+                const wsData = this.gpsDatos.map(item => ({
+                    "SubjectNum": item.sbjnum,
+                    "GPS_Base": item.latlong_base,
+                    "GPS_Encuesta": item.latlong_1,
+                    "Distancia_KM": item.distance,
+                    "Encuestador": item.encu
+                }));
+
+                const ws = XLSX.utils.json_to_sheet(wsData);
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, "Datos_GPS");
+
+                const now = new Date();
+                const dateN = new Intl.DateTimeFormat("en-GB", {
+                    timeZone: "America/Santiago",year: "numeric",month: "2-digit",day: "2-digit",hour: "2-digit",minute: "2-digit",hour12: false,
+                }).format(now);
+
+                const formattedDate = dateN.replace(",", "").replace(/:/g, "_").replace(/\//g, "_").replace(" ", "_");
+
+                XLSX.writeFile(wb, `Datos_GPS_${formattedDate}.xlsx`);
             },
         },
         mounted() {

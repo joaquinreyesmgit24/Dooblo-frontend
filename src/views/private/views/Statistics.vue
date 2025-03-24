@@ -42,8 +42,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
             <div class="flex justify-between mb-4 items-start">
-                <apexchart type="pie" width="640px" :options="chartOptionsFirst"
-                    :series="[activePercentageUsers, inactivePercentageUsers]" />
+                <apexchart type="pie" width="640px" :options="chartOptionsFirst" :series="[activePercentageUsers, inactivePercentageUsers]" />
             </div>
         </div>
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">

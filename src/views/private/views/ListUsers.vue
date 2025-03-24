@@ -14,13 +14,13 @@
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
                         <button type="button"
-                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3"
+                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-1 text-center mr-3"
                             data-bs-toggle="modal" data-bs-target="#modalUpdateUser"
                             @click="openUpdateUserModal(props.row)">
                             Editar
                         </button>
                         <button type="button"
-                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-1 text-center"
                             @click="openDeleteUserAlert(props.row)">
                             Eliminar
                         </button>
@@ -43,9 +43,7 @@
                         <div class="flex items-center">
                             <h3 class="text-lg font-medium">¿Estás seguro que deseas eliminar al usuario {{userDeleted.username}}?</h3>
                         </div>
-                        <div class="mt-2 mb-4 text-sm">
-                            Este elemento se eliminará permanentemente. Esta acción no se puede revertir.
-                        </div>
+                        <div class="mt-2 mb-4 text-sm">Este elemento se eliminará permanentemente. Esta acción no se puede revertir.</div>
                         <div class="flex">
                             <button @click="deleteUser(this.userDeleted.id)" type="button"
                                 class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 border border-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2">

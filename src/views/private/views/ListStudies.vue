@@ -14,13 +14,13 @@
                 <template v-slot:table-row="props">
                     <span v-if="props.column.field == 'acciones'">
                         <button type="button"
-                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3"
+                            class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-1 text-center mr-3"
                             data-bs-toggle="modal" data-bs-target="#modalUpdateStudy"
                             @click="openUpdateStudyModal(props.row)">
                             Editar
                         </button>
                         <button type="button"
-                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-1 text-center"
                             @click="openDeleteStudyAlert(props.row)">
                             Eliminar
                         </button>
@@ -61,12 +61,12 @@
                     </div>
                 </div>
             </div>
-            <div v-if="showStudyUpdateModal" class="fixed z-10 inset-0 overflow-y-auto">
+            <div v-if="showStudyUpdateModal" class="fixed z-10 inset-0 overflow-y-auto mt-8 pt-8">
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="fixed inset-0 transition-opacity" @click="closeUpdateStudyModal" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
-                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-3xl sm:w-full"
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                         <button @click="closeUpdateStudyModal"
                             class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
@@ -85,72 +85,79 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Id de encuesta" v-model.trim="editedStudy.surveyID" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Código del estudio" v-model.trim="editedStudy.code" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre de
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre de estudio" v-model.trim="editedStudy.name" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="expectedCases"
                                         class="block mb-2 text-sm font-medium text-gray-900">Casos esperados:</label>
                                     <input type="number" name="expectedCases" id="expectedCases"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCases" min="0" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="startDate" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
                                         inicio del estudio:</label>
                                     <input type="date" name="startDate" id="startDate"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="editedStudy.startDate"/>
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
                                     <input type="text" name="telefono" id="telefono"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Teléfono" v-model.trim="editedStudy.TelefonoVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900">Dirección:</label>
                                     <input type="text" name="direccion" id="direccion"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Dirección" v-model.trim="editedStudy.DireccionVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="correo" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
                                     <input type="text" name="correo" id="correo"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Correo" v-model.trim="editedStudy.CorreoVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="RegionVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Región:</label>
                                     <input type="text" name="RegionVarName" id="RegionVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Región" v-model.trim="editedStudy.RegionVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="ComunaVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="ComunaVarName" id="ComunaVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Comuna" v-model.trim="editedStudy.ComunaVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="UMPVarName"
                                         class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="UMPVarName" id="UMPVarName"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="UMP" v-model.trim="editedStudy.UMPVarName" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="AreaVarName"
+                                        class="block mb-2 text-sm font-medium text-gray-900">Área:</label>
+                                    <input type="text" name="AreaVarName" id="AreaVarName"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Área" v-model.trim="editedStudy.AreaVarName" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
@@ -176,7 +183,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion1"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion1" id="expectedCasesUrbanAreaRegion1"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion1"
@@ -184,7 +191,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion1"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion1" id="expectedCasesRuralAreaRegion1"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion1"
@@ -200,7 +207,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion2" id="expectedCasesUrbanAreaRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion2"
@@ -208,7 +215,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion2" id="expectedCasesRuralAreaRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion2"
@@ -225,7 +232,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion3"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion3" id="expectedCasesUrbanAreaRegion3"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion3"
@@ -233,7 +240,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion3"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion3" id="expectedCasesRuralAreaRegion3"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion3"
@@ -250,7 +257,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion4"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion4" id="expectedCasesUrbanAreaRegion4"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion4"
@@ -258,7 +265,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion4"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion4" id="expectedCasesRuralAreaRegion4"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion4"
@@ -274,7 +281,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion5" id="expectedCasesUrbanAreaRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion5"
@@ -282,7 +289,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion5" id="expectedCasesRuralAreaRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion5"
@@ -298,7 +305,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion6" id="expectedCasesUrbanAreaRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion6"
@@ -306,7 +313,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion6" id="expectedCasesRuralAreaRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion6"
@@ -322,7 +329,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion7" id="expectedCasesUrbanAreaRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion7"
@@ -330,7 +337,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion7" id="expectedCasesRuralAreaRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion7"
@@ -346,7 +353,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion8" id="expectedCasesUrbanAreaRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion8"
@@ -354,7 +361,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion8" id="expectedCasesRuralAreaRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion8"
@@ -371,7 +378,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion9"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion9" id="expectedCasesUrbanAreaRegion9"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion9"
@@ -379,7 +386,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion9"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion9" id="expectedCasesRuralAreaRegion9"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion9"
@@ -396,7 +403,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion10"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion10" id="expectedCasesUrbanAreaRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion10"
@@ -404,7 +411,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion10"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion10" id="expectedCasesRuralAreaRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion10"
@@ -421,7 +428,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion11"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion11" id="expectedCasesUrbanAreaRegion11"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion11"
@@ -429,7 +436,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion11"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion11" id="expectedCasesRuralAreaRegion11"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion11"
@@ -446,7 +453,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion12"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion12" id="expectedCasesUrbanAreaRegion12"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion12"
@@ -454,7 +461,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion12"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion12" id="expectedCasesRuralAreaRegion12"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion12"
@@ -470,7 +477,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion13" id="expectedCasesUrbanAreaRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion13"
@@ -478,7 +485,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion13" id="expectedCasesRuralAreaRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion13"
@@ -494,7 +501,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion14" id="expectedCasesUrbanAreaRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion14"
@@ -502,7 +509,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion14" id="expectedCasesRuralAreaRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion14"
@@ -518,7 +525,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion15" id="expectedCasesUrbanAreaRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion15"
@@ -526,7 +533,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion15" id="expectedCasesRuralAreaRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion15"
@@ -542,7 +549,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion16" id="expectedCasesUrbanAreaRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesUrbanAreaRegion16"
@@ -550,7 +557,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion16" id="expectedCasesRuralAreaRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="editedStudy.expectedCasesRuralAreaRegion16"
@@ -560,7 +567,7 @@
                             <div class="flex justify-between mt-4" v-show="!nextStudyUpdateModal">
                                 <button type="button" @click="returnUpdateModal"
                                     class="text-white inline-flex items-center bg-zinc-500 hover:bg-zinc-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                    Volver
+                                    Anterior
                                 </button>
                                 <button type="submit"
                                     class="text-white inline-flex items-center bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
@@ -571,12 +578,12 @@
                     </div>
                 </div>
             </div>
-            <div v-if="showStudyCreateModal" class="fixed z-10 inset-0 overflow-y-auto">
+            <div v-if="showStudyCreateModal" class="fixed z-10 inset-0 overflow-y-auto mt-8 pt-8">
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="fixed inset-0 transition-opacity" @click="closeCreateStudyModal" aria-hidden="true">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
-                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+                    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-3xl sm:w-full"
                         role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                         <button @click="closeCreateStudyModal"
                             class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
@@ -595,71 +602,77 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Id de encuesta" v-model.trim="createdStudy.surveyID" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Código del
                                         estudio:</label>
                                     <input type="text" name="code" id="code"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Código del estudio" v-model.trim="createdStudy.code" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre del
                                         estudio:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Nombre del estudio" v-model.trim="createdStudy.name" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="expectedCases" class="block mb-2 text-sm font-medium text-gray-900">Casos
                                         esperados:</label>
                                     <input type="number" name="expectedCases" id="expectedCases"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCases" min="0" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
                                         inicio del estudio:</label>
                                     <input type="date" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         v-model="createdStudy.startDate" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="correo" class="block mb-2 text-sm font-medium text-gray-900">Correo:</label>
                                     <input type="text" name="correo" id="correo"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Correo" v-model.trim="createdStudy.CorreoVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="direccion" class="block mb-2 text-sm font-medium text-gray-900">Dirección:</label>
                                     <input type="text" name="direccion" id="direccion"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Dirección" v-model.trim="createdStudy.DireccionVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
                                     <input type="text" name="telefono" id="telefono"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Teléfono" v-model.trim="createdStudy.TelefonoVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900">Region:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Región" v-model.trim="createdStudy.RegionVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name"
                                         class="block mb-2 text-sm font-medium text-gray-900">Comuna:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Comuna" v-model.trim="createdStudy.ComunaVarName" />
                                 </div>
-                                <div class="col-span-2">
+                                <div class="col-span-1">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">UMP:</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="UMP" v-model.trim="createdStudy.UMPVarName" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Área:</label>
+                                    <input type="text" name="name" id="name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
+                                        placeholder="Area" v-model.trim="createdStudy.AreaVarName" />
                                 </div>
                                 <div class="col-span-2 sm:col-span-1">
                                     <label for="status"
@@ -685,7 +698,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion1"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion1" id="expectedCasesUrbanAreaRegion1"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion1"
@@ -693,7 +706,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion1"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion1" id="expectedCasesRuralAreaRegion1"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion1"
@@ -709,7 +722,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion2" id="expectedCasesUrbanAreaRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion2"
@@ -717,7 +730,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion2"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion2" id="expectedCasesRuralAreaRegion2"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion2"
@@ -734,7 +747,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion3"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion3" id="expectedCasesUrbanAreaRegion3"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion3"
@@ -742,7 +755,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion3"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion3" id="expectedCasesRuralAreaRegion3"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion3"
@@ -759,7 +772,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion4"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion4" id="expectedCasesUrbanAreaRegion4"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion4"
@@ -767,7 +780,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion4"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion4" id="expectedCasesRuralAreaRegion4"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion4"
@@ -783,7 +796,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion5" id="expectedCasesUrbanAreaRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion5"
@@ -791,7 +804,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion5"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion5" id="expectedCasesRuralAreaRegion5"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion5"
@@ -807,7 +820,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion6" id="expectedCasesUrbanAreaRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion6"
@@ -815,7 +828,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion6"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion6" id="expectedCasesRuralAreaRegion6"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion6"
@@ -831,7 +844,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion7" id="expectedCasesUrbanAreaRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion7"
@@ -839,7 +852,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion7"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion7" id="expectedCasesRuralAreaRegion7"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion7"
@@ -855,7 +868,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion8" id="expectedCasesUrbanAreaRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion8"
@@ -863,7 +876,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion8"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion8" id="expectedCasesRuralAreaRegion8"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion8"
@@ -880,7 +893,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion9"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion9" id="expectedCasesUrbanAreaRegion9"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion9"
@@ -888,7 +901,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion9"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion9" id="expectedCasesRuralAreaRegion9"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion9"
@@ -905,7 +918,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion10"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion10" id="expectedCasesUrbanAreaRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion10"
@@ -913,7 +926,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion10"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion10" id="expectedCasesRuralAreaRegion10"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion10"
@@ -930,7 +943,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion11"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion11" id="expectedCasesUrbanAreaRegion11"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion11"
@@ -938,7 +951,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion11"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion11" id="expectedCasesRuralAreaRegion11"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion11"
@@ -955,7 +968,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion12"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion12" id="expectedCasesUrbanAreaRegion12"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion12"
@@ -963,7 +976,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion12"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion12" id="expectedCasesRuralAreaRegion12"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion12"
@@ -979,7 +992,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion13" id="expectedCasesUrbanAreaRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion13"
@@ -987,7 +1000,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion13"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion13" id="expectedCasesRuralAreaRegion13"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion13"
@@ -1003,7 +1016,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion14" id="expectedCasesUrbanAreaRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion14"
@@ -1011,7 +1024,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion14"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion14" id="expectedCasesRuralAreaRegion14"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion14"
@@ -1027,7 +1040,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion15" id="expectedCasesUrbanAreaRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion15"
@@ -1035,7 +1048,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion15"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion15" id="expectedCasesRuralAreaRegion15"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion15"
@@ -1051,7 +1064,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesUrbanAreaRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona urbana:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona urbana:</label>
                                     <input type="number" name="expectedCasesUrbanAreaRegion16" id="expectedCasesUrbanAreaRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesUrbanAreaRegion16"
@@ -1059,7 +1072,7 @@
                                 </div>
                                 <div class="col-span-2">
                                     <label for="expectedCasesRuralAreaRegion16"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados por zona rural:</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900">Casos esperados zona rural:</label>
                                     <input type="number" name="expectedCasesRuralAreaRegion16" id="expectedCasesRuralAreaRegion16"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
                                         placeholder="Casos esperados" v-model="createdStudy.expectedCasesRuralAreaRegion16"
@@ -1069,8 +1082,12 @@
                             <div class="flex justify-between mt-4" v-show="!nextStudyCreateModal">
                                 <button type="button" @click="returnCreateModal"
                                     class="text-white inline-flex items-center bg-zinc-500 hover:bg-zinc-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                                    Volver
+                                    Anterior
                                 </button>
+                                <!-- <button type="button" @click="closeCreateStudyModal"
+                                    class="text-white inline-flex items-center bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                    Cerrar
+                                </button> -->
                                 <button type="submit"
                                     class="text-white inline-flex items-center bg-lime-500 hover:bg-lime-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                     Crear estudio
@@ -1117,10 +1134,10 @@
                 },
                 toast: useToast(),
                 columns: [
-                    {
+                    /* {
                         label: "Id de encuesta",
                         field: "surveyID",
-                    },
+                    }, */
                     {
                         label: "Código",
                         field: "code",
@@ -1129,7 +1146,7 @@
                         label: "Nombre",
                         field: "name",
                     },
-                    {
+                    /* {
                         label: "Correo",
                         field: "CorreoVarName",
                     },
@@ -1152,7 +1169,7 @@
                     {
                         label: "UMP",
                         field: "UMPVarName",
-                    },
+                    }, */
                     {
                         label: "Estado",
                         field: "status",
@@ -1176,6 +1193,7 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
+                    AreaVarName: "",
                     expectedCases: "",
                     startDate: "",
                     expectedCasesRegion1: "",
@@ -1238,6 +1256,7 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
+                    AreaVarName: "",
                     expectedCases: 0,
                     startDate: "",
                     expectedCasesRegion1: 0,
@@ -1301,6 +1320,7 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
+                    AreaVarName: "",
                     expectedCases: "",
                     startDate: "",
                     expectedCasesRegion1: "",
@@ -1367,6 +1387,7 @@
                     RegionVarName: "",
                     ComunaVarName: "",
                     UMPVarName: "",
+                    AreaVarName: "",
                     expectedCases: 0,
                     startDate: "",
                     expectedCasesRegion1: 0,
@@ -1465,6 +1486,7 @@
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
+                            AreaVarName: study.AreaVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
                             expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
                             expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
@@ -1537,6 +1559,7 @@
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
+                            AreaVarName: study.AreaVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
                             expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
                             expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
@@ -1620,6 +1643,7 @@
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
+                            AreaVarName: study.AreaVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
                             expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
                             expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
@@ -1702,6 +1726,7 @@
                             RegionVarName: study.RegionVarName,
                             ComunaVarName: study.ComunaVarName,
                             UMPVarName: study.UMPVarName,
+                            AreaVarName: study.AreaVarName,
                             expectedCasesRegion1: study.expectedCasesRegion1,
                             expectedCasesUrbanAreaRegion1: study.expectedCasesUrbanAreaRegion1,
                             expectedCasesRuralAreaRegion1: study.expectedCasesRuralAreaRegion1,
@@ -1791,5 +1816,6 @@
     height: 800px;
     /* width: 800px; */
     overflow-y: auto;/* Permite el scroll vertical si es necesario */
+    
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
     <div class="grid grid-cols-1 gap-6 mb-6">
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+        <p class="text-center w-full" v-show="selectedStudy!='' && progreso==100"><span class="font-bold">{{ selectedStudy.name }}</span>
+            <span class="text-xs"><a href="/reports"> (Seleccionar otro estudio)</a></span>
+        </p>
+        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5" v-show="selectedStudy==''">
             <div class="flex items-center">
                 <select id="countries"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400 focus:ring-primary-500"
@@ -12,6 +15,7 @@
                 </select>
             </div>
         </div>
+        <hr v-show="selectedStudy!='' && progreso==100">
     </div>
     <div v-if="selectedStudy" class="grid grid-cols-1 gap-6">
         <template v-if="loading">
@@ -56,9 +60,13 @@
                     class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
                     <span class="text-sm">Supervisión</span>
                 </router-link>
+                <router-link :to="{ name: 'supervision-selected' }"
+                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-2">
+                    <span class="text-sm">Supervisión Selección</span>
+                </router-link>
                 <button @click="downloadSurveyExcel"
-                    class="text-white bg-violet-700 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto">
-                    Descargar todas las encuestas
+                    class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto">
+                    Descargar Encuestas
                 </button>
             </div>
             <router-view :regionCounts="regionCounts" :formattedData="formattedData" :selectedStudy="selectedStudy"
@@ -71,10 +79,12 @@
     import GlobalService from "../../../services/GlobalServices";
     import axios from "axios";
     import * as XLSX from "xlsx";
+    /* import { mapGetters } from 'vuex'; */
     export default {
         name: "reports",
         data() {
             return {
+                /* roleUser: "", */
                 selectedStudy: "",
                 studies: [],
                 dooblouser: {
@@ -91,6 +101,17 @@
                 progreso: 0,
             };
         },
+        /* computed: {
+            ...mapGetters(['getRolName']),
+        },
+        watch: {
+            getRolName: {
+                immediate: true,
+                handler(newValue) {
+                    this.roleUser = newValue;
+                },
+            },
+        }, */
         methods: {
             getDataStudies() {
                 GlobalService.getData("/study/list-active-studies")
@@ -107,14 +128,15 @@
                     this.loading = true;
                     //Total
                     const response = await axios.get(
-                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`,
+                        //`http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=FalsedateType=Upload`,
+                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=1,5,11`,
                         this.dooblouser
                     );
                     this.surveyID = response.data;
                     await sleep(500);
                     //Expiradas y canceladas
                     const responseB = await axios.get(
-                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=7,10`,
+                        `http://api.dooblo.net/newapi/SurveyInterviewIDs?surveyIDs=${study.surveyID}&testMode=False&completed=True&filtered=False&statuses=2,3,4,6,7,8,9,10,12,13,14,15`,
                         this.dooblouser
                         
                     );
@@ -183,7 +205,7 @@
                             (column) => column.Var === "Date"
                         );
                         const zoneColumn = subject.Columns.find(
-                            (column) => column.Var === "nom_area"
+                            (column) => column.Var === this.selectedStudy[`AreaVarName`]
                         ); // Asegúrate de que el nombre de la variable sea correcto
 
                         if (regionColumn) {
@@ -239,7 +261,7 @@
                     3: "Atacama",
                     4: "Coquimbo",
                     5: "Valparaíso",
-                    6: "O higgins",
+                    6: "Ohiggins",
                     7: "Maule",
                     8: "Biobío",
                     9: "Araucanía",
@@ -274,7 +296,7 @@
                 XLSX.utils.book_append_sheet(wb, ws, "Encuestas");
 
                 // Escribe el archivo Excel
-                XLSX.writeFile(wb, "encuestas.xlsx");
+                XLSX.writeFile(wb, "Encuestas.xlsx");
             },
         },
         mounted() {

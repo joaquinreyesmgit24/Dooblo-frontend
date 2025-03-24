@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
         next({ name: 'login' });
     } else {
         console.log("Enrutamiento: " + to.name);
-        console.log("test");
+        //console.log("test");
         // Comprueba si el usuario está autenticado antes de verificar el rol
         const isAuthenticated = store.getters['haveToken'];
         if (isAuthenticated) {

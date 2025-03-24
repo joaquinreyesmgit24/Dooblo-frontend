@@ -68,137 +68,149 @@
 <script>
 import GlobalService from "../../../services/GlobalServices";
 export default {
-  props: {
-    formattedData: { type: Array, default: () => [] },
-    selectedStudy: { type: Object, default: {} },
-  },
-  data() {
-    return {
-      correoVarName:"",
-      telefonoVarName:"",
-      direccionVarName:"",
-      resultado: {},
-      encuestasFiltradas: {},
-      percentage: 0, // Porcentaje ingresado por el usuario
-      accordionState: {},
-    };
-  },
-  methods: {
-    guardarEncuestasParaSupervision() {
-      // Recorre las encuestas filtradas por encuestador
-      const encuestasParaGuardar = [];
+    props: {
+        formattedData: { type: Array, default: () => [] },
+        selectedStudy: { type: Object, default: {} },
+    },
+    data() {
+        return {
+        correoVarName:"",
+        telefonoVarName:"",
+        direccionVarName:"",
+        resultado: {},
+        encuestasFiltradas: {},
+        percentage: 0, // Porcentaje ingresado por el usuario
+        accordionState: {},
+        supervisionData: [],
+        };
+    },
+    methods: {
+        guardarEncuestasParaSupervision() {
+        // Recorre las encuestas filtradas por encuestador
+        const encuestasParaGuardar = [];
 
-      for (const [encuestador, encuestas] of Object.entries(this.encuestasFiltradas)) {
-        console.log(this.selectedStudy)
-        encuestas.forEach(encuesta => {
-          // Prepara el objeto que será enviado a la API
-          const encuestaData = {
-            subjNum: encuesta.SubjectID,
-            mail: this.obtenerCorreo(encuesta),
-            phone: this.obtenerTelefono(encuesta),
-            address: this.obtenerDireccion(encuesta),
-            studyId: this.selectedStudy
-          };
-          encuestasParaGuardar.push(encuestaData);
-        });
-      }
-      // Llamada API para guardar las encuestas en la base de datos
-      GlobalService.createData('/supervision/create-supervision/', encuestasParaGuardar)
-        .then(response => {
-          console.log('Encuestas guardadas correctamente', response);
-          // Aquí puedes añadir alguna acción tras el éxito, como mostrar un mensaje o limpiar los datos
-        })
-        .catch(error => {
-          console.error('Error al guardar encuestas', error);
-          // Mostrar mensaje de error si ocurre algún problema con la API
-        });
-    },
-    obtenerVarName() {
-      GlobalService.getData(`/study/list-study/${this.selectedStudy.id}`)
-      .then((response) => {
-        this.correoVarName=response.study.CorreoVarName
-        this.telefonoVarName=response.study.TelefonoVarName
-        this.direccionVarName=response.study.DireccionVarName
-      }).catch((error) => {
-        console.log(error);
-      });
-    },
-    obtenerCorreo(encuesta) {
-      const correoColumna = encuesta.Columns.find(col => col.Var === this.correoVarName);
-      return correoColumna ? correoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
-    },
-    obtenerTelefono(encuesta) {
-      const telefonoColumna = encuesta.Columns.find(col => col.Var === this.telefonoVarName);
-      return telefonoColumna ? telefonoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
-    },
-    obtenerDireccion(encuesta) {
-      const direccionColumna = encuesta.Columns.find(col => col.Var === this.direccionVarName);
-      return direccionColumna ? direccionColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
-    },
-    encuestasPorEncuestador() {
-      // Construir el objeto `resultado`
-      for (const item of this.formattedData) {
-        for (const sujeto of item.Subjects) {
-          const encuestador =
-            sujeto.Columns?.find(col => col.Var === 'Srvyr')?.Value || 'Desconocido';
-          if (!this.resultado[encuestador]) {
-            this.resultado[encuestador] = [];
-          }
-          this.resultado[encuestador].push(sujeto);
+        for (const [encuestador, encuestas] of Object.entries(this.encuestasFiltradas)) {
+            console.log(this.selectedStudy)
+            encuestas.forEach(encuesta => {
+            // Prepara el objeto que será enviado a la API
+            const encuestaData = {
+                subjNum: encuesta.SubjectID,
+                mail: this.obtenerCorreo(encuesta),
+                phone: this.obtenerTelefono(encuesta),
+                address: this.obtenerDireccion(encuesta),
+                studyId: this.selectedStudy.id
+            };
+            encuestasParaGuardar.push(encuestaData);
+            });
         }
-      }
-      // Inicializar encuestas filtradas con todos los datos
-      this.encuestasFiltradas = { ...this.resultado };
+        //console.log(encuestasParaGuardar);
+
+        // Llamada API para guardar las encuestas en la base de datos
+        GlobalService.createData('/supervision/create-supervision/', encuestasParaGuardar)
+            .then(response => {
+            console.log('Encuestas guardadas correctamente', response);
+            // Aquí puedes añadir alguna acción tras el éxito, como mostrar un mensaje o limpiar los datos
+            })
+            .catch(error => {
+            console.error('Error al guardar encuestas', error);
+            // Mostrar mensaje de error si ocurre algún problema con la API
+            });
+        },
+        obtenerVarName() {
+            GlobalService.getData(`/study/list-study/${this.selectedStudy.id}`)
+            .then((response) => {
+                this.correoVarName=response.study.CorreoVarName
+                this.telefonoVarName=response.study.TelefonoVarName
+                this.direccionVarName=response.study.DireccionVarName
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
+        obtenerCorreo(encuesta) {
+            const correoColumna = encuesta.Columns.find(col => col.Var === this.correoVarName);
+            return correoColumna ? correoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+        },
+        obtenerTelefono(encuesta) {
+            const telefonoColumna = encuesta.Columns.find(col => col.Var === this.telefonoVarName);
+            return telefonoColumna ? telefonoColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+        },
+        obtenerDireccion(encuesta) {
+            const direccionColumna = encuesta.Columns.find(col => col.Var === this.direccionVarName);
+            return direccionColumna ? direccionColumna.Value : 'No disponible'; // Retorna el valor o un mensaje por defecto
+        },
+        encuestasPorEncuestador() {
+            // Construir el objeto `resultado`
+            for (const item of this.formattedData) {
+                for (const sujeto of item.Subjects) {
+                const encuestador =
+                    sujeto.Columns?.find(col => col.Var === 'Srvyr')?.Value || 'Desconocido';
+                if (!this.resultado[encuestador]) {
+                    this.resultado[encuestador] = [];
+                }
+                this.resultado[encuestador].push(sujeto);
+                }
+            }
+            // Inicializar encuestas filtradas con todos los datos
+            this.encuestasFiltradas = { ...this.resultado };
+        },
+        filtrarPorPorcentaje() {
+            // Calcular el porcentaje de encuestas para cada encuestador
+            const porcentajeDecimal = this.percentage / 100;
+        
+            this.encuestasFiltradas = {};
+            for (const [encuestador, encuestas] of Object.entries(this.resultado)) {
+                const cantidad = Math.ceil(encuestas.length * porcentajeDecimal);
+                this.encuestasFiltradas[encuestador] = encuestas.slice(0, cantidad);
+            }
+        },
+        toggleAccordion(encuestador) {
+            // Alternar el estado del acordeón
+            this.accordionState[encuestador] = !this.accordionState[encuestador];
+        },
+        eliminarEncuesta(encuestador, index) {
+            // Eliminar la encuesta del array del encuestador en las encuestas filtradas
+            this.encuestasFiltradas[encuestador].splice(index, 1);
+        },
+        eliminarEncuestador(encuestador) {
+            // Eliminar todas las encuestas de un encuestador en los objetos `resultado` y `encuestasFiltradas`
+            delete this.resultado[encuestador]; // Eliminar del objeto `resultado`
+            this.encuestasFiltradas[encuestador] = []; // Vaciar el array de encuestas en `encuestasFiltradas`
+        },
+        async getDataSupervisions() {
+            const response = await GlobalService.getData(`/supervision/list-supervision/${this.selectedStudy.id}`).then((response) => {
+                this.supervisionData = response.supervisions;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        },
     },
-    filtrarPorPorcentaje() {
-      // Calcular el porcentaje de encuestas para cada encuestador
-      const porcentajeDecimal = this.percentage / 100;
-  
-      this.encuestasFiltradas = {};
-      for (const [encuestador, encuestas] of Object.entries(this.resultado)) {
-        const cantidad = Math.ceil(encuestas.length * porcentajeDecimal);
-        this.encuestasFiltradas[encuestador] = encuestas.slice(0, cantidad);
-      }
+    
+    mounted() {
+        this.encuestasPorEncuestador();
+        this.obtenerVarName();
+        this.getDataSupervisions();
     },
-    toggleAccordion(encuestador) {
-      // Alternar el estado del acordeón
-      this.accordionState[encuestador] = !this.accordionState[encuestador];
-    },
-    eliminarEncuesta(encuestador, index) {
-      // Eliminar la encuesta del array del encuestador en las encuestas filtradas
-      this.encuestasFiltradas[encuestador].splice(index, 1);
-    },
-    eliminarEncuestador(encuestador) {
-      // Eliminar todas las encuestas de un encuestador en los objetos `resultado` y `encuestasFiltradas`
-      delete this.resultado[encuestador]; // Eliminar del objeto `resultado`
-      this.encuestasFiltradas[encuestador] = []; // Vaciar el array de encuestas en `encuestasFiltradas`
-    },
-  },
-  
-  mounted() {
-    this.encuestasPorEncuestador();
-    this.obtenerVarName();
-  },
 };
 </script>
   
-  <style scoped>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th, td {
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  td {
-    padding: 8px;
-  }
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  </style>
+<style scoped>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    td {
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
   
