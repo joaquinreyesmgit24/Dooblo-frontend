@@ -239,13 +239,13 @@
 
                 const now = new Date();
                 const dateN = new Intl.DateTimeFormat("en-GB", {
-                    timeZone: "America/Santiago",year: "numeric",month: "2-digit",day: "2-digit"/*,hour: "2-digit",minute: "2-digit"*/,hour12: false,
+                    timeZone: "America/Santiago",year: "numeric",month: "2-digit",day: "2-digit",hour: "2-digit",minute: "2-digit",hour12: false,
                 }).format(now);
 
                 const formattedDate = dateN.replace(",", "").replace(/:/g, "_").replace(/\//g, "_").replace(" ", "_");
 
                 // Escribir el archivo Excel
-                XLSX.writeFile(wb, `Resumen_${formattedDate}.xlsx`);
+                XLSX.writeFile(wb, `Reporte_${formattedDate}.xlsx`);
             }
         }
     }

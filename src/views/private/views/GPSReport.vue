@@ -177,7 +177,7 @@
 
                 const formattedDate = dateN.replace(",", "").replace(/:/g, "_").replace(/\//g, "_").replace(" ", "_");
 
-                XLSX.writeFile(wb, `Datos_GPS_${formattedDate}.xlsx`);
+                XLSX.writeFile(wb, `DatosGPS_${formattedDate}.xlsx`);
             },
         },
         mounted() {

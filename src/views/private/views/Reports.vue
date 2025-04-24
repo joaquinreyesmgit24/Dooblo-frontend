@@ -177,7 +177,8 @@
                     console.error("Error al obtener los registros:", error);
                 }
             },
-            countSurveysByRegion() {
+
+            /* countSurveysByRegion() {
                 const regionCounter = {};
                 const today = new Date().toISOString().split("T")[0];
                 // Inicializar todas las regiones del 1 al 16 con 0
@@ -249,7 +250,113 @@
                     });
                 });
                 this.regionCounts = regionCounter;
+            }, */
+
+            countSurveysByRegion() {
+                const regionCounter = {};
+                const today = new Date().toISOString().split("T")[0];
+
+                // Crear un mapeo de nombres de regiones a números
+                const regionNameToNumber = {
+                    "TARAPACÁ": 1,
+                    "ANTOFAGASTA": 2,
+                    "ATACAMA": 3,
+                    "COQUIMBO": 4,
+                    "VALPARAÍSO": 5,
+                    "LIBERTADOR BERNARDO O’HIGGINS": 6,
+                    "MAULE": 7,
+                    "BIOBÍO": 8,
+                    "ARAUCANÍA": 9,
+                    "LOS LAGOS": 10,
+                    "AYSÉN": 11,
+                    "MAGALLANES": 12,
+                    "METROPOLITANA": 13,
+                    "LOS RÍOS": 14,
+                    "ARICA Y PARINACOTA": 15,
+                    "BIOBÍO": 16
+                };
+
+                // Inicializar todas las regiones del 1 al 16 con 0
+                for (let i = 1; i <= 16; i++) {
+                    regionCounter[i] = {
+                        number: i,
+                        name: this.regionName(i),
+                        total: 0,
+                        total_reg: this.selectedStudy[`expectedCasesRegion${i}`],
+                        today: 0,
+                        urban: 0,
+                        total_urban: this.selectedStudy[`expectedCasesUrbanAreaRegion${i}`],
+                        rural: 0,
+                        total_rural: this.selectedStudy[`expectedCasesRuralAreaRegion${i}`],
+                        todayUrban: 0,
+                        todayRural: 0
+                    };
+                }
+
+                this.formattedData.forEach((survey) => {
+                    survey.Subjects.forEach((subject) => {
+                        const regionColumn = subject.Columns.find(
+                            (column) => column.Var === this.selectedStudy[`RegionVarName`]
+                        );
+                        const dateColumn = subject.Columns.find(
+                            (column) => column.Var === "Date"
+                        );
+                        const zoneColumn = subject.Columns.find(
+                            (column) => column.Var === this.selectedStudy[`AreaVarName`]
+                        );
+
+                        if (regionColumn) {
+                            // Normalizar la región, si es texto, convertirla a número
+                            let regionValue = regionColumn.Value;
+                            if (typeof regionValue === 'string' && regionNameToNumber[regionValue]) {
+                                regionValue = regionNameToNumber[regionValue];
+                            }
+
+                            // Verificar si el valor es un número válido
+                            if (regionCounter[regionValue]) {
+                                regionCounter[regionValue].total++;
+
+                                if (zoneColumn) {
+                                    const zoneValue = zoneColumn.Value.toLowerCase();
+                                    if (zoneValue === "urbano") {
+                                        regionCounter[regionValue].urban++;
+                                        if (dateColumn) {
+                                            const surveyDate = new Date(dateColumn.Value)
+                                                .toISOString()
+                                                .split("T")[0];
+                                            if (surveyDate === today) {
+                                                regionCounter[regionValue].todayUrban++;
+                                            }
+                                        }
+                                    } else if (zoneValue === "rural") {
+                                        regionCounter[regionValue].rural++;
+                                        if (dateColumn) {
+                                            const surveyDate = new Date(dateColumn.Value)
+                                                .toISOString()
+                                                .split("T")[0];
+                                            if (surveyDate === today) {
+                                                regionCounter[regionValue].todayRural++;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (dateColumn) {
+                                    const surveyDate = new Date(dateColumn.Value)
+                                        .toISOString()
+                                        .split("T")[0];
+                                    if (surveyDate === today) {
+                                        regionCounter[regionValue].today++;
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+
+                this.regionCounts = regionCounter;
             },
+
             regionName(region) {
                 // Aquí puedes definir la lógica para obtener el nombre de la región
                 // Puedes usar un objeto, una función, o cualquier método que tengas
