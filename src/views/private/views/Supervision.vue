@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Input para ingresar el porcentaje -->
-    <label for="percentage">Ingrese porcentaje (%):</label>
+    <label for="percentage" v-show="supervisionData.length<0">Ingrese porcentaje (%):</label>
     <input
       id="percentage"
       type="number"
@@ -9,9 +9,12 @@
       min="0"
       max="100"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 placeholder-gray-400 focus:ring-primary-500 w-40 mr-2 ml-2"
+      v-show="supervisionData.length<0"
     />
-    <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2">Calcular porcentaje</button>
-    <button @click="guardarEncuestasParaSupervision" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center">Guardar encuestas para supervisión</button>
+    <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2"
+      v-show="supervisionData.length<0">Calcular porcentaje</button>
+    <button @click="guardarEncuestasParaSupervision" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+      v-show="supervisionData.length<0">Guardar encuestas para supervisión</button>
 
     <!-- Mostrar encuestas filtradas en una tabla -->
     <div class="space-y-2 mt-4">

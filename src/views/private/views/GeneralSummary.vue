@@ -1,4 +1,5 @@
 <template>
+<div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
             <div class="flex justify-between mb-6">
@@ -38,11 +39,14 @@
     <div class="grid grid-cols-1 gap-6 mb-6">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md ">
             <div class="flex flex-col-2 items-center gap-6 justify-center">
+                    <apexchart type="pie" width="500px" :options="chartOptionsSecond"
+                        :series="[selectedStudy.expectedCases-(surveyID.length),surveyID.length]" />
                     <apexchart type="pie" width="500px" :options="chartOptionsFirst"
                         :series="[percentageCompletedSurvey, percentageExpiredcanceledSurvey]" />
             </div>
         </div>
     </div>
+</div>    
 </template>
 
 <script>
@@ -64,6 +68,23 @@
                     labels: ["Encuestas correctas", "Encuestas expiradas y canceladas"],
                     title: {
                     text: 'Porcentaje de encuestas correctas y incorrectas', // Aquí pones el título del gráfico
+                    align: 'center', // Puedes ajustar la alineación del título
+                    margin: 10, // Espaciado alrededor del título
+                    offsetY: 0, // Ajusta la posición vertical del título
+                    style: {
+                        fontSize: '18px', // Tamaño de fuente del título
+                        fontWeight: 'bold', // Peso de fuente del título
+                        },
+                    },
+                    legend: {
+                            position: 'bottom',
+                    },
+                    
+                },
+                chartOptionsSecond: {
+                    labels: ["Encuestas Por Realizar", "Encuestas Realizadas"],
+                    title: {
+                    text: 'Porcentaje de encuestas realizadas y por realizar', // Aquí pones el título del gráfico
                     align: 'center', // Puedes ajustar la alineación del título
                     margin: 10, // Espaciado alrededor del título
                     offsetY: 0, // Ajusta la posición vertical del título

@@ -56,8 +56,8 @@
                         {{regionInfo.today}}
                     </td>
                     <td class="px-6 py-3">
-                        <div class="relative h-4 bg-neutral-400 rounded-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center rounded-full" :class="{
+                        <div class="relative h-4 bg-neutral-400 rounded-md">
+                            <div class="absolute inset-y-0 left-0 flex items-center rounded-md" :class="{
                                                 'bg-green-500': regionInfo.total / regionInfo.total_reg >= 1,
                                                 'bg-orange-500': regionInfo.total / regionInfo.total_reg >= 0.5 && regionInfo.total / regionInfo.total_reg < 1,
                                                 'bg-red-500': regionInfo.total / regionInfo.total_reg < 0.5
@@ -140,8 +140,8 @@
                         {{regionInfo.todayUrban}}
                     </td>
                     <td class="px-6 py-3">
-                        <div class="relative h-4 bg-neutral-400 rounded-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center rounded-full" :class="{
+                        <div class="relative h-4 bg-neutral-400 rounded-md">
+                            <div class="absolute inset-y-0 left-0 flex items-center rounded-md" :class="{
                                                 'bg-green-500': regionInfo.urban / regionInfo.total_urban >= 1,
                                                 'bg-orange-500': regionInfo.urban / regionInfo.total_urban >= 0.5 && regionInfo.urban / regionInfo.total_urban < 1,
                                                 'bg-red-500': regionInfo.urban / regionInfo.total_urban < 0.5
@@ -167,8 +167,8 @@
                         {{regionInfo.todayRural}}
                     </td>
                     <td class="px-6 py-3">
-                        <div class="relative h-4 bg-neutral-400 rounded-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center rounded-full" :class="{
+                        <div class="relative h-4 bg-neutral-400 rounded-md">
+                            <div class="absolute inset-y-0 left-0 flex items-center rounded-md" :class="{
                                                 'bg-green-500': regionInfo.rural / regionInfo.total_rural >= 1,
                                                 'bg-orange-500': regionInfo.rural / regionInfo.total_rural >= 0.5 && regionInfo.rural / regionInfo.total_rural < 1,
                                                 'bg-red-500': regionInfo.rural / regionInfo.total_rural < 0.5
