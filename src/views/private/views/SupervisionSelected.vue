@@ -1,6 +1,10 @@
 <template>
     <div>
-        <button @click="downloadExcel"
+        <button @click="deleteStudy()" v-show="supervisionData.length > 0"
+            class="text-white bg-red-700 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto mb-4">
+            Borrar selección
+        </button>&nbsp;
+        <button @click="downloadExcel" v-show="supervisionData.length > 0"
             class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 text-center ml-auto mb-4">
             Descargar Excel
         </button>
@@ -34,6 +38,7 @@
 <script>
     import GlobalService from "../../../services/GlobalServices";
     import * as XLSX from "xlsx";
+    import { useToast } from "vue-toastification";
 
     export default {
         props: {
@@ -42,7 +47,9 @@
         },
         data() {
             return {
-            supervisionData: [],
+                toast: useToast(),
+                supervisionData: [],
+                rows: [],
             };
         },
         methods: {
@@ -52,6 +59,31 @@
                 })
                 .catch((error) => {
                     console.log(error);
+                });
+            },
+
+            deleteStudy() {
+                GlobalService.deleteDataById("/supervision/delete-supervision", this.selectedStudy.id)
+                .then((response) => {
+                    this.toast.success(response.msg);
+                    if (response.supervisions) {
+                        this.rows = response.supervisions.map((supervision) => ({
+                            id: supervision.id,
+                            subjNum: supervision.subjNum,
+                            mail: supervision.mail,
+                            phone: supervision.phone,
+                            address: supervision.address,
+                            createdAt: supervision.createdAt,
+                            updatedAt: supervision.updatedAt,
+                            studyId: supervision.studyId
+                        }));
+                    }
+                    this.getDataSupervisions(); 
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.getDataSupervisions();
+                    //this.toast.error(error);
                 });
             },
 

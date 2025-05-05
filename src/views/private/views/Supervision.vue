@@ -13,7 +13,7 @@
     />
     <button @click="filtrarPorPorcentaje" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2"
       v-show="supervisionData.length==0">Calcular porcentaje</button>
-    <button @click="guardarEncuestasParaSupervision" class="text-white bg-gray-600 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
+    <button @click="guardarEncuestasParaSupervision" class="text-white bg-blue-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
       v-show="supervisionData.length==0">Guardar encuestas para supervisión</button>
 
     <!-- Mostrar encuestas filtradas en una tabla -->
@@ -70,6 +70,7 @@
 
 <script>
 import GlobalService from "../../../services/GlobalServices";
+import { useToast } from "vue-toastification";
 export default {
     props: {
         formattedData: { type: Array, default: () => [] },
@@ -77,14 +78,15 @@ export default {
     },
     data() {
         return {
-        correoVarName:"",
-        telefonoVarName:"",
-        direccionVarName:"",
-        resultado: {},
-        encuestasFiltradas: {},
-        percentage: 0, // Porcentaje ingresado por el usuario
-        accordionState: {},
-        supervisionData: [],
+          toast: useToast(),
+          correoVarName:"",
+          telefonoVarName:"",
+          direccionVarName:"",
+          resultado: {},
+          encuestasFiltradas: {},
+          percentage: 0, // Porcentaje ingresado por el usuario
+          accordionState: {},
+          supervisionData: [],
         };
     },
     methods: {
@@ -111,12 +113,14 @@ export default {
         // Llamada API para guardar las encuestas en la base de datos
         GlobalService.createData('/supervision/create-supervision/', encuestasParaGuardar)
             .then(response => {
-            console.log('Encuestas guardadas correctamente', response);
-            // Aquí puedes añadir alguna acción tras el éxito, como mostrar un mensaje o limpiar los datos
+              //console.log('Encuestas guardadas correctamente', response);
+              // Aquí puedes añadir alguna acción tras el éxito, como mostrar un mensaje o limpiar los datos
+              this.toast.success(response.data.msg);
             })
             .catch(error => {
-            console.error('Error al guardar encuestas', error);
-            // Mostrar mensaje de error si ocurre algún problema con la API
+              //console.error('Error al guardar encuestas', error);
+              // Mostrar mensaje de error si ocurre algún problema con la API
+              this.toast.error(response.data.error);
             });
         },
         obtenerVarName() {
@@ -163,7 +167,11 @@ export default {
             this.encuestasFiltradas = {};
             for (const [encuestador, encuestas] of Object.entries(this.resultado)) {
                 const cantidad = Math.ceil(encuestas.length * porcentajeDecimal);
-                this.encuestasFiltradas[encuestador] = encuestas.slice(0, cantidad);
+                //No aleatorias
+                //this.encuestasFiltradas[encuestador] = encuestas.slice(0, cantidad);
+                // Aleatorias
+                const aleatorias = [...encuestas].sort(() => Math.random() - 0.5).slice(0, cantidad);
+                this.encuestasFiltradas[encuestador] = aleatorias;
             }
         },
         toggleAccordion(encuestador) {
